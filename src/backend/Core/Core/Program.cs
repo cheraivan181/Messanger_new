@@ -1,14 +1,35 @@
 using Core;
+using Core.Converters;
 using Core.Hubs;
+using Core.Identity;
 using Core.Middlewhere;
+using Core.Utils;
+using Hangfire;
+using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Events;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog();
+
+builder.Services.AddHangfire(configuration => configuration
+                 .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+                 .UseSimpleAssemblyNameTypeSerializer()
+                 .UseRecommendedSerializerSettings()
+                 .UseSqlServerStorage(builder.Configuration.GetConnectionString("MsSql"), new SqlServerStorageOptions
+                 {
+                     CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                     SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                     QueuePollInterval = TimeSpan.Zero,
+                     UseRecommendedIsolationLevel = true,
+                     DisableGlobalLocks = true
+                 }));
+
 
 builder.Services.AddOptions();
 builder.Services.AddLocalization();
@@ -16,12 +37,25 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
-
+        options.JsonSerializerOptions.Converters.Add(new IntPtrConverter());
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     });
 
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Messanger api",
+        Description = "An ASP.NET Core Web API for realize messanger clients",
+        License = new OpenApiLicense
+        {
+            Name = "MessangerLicense"
+        }
+    });
+});
 
 builder.Services.AddAntiforgery(options => { options.HeaderName = "x-xsrf-token"; });
 builder.Services.Configure<CookiePolicyOptions>(options =>
@@ -30,10 +64,15 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 builder.Services.AddDataProtection();
 builder.Services.AddHttpClient();
 
-builder.Services.AddAppInfrastructureServices();
+builder.Services.AddAppInfrastructureServices(builder.Configuration);
 
-builder.Services.AddSignalR()
-    .AddMessagePackProtocol();
+builder.Services.AddSignalR(options =>
+{
+   
+}).AddMessagePackProtocol(options =>
+  {
+        
+  });
 
 AddConfigureLogging();
 AddConfigureAuthenticationAndAuthorization(builder.Services, builder.Configuration);
@@ -61,8 +100,10 @@ app.UseAuthorization();
 app.UseCors("MessangerPolicy");
 app.UseMiddleWhares();
 
-app.MapControllers();
-app.MapHub<MessangerHub>("/messangerhub");
+app.MapControllers().RequireCors("MessangerPolicy");
+app.MapHub<MessangerHub>("/messangerhub").RequireCors("MessangerPolicy");
+
+app.MapHangfireDashboard();
 
 Log.Debug($"Application is running...");
 
@@ -73,6 +114,7 @@ app.Run();
 
 void AddConfigureAuthenticationAndAuthorization(IServiceCollection collection, ConfigurationManager configuration)
 {
+    var signDecodingKey = new SignInSymmetricKey(configuration["TokenOptions:Key"]);
     collection
               .AddAuthentication(options =>
               {
@@ -87,12 +129,12 @@ void AddConfigureAuthenticationAndAuthorization(IServiceCollection collection, C
                   {
                       ValidIssuer = configuration["Auth:Issuer"],
                       ValidAudience = configuration["Auth:Audience"],
-                    // IssuerSigningKey = signingDecodingKey.GetKey(),
+                      IssuerSigningKey = signDecodingKey.GetKey(),
                       ClockSkew = TimeSpan.Zero,
                       ValidateLifetime = true,
-                      ValidateAudience = false,
+                      ValidateAudience = true,
                       ValidateIssuer = true,
-                      ValidateIssuerSigningKey = true
+                      ValidateIssuerSigningKey = true,
                   };
 
                   cfg.Events = new JwtBearerEvents

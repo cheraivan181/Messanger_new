@@ -17,8 +17,4 @@
     <ProjectReference Include="..\Core.DbModels\Core.DbModels.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
-
 </Project>
