@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Core.ApiRequests\Core.ApiRequests.csproj" />
     <ProjectReference Include="..\Core.ApiResponses\Core.ApiResponses.csproj" />
+    <ProjectReference Include="..\Core.CacheServices\Core.CacheServices.csproj" />
     <ProjectReference Include="..\Core.DbModels\Core.DbModels.csproj" />
     <ProjectReference Include="..\Core.IdentityService\Core.IdentityService.csproj" />
     <ProjectReference Include="..\Core.Repositories\Core.Repositories.csproj" />

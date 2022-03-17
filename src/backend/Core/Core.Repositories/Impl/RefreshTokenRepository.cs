@@ -17,14 +17,15 @@ namespace Core.Repositories.Impl
         public async Task<RefreshToken> GetRefreshTokenByValueAsync(string value)
         {
             using var conn = await _connectionFactory.GetDbConnectionAsync();
-            string sql = "SELECT * FROM RefreshTokens r " +
-                "INNER JOIN Users u ON r.[Value] = @value and r.UserId = u.Id";
+            string sql = "SELECT TOP 1 * FROM RefreshTokens r " +
+                "INNER JOIN Users u ON r.UserId = u.Id " +
+                "WHERE r.[Value] = @value";
             var refreshToken = await conn.QueryAsync<RefreshToken, User, RefreshToken>(sql, 
                 (refreshToken, user) =>
                 {
                     refreshToken.User = user;
                     return refreshToken;
-                }, new { value  = value }, splitOn: "UserId");
+                }, new { value  = value }, splitOn: "Id");
 
             return refreshToken?.FirstOrDefault();
         }

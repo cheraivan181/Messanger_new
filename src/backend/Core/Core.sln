@@ -39,7 +39,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{CBB987
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Utils", "Core.Utils\Core.Utils.csproj", "{FC42C484-8DDE-40B5-9C0A-3543986963BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.IdentityService.UnitTests", "Core.IdentityService.UnitTests\Core.IdentityService.UnitTests.csproj", "{E11510A1-A27C-413F-97BB-82FF8A1AEBE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.IdentityService.UnitTests", "Core.IdentityService.UnitTests\Core.IdentityService.UnitTests.csproj", "{E11510A1-A27C-413F-97BB-82FF8A1AEBE7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2999555E-CBAC-4FD9-8760-DDFDFCF48E06}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

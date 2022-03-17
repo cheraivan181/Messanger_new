@@ -23,7 +23,7 @@ namespace Core.Repositories.Impl
             return result > 0;
         } 
 
-        public async Task AddUserRoleAsync(long userId, long roleId)
+        public async Task AddUserRoleAsync(long userId, int roleId)
         {
             using var connection = await _connectionFactory.GetDbConnectionAsync();
             string sql = "INSERT INTO UserRoles (UserId, RoleId)" +

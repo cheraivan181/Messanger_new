@@ -49,7 +49,7 @@ namespace Core.IdentityService.Services
                 claims.Add(new Claim(ClaimsIdentity.DefaultRoleClaimType, role));
 
             var expires = DateTime.Now.AddMinutes(Convert.ToDouble(_tokenLifeTimeOptions.Value.AccessTokenLifeTime));
-            var now = DateTime.UtcNow;
+            var now = DateTime.Now;
 
             var signInEncodingKey = new SignInSymmetricKey(_tokenOptions.Value.Key);
 

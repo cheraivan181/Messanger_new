@@ -1,4 +1,5 @@
-﻿using Core.CryptService;
+﻿using Core.CacheServices.Domain;
+using Core.CryptService;
 using Core.DbModels.Base.Di;
 using Core.IdentityService;
 using Core.Mapping;
@@ -8,13 +9,14 @@ namespace Core
 {
     public static class DiExtensions
     {
-        public static void AddAppInfrastructureServices(this IServiceCollection serviceCollection, ConfigurationManager configManager)
+        public static void AddAppInfrastructureServices(this IServiceCollection serviceCollection, IConfiguration configuration)
         {
             serviceCollection.AddDbServices();
             serviceCollection.AddRepositories();
-            serviceCollection.AddIdentityServices(configManager);
+            serviceCollection.AddIdentityServices(configuration);
             serviceCollection.AddMappers();
             serviceCollection.AddCryptService();
+            serviceCollection.AddRedisServices(configuration);
         } 
     }
 }
