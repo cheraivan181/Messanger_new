@@ -48,7 +48,7 @@ namespace Core.IdentityService
             var isUserExists = await _userRepository.CheckUserByUserNameAsync(userName);
             if (isUserExists)
             {
-                result.SetError($"User with {userName} is alredy exist");
+                result.SetError($"User with userName: {userName} is alredy exist");
                 return result;
             }
 
@@ -104,7 +104,7 @@ namespace Core.IdentityService
             var refreshToken = await _refreshTokenRepository.GetRefreshTokenByValueAsync(refreshTokenValue);
             if (refreshToken == null)
             {
-                result.SetUnAuthorizedError($"Cannot find user with refreshToken#({refreshToken})");
+                result.SetUnAuthorizedError($"Cannot find user with refreshToken {refreshToken}");
                 return result;
             }
 

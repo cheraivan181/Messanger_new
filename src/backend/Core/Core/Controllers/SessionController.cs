@@ -7,7 +7,6 @@ namespace Core.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles = CommonConstants.ProtocoledUser)]
     public class SessionController : BaseController
     {
         public SessionController(IServiceProvider serviceProvider,
@@ -17,3 +16,4 @@ namespace Core.Controllers
         }
     }
 }
+ 

@@ -1,0 +1,63 @@
+﻿@page "/signup"
+
+@inject IAuthService _authService
+@inject NavigationManager _navigationManager
+
+@using Front.Domain.FormModels
+@using Front.Services.Interfaces.Auth
+
+<EditForm Model="RegisterModel" OnValidSubmit="SignUpAsync" class="card card-body bg-light mt-5">
+    <DataAnnotationsValidator />
+    <div class="form-group row">
+        <label for="email" class="col-md-2 col-form-label">UserName:</label>
+        <div class="col-md-10">
+            <InputText id="email" class="form-control" @bind-Value="RegisterModel.UserName" />
+            <ValidationMessage For="@(() => RegisterModel.UserName)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="email" class="col-md-2 col-form-label">Email:</label>
+        <div class="col-md-10">
+            <InputText id="email" class="form-control" @bind-Value="RegisterModel.Email" />
+            <ValidationMessage For="@(() => RegisterModel.Email)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="email" class="col-md-2 col-form-label">Phone:</label>
+        <div class="col-md-10">
+            <InputText id="email" class="form-control" @bind-Value="RegisterModel.Phone" />
+            <ValidationMessage For="@(() => RegisterModel.Phone)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="password" class="col-md-2 col-form-label">Password:</label>
+        <div class="col-md-10">
+            <InputText type="password" id="password" class="form-control" @bind-Value="RegisterModel.Password" />
+            <ValidationMessage For="@(() => RegisterModel.Password)" />
+            @if (!string.IsNullOrEmpty(RegisterError))
+            {
+                <p>@RegisterError</p>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button type="submit" class="btn btn-success">Register</button>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+
+    private RegisterModel RegisterModel = new RegisterModel();
+    private string RegisterError;
+
+    public async Task SignUpAsync()
+    {
+        var authService = await _authService.SignUpAsync(RegisterModel);
+        if (authService.IsSucess)
+            _navigationManager.NavigateTo("/messanger");
+        else
+            RegisterError = authService.ErrorMessage;
+    }
+}

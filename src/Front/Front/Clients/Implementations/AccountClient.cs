@@ -1,18 +1,73 @@
 ﻿using System.Net.Http;
+using Front.Clients.Interfaces;
+using Front.ClientsDomain.Responses;
+using Front.Domain.Requests;
+using Front.Domain.Responses;
+using Front.Domain.Responses.Base;
 
 namespace Front.Clients.Implementations
 {
-    public class AccountClient
+    public class AccountClient : IAccountClient
     {
-        private readonly HttpClient _httpClient;
-
-        public AccountClient(IHttpClientFactory httpClientFactory)
+        private readonly IRestClient _restClient;
+        
+        public AccountClient(IRestClient restClient)
         {
-            _httpClient = httpClientFactory.CreateClient(); 
+            _restClient = restClient;
+        }
+        
+        public async Task<RestClientResponse<SignInResponse>> SignInAsync(string userName, string password)
+        {
+            var signInRequest = new SignInRequest()
+            {
+                UserName = userName,
+                Password = password
+            };
+
+            var response = await _restClient.MakeHttpRequestAsync<SignInResponse>("Account/signin", HttpMethod.Post, data: signInRequest);
+            return response;
         }
 
-        public async Task SignInAsync() { }
-        public async Task SignUpAsync() { }
-        public async Task RerfreshTokenAsync() { }
+        public async Task<RestClientResponse<SignInResponse>> SignUpAsync(string userName, string password,
+            string phone, string email)
+        {
+            var signUpRequest = new SignUpRequest()
+            {
+                UserName = userName,
+                Password = password,
+                Phone = phone,
+                Email = email
+            };
+
+            var response = await _restClient
+                .MakeHttpRequestAsync<SignInResponse>("Account/signup", HttpMethod.Post, data: signUpRequest);
+            return response;
+        }
+
+        public async Task<RestClientResponse<SignInResponse>> UpdateRefreshTokenAsync(string refreshToken)
+        {
+            var acessTokenUpdateRequest = new UpdateRefreshTokenRequest()
+            {
+                RefreshToken = refreshToken
+            };
+
+            var response = await _restClient
+                .MakeHttpRequestAsync<SignInResponse>("Account/UpdateAcessTokenAsync", HttpMethod.Post, data: acessTokenUpdateRequest);
+
+            return response;
+        }
+
+        public async Task<RestClientResponse<AuthOptions>> GetAuthOptionsAsync()
+        {
+            var response = await _restClient.MakeHttpRequestAsync<AuthOptions>("Account/getTokenLifeTimeOptions",
+                HttpMethod.Get);
+            return response;
+        }
+
+        public async Task<RestClientResponse<AuthInfoResponse>> GetAuthInfoResponseAsync()
+        {
+            var response = await _restClient.MakeHttpRequestAsync<AuthInfoResponse>("Account/getAuthInfo", HttpMethod.Get);
+            return response;
+        }
     }
 }

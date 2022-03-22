@@ -1,9 +1,46 @@
 ﻿@page "/"
+@using Front.Services.Interfaces.Alive
+@using Front.Services.Interfaces.Auth
+
+@inject IAliveService _aliveService;
+@inject NavigationManager _navigationManager;
+@inject AuthenticationStateProvider _authStateProvider;
 
 <PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
+<AuthorizeView>
+    <Authorized>
+        <p>Auth</p>
+    </Authorized>
+    <NotAuthorized>
+        <p>NoAuthorized</p>
+    </NotAuthorized>
+</AuthorizeView>
 
-Welcome to your new app.
+@if (!IsApiAlive)
+{
+    <p>Api is not alive. Try later...</p>
+}
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@code {
+    private bool IsApiAlive = true;
+
+    protected async override Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        IsApiAlive = await _aliveService.IsApiAliveAsync();
+        var authState = await _authStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User.Identity.IsAuthenticated;
+
+        if (authState.User.Identity.IsAuthenticated)
+        {
+            _navigationManager.NavigateTo("/messanger");
+        }
+        else
+        {
+            _navigationManager.NavigateTo("signin");
+        }
+    }
+}
+

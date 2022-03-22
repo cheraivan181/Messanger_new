@@ -1,6 +1,6 @@
 ﻿namespace Core.ApiResponses.Account
 {
-    public class AuthInfo
+    public class AuthInfoResponse
     {
         public string UserName { get; set; }
         public long UserId { get; set; }

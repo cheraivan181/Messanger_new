@@ -1,11 +1,13 @@
 ﻿using Core.ApiRequests.Account;
 using Core.ApiResponses.Account;
 using Core.ApiResponses.Base;
+using Core.IdentityService.Domain.Options;
 using Core.IdentityService.Interfaces;
 using Core.Mapping.Interfaces;
 using Core.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace Core.Controllers
 {
@@ -16,14 +18,17 @@ namespace Core.Controllers
     {
         private readonly IIdentityService _identityService;
         private readonly IIdentityServiceMapper _identityServiceMapper;
+        private readonly IOptions<TokenLifeTimeOptions> _tokenLifeTimeOptions;
 
         public AccountController(IServiceProvider serviceProvider,
             IUserRepository userRepository,
             IIdentityService identityService,
-            IIdentityServiceMapper identityServiceMapper) : base(serviceProvider, userRepository)
+            IIdentityServiceMapper identityServiceMapper,
+            IOptions<TokenLifeTimeOptions> tokenLifeTimeOptions) : base(serviceProvider, userRepository)
         {
             _identityService = identityService;
             _identityServiceMapper = identityServiceMapper;
+            _tokenLifeTimeOptions = tokenLifeTimeOptions;
         }
 
         /// <summary>
@@ -152,12 +157,11 @@ namespace Core.Controllers
         /// <response code="200">Returns the newly created item</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("getAuthInfo")]
-        [Authorize]
         public IActionResult GetAuthInfo()
         {
             if (User.Identity.IsAuthenticated)
             {
-                var result = new AuthInfo()
+                var result = new AuthInfoResponse()
                 {
                     Roles = RoleNames,
                     SessionId = SessionId,
@@ -169,8 +173,29 @@ namespace Core.Controllers
                 var response = SucessResponseBuilder.Build(result);
                 return Ok(response);
             }
-
-            return Ok(SucessResponseBuilder.Build(new { message = "User is not authorized" }));
+            
+            return Unauthorized(ErrorResponseBuilder.Build("User is not authorized"));
+        }
+        
+        
+        /// <summary>
+        /// get token life times options
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>Auth options</returns>
+        /// <response code="200">Returns auth options</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [HttpGet("getTokenLifeTimeOptions")]
+        public IActionResult GetTokenLifeTimeOptions()
+        {
+            var result = new TokenLifeTimeOptions()
+            {
+                AccessTokenLifeTime = _tokenLifeTimeOptions.Value.AccessTokenLifeTime,
+                RefreshTokenLifeTime = _tokenLifeTimeOptions.Value.RefreshTokenLifeTime
+            };
+    
+            var response = SucessResponseBuilder.Build(result);
+            return Ok(response);
         }
     }
 }

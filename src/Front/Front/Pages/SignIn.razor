@@ -1,0 +1,49 @@
+﻿@page "/signin"
+
+@inject IAuthService _authService
+@inject NavigationManager _navigationManager
+
+@using Front.Domain.FormModels
+@using Front.Services.Interfaces.Auth
+
+<EditForm Model="AuthModel" OnValidSubmit="SignUpAsync" class="card card-body bg-light mt-5">
+    <DataAnnotationsValidator />
+    <div class="form-group row">
+        <label for="email" class="col-md-2 col-form-label">UserName:</label>
+        <div class="col-md-10">
+            <InputText id="email" class="form-control" @bind-Value="AuthModel.UserName" />
+            <ValidationMessage For="@(() => AuthModel.UserName)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="password" class="col-md-2 col-form-label">Password:</label>
+        <div class="col-md-10">
+            <InputText type="password" id="password" class="form-control" @bind-Value="AuthModel.Password" />
+            <ValidationMessage For="@(() => AuthModel.Password)" />
+            @if (!string.IsNullOrEmpty(AuthError))
+            {
+                <p>@AuthError</p>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button type="submit" class="btn btn-success">Login</button>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+
+    private AuthModel AuthModel = new AuthModel();
+    private string AuthError;
+
+    public async Task SignUpAsync()
+    {
+        var authService = await _authService.SignInAsync(AuthModel);
+        if (authService.IsSucess)
+            _navigationManager.NavigateTo("/messanger");
+        else
+            AuthError = authService.ErrorMessage;
+    }
+}
