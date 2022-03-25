@@ -6,6 +6,7 @@
         {
             app.UseMiddleware<XssProtectionMiddlewhere>();
             app.UseMiddleware<ExceptionMiddlewhere>();
+            app.UseMiddleware<RequestMetricMiddlewhere>();
         }
     }
 }

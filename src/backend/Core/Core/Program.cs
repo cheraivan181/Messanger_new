@@ -8,7 +8,7 @@ public class Program
         var hostBuilder = BuildHost(args);
         var host = hostBuilder.Build();
         Log.Debug("Application is running...");
-
+        
         await host.RunAsync();
     }
 

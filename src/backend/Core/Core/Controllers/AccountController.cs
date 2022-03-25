@@ -5,7 +5,6 @@ using Core.IdentityService.Domain.Options;
 using Core.IdentityService.Interfaces;
 using Core.Mapping.Interfaces;
 using Core.Repositories.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 

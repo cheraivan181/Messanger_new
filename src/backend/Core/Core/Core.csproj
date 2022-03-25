@@ -5,6 +5,9 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <Configurations>Debug;Release;Test</Configurations>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <UserSecretsId>0fc974c3-0221-4f02-a9f9-cc953e0c589d</UserSecretsId>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +16,9 @@
     <PackageReference Include="Hangfire.SqlServer" Version="1.7.28" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="6.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
+    <PackageReference Include="prometheus-net" Version="6.0.0" />
+    <PackageReference Include="prometheus-net.AspNetCore" Version="6.0.0" />
     <PackageReference Include="Serilog" Version="2.10.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
@@ -22,9 +28,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Core.ApiRequests\Core.ApiRequests.csproj" />
     <ProjectReference Include="..\Core.ApiResponses\Core.ApiResponses.csproj" />
-    <ProjectReference Include="..\Core.CacheServices\Core.CacheServices.csproj" />
+    <ProjectReference Include="..\Core.CacheServices\Core.Redis.csproj" />
     <ProjectReference Include="..\Core.DbModels\Core.DbModels.csproj" />
     <ProjectReference Include="..\Core.IdentityService\Core.IdentityService.csproj" />
+    <ProjectReference Include="..\Core.Kafka\Core.Kafka.csproj" />
     <ProjectReference Include="..\Core.Repositories\Core.Repositories.csproj" />
     <ProjectReference Include="..\Core.Utils\Core.Utils.csproj" />
   </ItemGroup>

@@ -2,6 +2,7 @@
 using Core.CryptService;
 using Core.DbModels.Base.Di;
 using Core.IdentityService;
+using Core.Kafka;
 using Core.Mapping;
 using Core.Repositories;
 
@@ -17,6 +18,7 @@ namespace Core
             serviceCollection.AddMappers();
             serviceCollection.AddCryptService();
             serviceCollection.AddRedisServices(configuration);
+            serviceCollection.AddKafkaServices(configuration);
         } 
     }
 }

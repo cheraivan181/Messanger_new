@@ -1,0 +1,62 @@
+version: '3.4'
+
+services:
+  core:
+    image: ${DOCKER_REGISTRY-}core
+    build:
+      context: .
+      dockerfile: Core/Dockerfile
+    depends_on:
+     - messanger_datastore 
+     - messanger_redis
+     - messanger_rabbit
+    ports:
+      - "5001:80"
+    networks:
+     - messanger_network 
+    restart: always
+
+  messanger_datastore:
+    container_name: messanger_datastore
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports: 
+        - "1432:1433"
+    environment:
+      - SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    volumes:
+      - messanger_volume:/var/lib/mssql/data
+    networks:
+      - messanger_network
+    restart: always
+
+  messanger_redis:
+    container_name: messanger_redis
+    image: "redis:alpine"
+    ports:
+      - "6378:6379"
+    environment:
+      - REDIS_REPLICATION_MODE=master
+    networks:
+      - messanger_network
+  messanger_rabbit:
+    image: rabbitmq:3-management
+    container_name: 'messanger_rabbitmq'
+    ports:
+      - 5670:5672
+      - 15670:15672
+    volumes:
+      - messanger_volume:/var/lib/rabbitmq/
+      - messanger_volume:/var/log/rabbitmq
+    networks: 
+      - messanger_network
+    environment:
+      default_user: "guest"
+      default_pass: "guest"
+      default_vhost: "/"
+
+
+volumes:
+  messanger_volume: {}
+networks:
+  messanger_network:

@@ -11,6 +11,7 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Events;
 using System.Text.Json.Serialization;
+using Prometheus;
 
 namespace Core
 {
@@ -90,6 +91,7 @@ namespace Core
             app.UseAuthorization();
             app.UseCors("MessangerPolicy");
             app.UseMiddleWhares();
+            app.UseMetricServer();
 
             app.UseEndpoints(endpoints =>
             {
