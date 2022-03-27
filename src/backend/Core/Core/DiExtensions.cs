@@ -5,6 +5,7 @@ using Core.IdentityService;
 using Core.Kafka;
 using Core.Mapping;
 using Core.Repositories;
+using Core.SessionServices;
 
 namespace Core
 {
@@ -19,6 +20,7 @@ namespace Core
             serviceCollection.AddCryptService();
             serviceCollection.AddRedisServices(configuration);
             serviceCollection.AddKafkaServices(configuration);
+            serviceCollection.AddSessionServices();
         } 
     }
 }

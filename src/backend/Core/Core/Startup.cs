@@ -11,6 +11,8 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Events;
 using System.Text.Json.Serialization;
+using Core.DbModels.Base;
+using Microsoft.EntityFrameworkCore;
 using Prometheus;
 
 namespace Core
@@ -49,6 +51,11 @@ namespace Core
             services.AddDataProtection();
             services.AddHttpClient();
 
+            services.AddDbContext<ApplicationContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("MsSql"));
+            });
+
             services.AddAppInfrastructureServices(Configuration);
 
             services.AddSignalR(options =>
@@ -75,7 +82,8 @@ namespace Core
                 app.UseSwaggerUI();
             }
 
-
+            MetricsCollectorStart();
+            
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor |
@@ -92,9 +100,11 @@ namespace Core
             app.UseCors("MessangerPolicy");
             app.UseMiddleWhares();
             app.UseMetricServer();
+            app.UseHttpMetrics();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapMetrics();
                 endpoints.MapControllers();
                 endpoints.MapHub<MessangerHub>("/messangerhub").RequireCors("MessangerPolicy");
                 endpoints.MapHangfireDashboard();
@@ -201,6 +211,12 @@ namespace Core
                                             .AllowCredentials()
                                             .WithExposedHeaders();
                            }));
+        }
+
+        private void MetricsCollectorStart()
+        {
+            var metricServer = new KestrelMetricServer(port: 1234);
+            metricServer.Start();
         }
     }
 }

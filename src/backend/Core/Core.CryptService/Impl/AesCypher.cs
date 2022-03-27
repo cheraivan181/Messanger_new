@@ -1,32 +1,79 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
+using Core.CryptService.Interfaces;
+using Core.Utils;
 
 namespace Core.CryptService.Impl
 {
-    public class AesCypher
+    public class AesCypher : IAesCypher
     {
         public string Crypt(string key, string iv, string value)
         {
-            var keyBuffer = Encoding.UTF8.GetBytes(key);
-            var ivBuffer = Encoding.UTF8.GetBytes(iv);
+            var keyBuffer = Convert.FromBase64String(key);
+            var ivBuffer = Convert.FromBase64String(iv);
 
-            return Crypt(keyBuffer, ivBuffer, value);
-        }
-
-        public string Crypt(byte[] key, byte[] iv, string vale)
-        {
             using Aes aes = Aes.Create();
-            aes.Key = key;
-            aes.IV = iv;
+            aes.Key = keyBuffer;
+            aes.IV = ivBuffer;
 
             ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
-            using var msEncrypt = new MemoryStream();
-            using var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write);
-            using var swEncrypt = new StreamWriter(csEncrypt);
+            byte[] encrypted;
+            
+            using (MemoryStream msEncrypt = new MemoryStream())
+            {
+                using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                {
+                    using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
+                    {
+                        swEncrypt.Write(value);
+                    }
+                    encrypted = msEncrypt.ToArray();
+                    return Convert.ToBase64String(encrypted);
+                }
+            }
+        }
+        
+        public string Decrypt(string cryptedText, string key, string iv)
+        {
+            byte[] keyBuffer = Convert.FromBase64String(key);
+            byte[] ivBuffer = Convert.FromBase64String(iv);
+            byte[] cryptedTextBuffer = Convert.FromBase64String(cryptedText);
 
-            swEncrypt.Write(vale);
-            var buffer = msEncrypt.ToArray();
-            return Encoding.UTF8.GetString(buffer);
+            return Decrypt(cryptedTextBuffer, keyBuffer, ivBuffer);
+        }
+
+        public string Decrypt(byte[] cryptedTextBuffer, byte[] keyBuffer, byte[] ivBuffer)
+        {
+            using (Aes aesAlg = Aes.Create())
+            {
+                aesAlg.Key = keyBuffer;
+                aesAlg.IV = ivBuffer;
+
+                ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
+
+                using (MemoryStream msDecrypt = new MemoryStream(cryptedTextBuffer))
+                {
+                    using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                    {
+                        using (StreamReader srDecrypt = new StreamReader(csDecrypt))
+                        {
+
+                            // Read the decrypted bytes from the decrypting stream
+                            // and place them in a string.
+                            var decryptedText = srDecrypt.ReadToEnd();
+                            return decryptedText;
+                        }
+                    }
+                }
+            }
+        }
+
+        public (string key, string iv) GetAesKeyAndIv()
+        {
+            using Aes aes = Aes.Create();
+            aes.GenerateKey();
+            aes.GenerateIV();
+            return (key: Convert.ToBase64String(aes.Key), iv: Convert.ToBase64String(aes.IV));
         }
     }
 }

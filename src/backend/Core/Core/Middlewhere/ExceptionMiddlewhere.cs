@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using Core.Utils;
 
 namespace Core.Middlewhere
 {
@@ -33,15 +34,15 @@ namespace Core.Middlewhere
                 string json = "";
                 if (_webHostEnv.IsProduction())
                 {
-                    json = JsonSerializer.Serialize(new
+                    json = new
                     {
                         exception = "Something was error, try later"
-                    });
+                    }.ToJson();
                     await context.Response.WriteAsync(json);
                 }
                 else
                 {
-                    json = JsonSerializer.Serialize(ex);
+                    json = ex.ToJson();
                     await context.Response.WriteAsync(json);
                 }
             }

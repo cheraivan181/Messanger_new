@@ -5,8 +5,10 @@ using Front.Clients.Implementations;
 using Front.Clients.Interfaces;
 using Front.Services.Implementations.Alive;
 using Front.Services.Implementations.Auth;
+using Front.Services.Implementations.Crypt;
 using Front.Services.Interfaces.Alive;
 using Front.Services.Interfaces.Auth;
+using Front.Services.Interfaces.Crypt;
 using Front.Servives.Implementations;
 using Front.Servives.Implementations.Auth;
 using Front.Servives.Interfaces.Auth;
@@ -51,6 +53,13 @@ builder.Services.AddScoped<IAuthOptionsService, AuthOptionsService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 #endregion
+
+#region cryptServices
+
+builder.Services.AddSingleton<IAesCryptService, AesService>();
+
+#endregion
+
 builder.Services.AddBlazoredSessionStorage();
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddMudServices();

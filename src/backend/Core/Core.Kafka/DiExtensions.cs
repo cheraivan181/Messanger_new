@@ -12,6 +12,7 @@ namespace Core.Kafka
             IConfiguration configuration)
         {
             serviceCollection.Configure<KafkaOptions>(configuration.GetSection("kafka"));
+            serviceCollection.AddSingleton<IProducerSubscriberProvider, ProducerSubscriberSubscriberProvider>();
             serviceCollection.AddScoped<IProducerService, ProducerService>();
         }
     }

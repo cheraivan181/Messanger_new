@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
+using Core.Utils.Json;
 
 namespace Core.Utils
 {
@@ -7,7 +8,11 @@ namespace Core.Utils
     {
         public static JsonSerializerOptions options = new JsonSerializerOptions()
         {
-            ReferenceHandler = ReferenceHandler.IgnoreCycles
+            ReferenceHandler = ReferenceHandler.IgnoreCycles,
+            Converters =
+            {
+                new RsaParametersConverter()
+            }
         };
         public static string ToJson(this object obj) =>
             JsonSerializer.Serialize(obj, options);

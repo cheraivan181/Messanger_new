@@ -9,6 +9,8 @@ namespace Core.CryptService
         public static void AddCryptService(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<IHashService, HashService>();
+            serviceCollection.AddSingleton<IAesCypher, AesCypher>();
+            serviceCollection.AddSingleton<IRsaCypher, RsaCypher>();
         }
     }
 }

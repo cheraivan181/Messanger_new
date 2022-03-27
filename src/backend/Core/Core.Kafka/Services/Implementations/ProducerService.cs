@@ -3,6 +3,7 @@ using System.Text.Json;
 using Confluent.Kafka;
 using Core.Kafka.Domain;
 using Core.Kafka.Services.Interfaces;
+using Core.Utils;
 using Microsoft.Extensions.Options;
 using Serilog;
 
@@ -20,7 +21,7 @@ namespace Core.Kafka.Services.Implementations
         public async Task<bool> ProduceAsync(string topicName, object objectToProduct)
         {
             var msgId = DateTime.Now.Ticks;
-            var message = JsonSerializer.Serialize(objectToProduct);
+            var message = objectToProduct.ToJson();
             
             Log.Debug($"Publish message in kafka. MsgId: {msgId}," +
                       $" TopicName: {topicName}, Message: {message}");
@@ -43,7 +44,7 @@ namespace Core.Kafka.Services.Implementations
                     Log.Error($"Cannot produce message, messageId: {msgId}");
                     return false;
                 }
-
+                
                 return true;
             }
         }
