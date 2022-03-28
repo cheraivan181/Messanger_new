@@ -1,13 +1,17 @@
-BEGIN TRANSACTION [Migration]
+BEGIN TRANSACTION [AddRoles]
 BEGIN TRY
-	
-	ALTER TABLE RefreshTokens 
-		ADD [CreatedAt] AS GETDATE();
 
-	COMMIT TRANSACTION[Migration];
+		INSERT INTO Roles ([Name])
+			VALUES('User');
+		INSERT INTO Roles ([Name])
+			VALUES('ProtocoledUser');
+		INSERT INTO Roles ([Name])
+			VALUES('Admin');
+
+	COMMIT TRANSACTION[AddRoles];
 END TRY
 BEGIN CATCH
-	ROLLBACK TRANSACTION [Migration];
+	ROLLBACK TRANSACTION [AddRoles];
 	SELECT
        ERROR_NUMBER() AS ErrorNumber,
        ERROR_SEVERITY() AS ErrorSeverity,

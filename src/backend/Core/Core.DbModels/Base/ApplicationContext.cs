@@ -15,7 +15,7 @@ public class ApplicationContext : DbContext
     public DbSet<Session> Sessions { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserRoles> UserRoles { get; set; }
-
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -56,6 +56,28 @@ public class ApplicationContext : DbContext
         modelBuilder.Entity<UserRoles>()
             .HasOne(x => x.User);
         modelBuilder.Entity<UserRoles>()
-            .HasOne(x => x.Role);        
+            .HasOne(x => x.Role);
+
+        modelBuilder.Entity<Dialog>()
+            .Property(x => x.Created)
+            .HasComputedColumnSql("GETDATE()");
+        modelBuilder.Entity<DialogRequest>()
+            .Property(x => x.CreatedAt)
+            .HasComputedColumnSql("GETDATE()");
+        modelBuilder.Entity<DialogSecret>()
+            .Property(x => x.CreatedAt)
+            .HasComputedColumnSql("GETDATE()");
+        modelBuilder.Entity<Message>()
+            .Property(x => x.CreatedAt)
+            .HasComputedColumnSql("GETDATE()");
+        modelBuilder.Entity<RefreshToken>()
+            .Property(x => x.CreatedAt)
+            .HasComputedColumnSql("GETDATE()");
+        modelBuilder.Entity<Session>()
+            .Property(x => x.CreatedAt)
+            .HasComputedColumnSql("GETDATE()");
+        modelBuilder.Entity<User>()
+            .Property(x => x.CreatedAt)
+            .HasComputedColumnSql("GETDATE()");
     }
 }
