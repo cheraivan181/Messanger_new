@@ -1,5 +1,6 @@
-﻿using Core.Converters;
-using Core.Hubs;
+﻿using System;
+using System.IO;
+using Core.Converters;
 using Core.Identity;
 using Core.Middlewhere;
 using Hangfire;
@@ -11,8 +12,15 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Events;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 using Core.DbModels.Base;
+using Core.HostingServices;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Prometheus;
 
 namespace Core
@@ -58,6 +66,8 @@ namespace Core
 
             services.AddAppInfrastructureServices(Configuration);
 
+            services.AddHostedService<ReceiveMessageHostingService>();
+            
             services.AddSignalR(options =>
             {
 
@@ -106,7 +116,7 @@ namespace Core
             {
                 endpoints.MapMetrics();
                 endpoints.MapControllers();
-                endpoints.MapHub<MessangerHub>("/messangerhub").RequireCors("MessangerPolicy");
+//                endpoints.MapHub<MessangerHub>("/messangerhub").RequireCors("MessangerPolicy");
                 endpoints.MapHangfireDashboard();
             });
 
@@ -212,7 +222,8 @@ namespace Core
                                             .WithExposedHeaders();
                            }));
         }
-
+        
+        
         private void MetricsCollectorStart()
         {
             var metricServer = new KestrelMetricServer(port: 1234);

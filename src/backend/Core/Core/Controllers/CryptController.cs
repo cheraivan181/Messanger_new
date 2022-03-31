@@ -1,4 +1,5 @@
-﻿using Core.ApiRequests.Crypt;
+﻿using System;
+using Core.ApiRequests.Crypt;
 using Core.ApiResponses.Base;
 using Core.ApiResponses.Crypt;
 using Core.CryptService.Interfaces;

@@ -2,5 +2,5 @@
 
 public interface IProducerService
 {
-    Task<bool> ProduceAsync(string topicName, object objectToProduct);
+    Task<bool> ProduceAsync(string topicName, object objectToProduct, int partition = 0);
 }

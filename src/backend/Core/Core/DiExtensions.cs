@@ -6,6 +6,8 @@ using Core.Kafka;
 using Core.Mapping;
 using Core.Repositories;
 using Core.SessionServices;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Core
 {

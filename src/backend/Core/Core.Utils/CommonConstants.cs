@@ -13,5 +13,11 @@
         public const string AdminRole = "Admin";
 
         #endregion
+
+        #region KafkaTopics
+
+        public const string ReceiveMessages = "receiveMessageTopic";
+
+        #endregion
     }
 }

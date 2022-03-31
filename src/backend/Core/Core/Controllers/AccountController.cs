@@ -1,10 +1,13 @@
-﻿using Core.ApiRequests.Account;
+﻿using System;
+using System.Threading.Tasks;
+using Core.ApiRequests.Account;
 using Core.ApiResponses.Account;
 using Core.ApiResponses.Base;
 using Core.IdentityService.Domain.Options;
 using Core.IdentityService.Interfaces;
 using Core.Mapping.Interfaces;
 using Core.Repositories.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 

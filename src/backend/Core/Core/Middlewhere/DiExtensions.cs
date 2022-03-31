@@ -1,4 +1,6 @@
-﻿namespace Core.Middlewhere
+﻿using Microsoft.AspNetCore.Builder;
+
+namespace Core.Middlewhere
 {
     public static class DiExtensions
     {

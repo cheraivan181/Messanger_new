@@ -1,4 +1,7 @@
-﻿namespace Core.Middlewhere
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+
+namespace Core.Middlewhere
 {
     public class XssProtectionMiddlewhere
     {

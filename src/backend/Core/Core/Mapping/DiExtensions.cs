@@ -1,5 +1,6 @@
 ﻿using Core.Mapping.Impl;
 using Core.Mapping.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Core.Mapping
 {

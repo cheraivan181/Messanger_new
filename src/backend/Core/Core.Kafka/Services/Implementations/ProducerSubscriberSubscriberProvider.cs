@@ -11,7 +11,9 @@ public class ProducerSubscriberSubscriberProvider : IProducerSubscriberProvider
     private readonly IOptions<KafkaOptions> _kafkaOptions;
     
     private static IProducer<Null, string> Producer;
-    private static IConsumer<Ignore, string> Consumer;
+    
+    private static Dictionary<string, IConsumer<Ignore, string>> Consumers 
+        = new Dictionary<string, IConsumer<Ignore, string>>();
 
     public ProducerSubscriberSubscriberProvider(IOptions<KafkaOptions> kafkaOptions)
     {
@@ -25,9 +27,12 @@ public class ProducerSubscriberSubscriberProvider : IProducerSubscriberProvider
             var config = new ProducerConfig()
             {
                 BootstrapServers = _kafkaOptions.Value.BootstrapServer,
-                ClientId = Dns.GetHostName()
+                ClientId = Dns.GetHostName(),
+                CompressionType = CompressionType.Gzip,
+                LingerMs = 20,
+                BatchSize = 700000
             };
-
+        
             Producer = new ProducerBuilder<Null, string>(config).Build();
         }
 
@@ -36,20 +41,23 @@ public class ProducerSubscriberSubscriberProvider : IProducerSubscriberProvider
 
     public IConsumer<Ignore, string> GetConsumer(string groupId = "")
     {
-        if (Consumer == null)
+        if (!Consumers.TryGetValue(groupId, out IConsumer<Ignore, string> consumer)
+            || consumer == null)
         {
             var config = new ConsumerConfig()
             {
                 BootstrapServers = _kafkaOptions.Value.BootstrapServer,
-                ClientId = Dns.GetHostName()
+                ClientId = Dns.GetHostName(),
+                EnableAutoCommit = false,
             };
 
             if (!string.IsNullOrEmpty(groupId))
                 config.GroupId = groupId;
-
-            Consumer = new ConsumerBuilder<Ignore, string>(config).Build();
+            
+            Consumers.Add(groupId, new ConsumerBuilder<Ignore, string>(config).Build());
+            return Consumers[groupId];
         }
 
-        return Consumer;
+        return consumer;
     }
 }

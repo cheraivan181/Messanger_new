@@ -158,7 +158,7 @@ namespace Core.IdentityService.UnitTests
                 .Returns((string userName, string hashPassword) =>
                 {
                     return Task.FromResult(_users.FirstOrDefault(x => x.UserName == userName && x.Password == hashPassword));
-                });
+                }); 
 
             _userRepositoryMock.Setup(x => x.CreateUserAsync(It.IsAny<string>(), It.IsAny<string>(),
                     It.IsAny<string>(), It.IsAny<string>()))

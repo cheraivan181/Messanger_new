@@ -1,4 +1,5 @@
-﻿using Core.ApiResponses.Alive;
+﻿using System;
+using Core.ApiResponses.Alive;
 using Core.ApiResponses.Base;
 using Microsoft.AspNetCore.Mvc;
 

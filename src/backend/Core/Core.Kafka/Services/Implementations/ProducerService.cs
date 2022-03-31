@@ -18,7 +18,7 @@ namespace Core.Kafka.Services.Implementations
             _kafkaOptions = kafkaOptions;
         }
 
-        public async Task<bool> ProduceAsync(string topicName, object objectToProduct)
+        public async Task<bool> ProduceAsync(string topicName, object objectToProduct, int partition = 0)
         {
             var msgId = DateTime.Now.Ticks;
             var message = objectToProduct.ToJson();
@@ -30,11 +30,11 @@ namespace Core.Kafka.Services.Implementations
             {
                 BootstrapServers = _kafkaOptions.Value.BootstrapServer,
                 ClientId = Dns.GetHostName()
-            };
-
+            }; 
+            
             using (var producer = new ProducerBuilder<Null, string>(config).Build())
             {
-                var result = await producer.ProduceAsync(topicName, new Message<Null, string>()
+                var result = await producer.ProduceAsync(new TopicPartition(topicName, new Partition(partition)), new Message<Null, string>()
                 {
                     Value = message
                 }, CancellationToken.None);

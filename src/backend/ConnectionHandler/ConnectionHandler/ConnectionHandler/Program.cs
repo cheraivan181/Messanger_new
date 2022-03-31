@@ -1,7 +1,4 @@
-using System.Threading.Tasks;
-using Core;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+using ConnectionHandler;
 using Serilog;
 
 public class Program
@@ -12,7 +9,7 @@ public class Program
         var host = hostBuilder.Build();
         Log.Debug("Application is running...");
         
-        await host.RunAsync(); 
+        await host.RunAsync();
     }
 
     private static IHostBuilder BuildHost(string[] args) =>
