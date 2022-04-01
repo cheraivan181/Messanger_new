@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using Core.Converters;
+﻿using Core.Converters;
 using Core.Identity;
 using Core.Middlewhere;
 using Hangfire;
@@ -12,15 +10,9 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Events;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using Core.DbModels.Base;
 using Core.HostingServices;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Prometheus;
 
 namespace Core
@@ -48,7 +40,7 @@ namespace Core
                      options.JsonSerializerOptions.Converters.Add(new IntPtrConverter());
                      options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
                  });
-
+            
             services.AddEndpointsApiExplorer();
 
             services.AddAntiforgery(options => { options.HeaderName = "x-xsrf-token"; });
@@ -75,7 +67,8 @@ namespace Core
             {
 
             });
-
+            
+            
             AddCorsConfig(services, Configuration);
             AddConfigureAuthenticationAndAuthorization(services, Configuration);
             AddConfigureLogging();
@@ -116,7 +109,6 @@ namespace Core
             {
                 endpoints.MapMetrics();
                 endpoints.MapControllers();
-//                endpoints.MapHub<MessangerHub>("/messangerhub").RequireCors("MessangerPolicy");
                 endpoints.MapHangfireDashboard();
             });
 

@@ -47,8 +47,7 @@ public class ProducerSubscriberSubscriberProvider : IProducerSubscriberProvider
             var config = new ConsumerConfig()
             {
                 BootstrapServers = _kafkaOptions.Value.BootstrapServer,
-                ClientId = Dns.GetHostName(),
-                EnableAutoCommit = false,
+                ClientId = Dns.GetHostName()
             };
 
             if (!string.IsNullOrEmpty(groupId))

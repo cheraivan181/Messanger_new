@@ -15,7 +15,8 @@ public class ApplicationContext : DbContext
     public DbSet<Session> Sessions { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserRoles> UserRoles { get; set; }
-    
+    public DbSet<Connection> Connections { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -29,6 +30,7 @@ public class ApplicationContext : DbContext
         modelBuilder.Entity<Session>();
         modelBuilder.Entity<User>();
         modelBuilder.Entity<UserRoles>();
+        modelBuilder.Entity<Connection>();
 
         modelBuilder.Entity<Dialog>().HasKey(x => x.Id);
         modelBuilder.Entity<DialogRequest>().HasKey(x => x.Id);
@@ -39,7 +41,8 @@ public class ApplicationContext : DbContext
         modelBuilder.Entity<Session>().HasKey(x => x.Id);
         modelBuilder.Entity<User>().HasKey(x => x.Id);
         modelBuilder.Entity<UserRoles>().HasKey(x => x.Id);
-
+        modelBuilder.Entity<Connection>().HasKey(x => x.Id);
+        
         modelBuilder.Entity<Dialog>().HasIndex(x => x.User1Id);
         modelBuilder.Entity<Dialog>().HasIndex(x => x.User2Id);
 
@@ -57,6 +60,12 @@ public class ApplicationContext : DbContext
             .HasOne(x => x.User);
         modelBuilder.Entity<UserRoles>()
             .HasOne(x => x.Role);
+        modelBuilder.Entity<Connection>()
+            .HasOne(x => x.Session);
+        modelBuilder.Entity<Connection>()
+            .HasOne(x => x.User)
+            .WithMany(x => x.Connections)
+            .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<Dialog>()
             .Property(x => x.Created)
@@ -77,6 +86,9 @@ public class ApplicationContext : DbContext
             .Property(x => x.CreatedAt)
             .HasComputedColumnSql("GETDATE()");
         modelBuilder.Entity<User>()
+            .Property(x => x.CreatedAt)
+            .HasComputedColumnSql("GETDATE()");
+        modelBuilder.Entity<Connection>()
             .Property(x => x.CreatedAt)
             .HasComputedColumnSql("GETDATE()");
     }

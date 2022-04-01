@@ -43,13 +43,12 @@ public class ReceiveMessageHostingService : IHostedService
             var consumer = _producerSubscriberProvider.GetConsumer(groupId: "consumer2"); 
             consumer.Subscribe("s"); 
             //consumer.Subscribe("s");
-            
             int count = 0;
             while (!cancellationToken.IsCancellationRequested)
             {
-              //  var newMessage = newConsumer.Consume(cancellationToken);
+                //  var newMessage = newConsumer.Consume(cancellationToken);
                 var message = consumer.Consume(cancellationToken);
-                
+                   
                 Log.Information( $"Received message: {message.Value}"); 
             }
         }, cancellationToken);

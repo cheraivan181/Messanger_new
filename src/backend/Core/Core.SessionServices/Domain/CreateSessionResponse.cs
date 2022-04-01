@@ -6,6 +6,7 @@ public class CreateSessionResponse
     public bool IsSucess { get; set; }
     public string ServerPublicKey { get; set; }
     public string ErrorMessage { get; set; }
+    public bool IsNeedUpdateToken { get; set; } 
 
     public void SetError(string message)
     {
@@ -19,6 +20,8 @@ public class CreateSessionResponse
         IsSucess = false;
     }
 
-    public void SetSucessResult() =>
+    public void SetSucessResult(string serverPublicKey, bool isNeedUpdateToken)
+    {
         IsSucess = true;
+    }
 }

@@ -12,6 +12,8 @@ namespace Core.Repositories
             serviceCollection.AddScoped<IRoleRepository, RoleRepository>();
             serviceCollection.AddScoped<IUserRoleRepository, UserRoleRepository>();
             serviceCollection.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+            serviceCollection.AddScoped<ISessionRepository, SessionRepository>();
+            serviceCollection.AddScoped<IConnectionRepository, ConnectionRepository>();
         }
     }
 }

@@ -9,6 +9,7 @@ namespace Core.Mapping
         public static void AddMappers(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<IIdentityServiceMapper, IdentityServiceMapper>();
+            serviceCollection.AddSingleton<ISessionServiceMapper, SessionServiceMapper>();
         }
     }
 }

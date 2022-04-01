@@ -4,43 +4,14 @@
     <projectFile profileName="ConnectionHandler">ConnectionHandler/ConnectionHandler.csproj</projectFile>
     <projectFile profileName="IIS Express">ConnectionHandler/ConnectionHandler.csproj</projectFile>
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="dc7ec941-6ead-44a2-b075-d1856d7f9953" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.ConnectionHandler/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.ConnectionHandler/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.ConnectionHandler/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.ConnectionHandler/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ConnectionHandler/Auth/SignInSymmetricKey.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ConnectionHandler/Hubs/MessangerHub.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ConnectionHandler/Startup.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/ConnectionHandler/Controllers/AliveController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/ConnectionHandler/Hubs/MessangerHub.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/ConnectionHandler/Startup.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core/HostingServices/ReceiveMessageHostingService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.IdentityService.UnitTests/IdentityServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.IdentityService.UnitTests/IdentityServiceTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.Kafka/Services/Implementations/ProducerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Kafka/Services/Implementations/ProducerService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.Kafka/Services/Implementations/ProducerSubscriberSubscriberProvider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Kafka/Services/Implementations/ProducerSubscriberSubscriberProvider.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.Kafka/Services/Implementations/SubscriberService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.Kafka/Services/Interfaces/IProducerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Kafka/Services/Interfaces/IProducerService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/SessionRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/SessionRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.Utils/CommonConstants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Utils/CommonConstants.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Controllers/AccountController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/Controllers/AliveController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Controllers/AliveController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/Controllers/BaseController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Controllers/BaseController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/Controllers/ChatController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Controllers/ChatController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/Controllers/CryptController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Controllers/CryptController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/Controllers/MessangerCryptController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Controllers/MessangerCryptController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/Controllers/SessionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Controllers/SessionController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/Converters/IntPtrConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Converters/IntPtrConverter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/DiExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/DiExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/Hubs/MessangerHub.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/Mapping/DiExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Mapping/DiExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/Middlewhere/DiExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Middlewhere/DiExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/Middlewhere/ExceptionMiddlewhere.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Middlewhere/ExceptionMiddlewhere.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/Middlewhere/RequestMetricMiddlewhere.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Middlewhere/RequestMetricMiddlewhere.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/Middlewhere/XssProtectionMiddlewhere.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Middlewhere/XssProtectionMiddlewhere.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Program.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core/GRPC/ConnectionGrpcController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ConnectionHandler/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ConnectionHandler/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core/Core.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Core.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Startup.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,6 +42,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected=".NET Launch Settings Profile.ConnectionHandler">
@@ -113,7 +88,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1648715090707</updated>
-      <workItem from="1648715095391" duration="518000" />
+      <workItem from="1648715095391" duration="2320000" />
     </task>
     <servers />
   </component>

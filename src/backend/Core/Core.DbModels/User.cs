@@ -14,6 +14,7 @@ namespace Core.DbModels
         [MaxLength(300)]
         public string Password { get; set; }
         public List<RefreshToken> RefreshTokens { get; set; }
+        public List<Connection> Connections { get; set; }
         public DateTime CreatedAt { get; set; }
 
         public User()

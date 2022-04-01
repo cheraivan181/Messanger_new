@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using Core.Utils.Json;
+using StackExchange.Redis;
 
 namespace Core.Utils
 {
@@ -19,5 +20,8 @@ namespace Core.Utils
         
         public static T FromJson<T>(this string json) =>
             JsonSerializer.Deserialize<T>(json, options);
+
+        public static T FromJson<T>(this RedisValue value) =>
+            JsonSerializer.Deserialize<T>(value.ToString());
     }
 }
