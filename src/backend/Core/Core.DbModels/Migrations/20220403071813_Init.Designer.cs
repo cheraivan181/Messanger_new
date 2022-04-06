@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Core.DbModels.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220401053306_Add_ConnectionModel")]
-    partial class Add_ConnectionModel
+    [Migration("20220403071813_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,9 +33,7 @@ namespace Core.DbModels.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2")
-                        .HasComputedColumnSql("GETDATE()");
+                        .HasColumnType("datetime2");
 
                     b.Property<long>("SessionId")
                         .HasColumnType("bigint");
@@ -66,9 +64,7 @@ namespace Core.DbModels.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<DateTime>("Created")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2")
-                        .HasComputedColumnSql("GETDATE()");
+                        .HasColumnType("datetime2");
 
                     b.Property<long>("User1Id")
                         .HasColumnType("bigint");
@@ -94,9 +90,7 @@ namespace Core.DbModels.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2")
-                        .HasComputedColumnSql("GETDATE()");
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsAccepted")
                         .HasColumnType("bit");
@@ -123,9 +117,7 @@ namespace Core.DbModels.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2")
-                        .HasComputedColumnSql("GETDATE()");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("CypherKey")
                         .IsRequired()
@@ -154,9 +146,7 @@ namespace Core.DbModels.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2")
-                        .HasComputedColumnSql("GETDATE()");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("CryptedText")
                         .IsRequired()
@@ -188,9 +178,7 @@ namespace Core.DbModels.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2")
-                        .HasComputedColumnSql("GETDATE()");
+                        .HasColumnType("datetime2");
 
                     b.Property<long>("UserID")
                         .HasColumnType("bigint");
@@ -238,9 +226,7 @@ namespace Core.DbModels.Migrations
                         .HasColumnType("nvarchar(3000)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2")
-                        .HasComputedColumnSql("GETDATE()");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ServerPrivateKey")
                         .IsRequired()
@@ -271,9 +257,7 @@ namespace Core.DbModels.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2")
-                        .HasComputedColumnSql("GETDATE()");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .IsRequired()

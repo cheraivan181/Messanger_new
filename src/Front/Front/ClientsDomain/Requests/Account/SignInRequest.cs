@@ -14,4 +14,7 @@ public class SignInRequest
     [MinLength(6)]
     [JsonPropertyName("password")]
     public string Password { get; set; }
+
+    [JsonPropertyName("sessionId")]
+    public long? SessionId { get; set; }
 }

@@ -2,7 +2,7 @@
 {
     public interface IAesCryptService
     {
-        string DecryptText(string cipherText, byte[] Key, byte[] IV);
-        string CryptText(string plainText, byte[] Key, byte[] IV);
+        string DecryptText(long dialogId, string cipherText);
+        string CryptText(long dialogId, string textToCrypt);
     }
 }

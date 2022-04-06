@@ -32,11 +32,11 @@ namespace Core.Repositories.Impl
 
         public async Task<bool> CreateRefreshTokenAsync(long userId, string value)
         {
-            using var conn = await _connectionFactory.GetDbConnectionAsync();
-            string sql = "INSERT INTO RefreshTokens (UserId, Value) " +
-                "VALUES (@userId, @value)";
+            await using var conn = await _connectionFactory.GetDbConnectionAsync();
+            string sql = "INSERT INTO RefreshTokens (UserId, Value, CreatedAt) " +
+                "VALUES (@userId, @value, @createdAt)";
 
-            var result = await conn.ExecuteAsync(sql, new { userId = userId, value = value });
+            var result = await conn.ExecuteAsync(sql, new { userId = userId, value = value, createdAt = DateTime.Now });
             return result > 0;
         }
 

@@ -97,10 +97,11 @@ namespace Core
 
             app.UseCookiePolicy();
             app.UseStaticFiles();
-
+            
+            app.UseCors("MessangerPolicy");
+            
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseCors("MessangerPolicy");
             app.UseMiddleWhares();
             app.UseMetricServer();
             app.UseHttpMetrics();
@@ -109,6 +110,7 @@ namespace Core
             {
                 endpoints.MapMetrics();
                 endpoints.MapControllers();
+                
                 endpoints.MapHangfireDashboard();
             });
 
@@ -158,7 +160,9 @@ namespace Core
                       })
                       .AddJwtBearer(cfg =>
                       {
-                          cfg.RequireHttpsMetadata = false;
+                          cfg.RequireHttpsMetadata = true;
+                          cfg.SaveToken = true;
+                          
                           cfg.TokenValidationParameters = new TokenValidationParameters
                           {
                               ValidIssuer = configuration["Auth:Issuer"],

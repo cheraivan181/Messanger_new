@@ -2,6 +2,7 @@
 using ConnectionHandler.Auth;
 using ConnectionHandler.Hubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -77,14 +78,17 @@ public class Startup
         app.UseCookiePolicy();
         app.UseStaticFiles();
 
+        app.UseCors("MessangerPolicy");
+        
         app.UseAuthentication();
         app.UseAuthorization();
-        app.UseCors("MessangerPolicy");
+        
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapControllers();
-            endpoints.MapHub<MessangerHub>("/messangerhub").RequireCors("MessangerPolicy");
-            // endpoints.MapHangfireDashboard();
+            endpoints.MapControllers().RequireCors("MessangerPolicy");
+            endpoints.MapHub<MessangerHub>("/messanger", options =>
+            {
+            }).RequireCors("MessangerPolicy");
         });
     }
     
@@ -103,50 +107,38 @@ public class Startup
             }));
     }
     
-    private void AddConfigureAuthenticationAndAuthorization(IServiceCollection collection, IConfiguration configuration)
-        {
-            var signDecodingKey = new SignInSymmetricKey(configuration["TokenOptions:Key"]);
-            collection
-                      .AddAuthentication(options =>
-                      {
-                          options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                          options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                          options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                      })
-                      .AddJwtBearer(cfg =>
-                      {
-                          cfg.RequireHttpsMetadata = false;
-                          cfg.TokenValidationParameters = new TokenValidationParameters
-                          {
-                              ValidIssuer = configuration["Auth:Issuer"],
-                              ValidAudience = configuration["Auth:Audience"],
-                              IssuerSigningKey = signDecodingKey.GetKey(),
-                              ClockSkew = TimeSpan.Zero,
-                              ValidateLifetime = true,
-                              ValidateAudience = true,
-                              ValidateIssuer = true,
-                              ValidateIssuerSigningKey = true,
-                          };
+     private void AddConfigureAuthenticationAndAuthorization(IServiceCollection collection, IConfiguration configuration)
+     {
+         var key = configuration["TokenOptions:Key"];
+         var signDecodingKey = new SignInSymmetricKey(key);
+         collection
+             .AddAuthentication(options =>
+             {
+                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+             })
+             .AddJwtBearer(cfg =>
+             {
+                 cfg.RequireHttpsMetadata = true;
+                 cfg.SaveToken = true;
 
-                          cfg.Events = new JwtBearerEvents
-                          {
-                              OnMessageReceived = context =>
-                              {
-                                  var accessToken = context.Request.Query["access_token"];
-                                  var path = context.HttpContext.Request.Path;
+                 cfg.TokenValidationParameters = new TokenValidationParameters
+                 {
+                     ValidIssuer = configuration["Auth:Issuer"],
+                     ValidAudience = configuration["Auth:Audience"],
+                     IssuerSigningKey = signDecodingKey.GetKey(),
+                     ValidateIssuerSigningKey = true,
+                     ClockSkew = TimeSpan.Zero,
+                     ValidateLifetime = true,
+                     ValidateAudience = true,
+                     ValidateIssuer = true,
+                 };
 
-                                  if (path.StartsWithSegments("/messanger"))
-                                  {
-                                      context.Token = accessToken;
-                                  }
-
-                                  return Task.CompletedTask;
-                              }
-                          };
-                      });
+              
+             });
             collection.AddAuthorization();
-        }
-    
+     }
         
     private void AddConfigureLogging()
     {

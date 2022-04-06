@@ -1,12 +1,40 @@
 ﻿@page "/messanger"
+@inject ISessionService _sessionService
+@inject IConnectorService _connectorService
 
-@inject AuthenticationStateProvider _authStateProvider
+@using Front.Services.Interfaces.Sessions
+@using Front.Services.Interfaces.WebSocket
+
 
 <h3>Messanger</h3>
 
+@if (!string.IsNullOrEmpty(ErrorMessage))
+{
+    <p>@ErrorMessage</p>
+}
+else
+{
+    <p>session create sucess</p>
+}
+
 @code {
+
+    private string ErrorMessage { get; set; }
+
+
     protected async override Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
+        bool isNeedCreateSession = await _sessionService.IsNeedCreateSessionAsync();
+        if (isNeedCreateSession)
+        {
+            var createSessionResult = await _sessionService.CreateSessionService();
+            if (!createSessionResult)
+            {
+                ErrorMessage = "Server error. Try later";
+            }
+        }
+
+        await _connectorService.InitConnectionAsync();
     }
 }

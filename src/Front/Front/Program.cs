@@ -6,9 +6,13 @@ using Front.Clients.Interfaces;
 using Front.Services.Implementations.Alive;
 using Front.Services.Implementations.Auth;
 using Front.Services.Implementations.Crypt;
+using Front.Services.Implementations.Sessions;
+using Front.Services.Implementations.WebSocket;
 using Front.Services.Interfaces.Alive;
 using Front.Services.Interfaces.Auth;
 using Front.Services.Interfaces.Crypt;
+using Front.Services.Interfaces.Sessions;
+using Front.Services.Interfaces.WebSocket;
 using Front.Servives.Implementations;
 using Front.Servives.Implementations.Auth;
 using Front.Servives.Interfaces.Auth;
@@ -23,7 +27,7 @@ builder.Configuration.AddInMemoryCollection(Configuration.Configurations);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-var baseAdress = builder.Configuration.GetValue<string>("Url");
+var baseAdress = builder.Configuration.GetValue<string>("CoreUrl");
 builder.Services.AddHttpClient("CoreClient", httpClient =>
 {
     httpClient.BaseAddress = new Uri(baseAdress);
@@ -34,6 +38,8 @@ builder.Services.AddHttpClient("CoreClient", httpClient =>
 builder.Services.AddScoped<IRestClient, RestClient>();
 builder.Services.AddScoped<IAliveClient, AliveClient>();
 builder.Services.AddScoped<IAccountClient, AccountClient>();
+builder.Services.AddScoped<ISessionClient, SessionClient>();
+builder.Services.AddScoped<ICryptClient, CryptClient>();
 
 #endregion
 
@@ -56,7 +62,20 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 
 #region cryptServices
 
-builder.Services.AddSingleton<IAesCryptService, AesService>();
+builder.Services.AddScoped<IAesCryptService, AesService>();
+builder.Services.AddScoped<IRsaService, RsaService>();
+
+#endregion
+
+#region sessionServices
+
+builder.Services.AddScoped<ISessionService, SessionService>();
+
+#endregion
+
+#region connectorServices
+
+builder.Services.AddSingleton<IConnectorService, ConnectorService>();
 
 #endregion
 

@@ -1,5 +1,4 @@
-﻿using System.Net.Http;
-using Front.Clients.Interfaces;
+﻿using Front.Clients.Interfaces;
 using Front.ClientsDomain.Responses;
 using Front.Domain.Requests;
 using Front.Domain.Responses;
@@ -16,12 +15,13 @@ namespace Front.Clients.Implementations
             _restClient = restClient;
         }
         
-        public async Task<RestClientResponse<SignInResponse>> SignInAsync(string userName, string password)
+        public async Task<RestClientResponse<SignInResponse>> SignInAsync(string userName, string password, long? sessionId)
         {
             var signInRequest = new SignInRequest()
             {
                 UserName = userName,
-                Password = password
+                Password = password,
+                SessionId = sessionId
             };
 
             var response = await _restClient.MakeHttpRequestAsync<SignInResponse>("Account/signin", HttpMethod.Post, data: signInRequest);
@@ -44,15 +44,16 @@ namespace Front.Clients.Implementations
             return response;
         }
 
-        public async Task<RestClientResponse<SignInResponse>> UpdateRefreshTokenAsync(string refreshToken)
+        public async Task<RestClientResponse<SignInResponse>> UpdateRefreshTokenAsync(string refreshToken, long? sessionId)
         {
             var acessTokenUpdateRequest = new UpdateRefreshTokenRequest()
             {
-                RefreshToken = refreshToken
+                RefreshToken = refreshToken,
+                SessionId = sessionId
             };
 
             var response = await _restClient
-                .MakeHttpRequestAsync<SignInResponse>("Account/UpdateAcessTokenAsync", HttpMethod.Post, data: acessTokenUpdateRequest);
+                .MakeHttpRequestAsync<SignInResponse>("Account/updatetoken", HttpMethod.Post, data: acessTokenUpdateRequest);
 
             return response;
         }

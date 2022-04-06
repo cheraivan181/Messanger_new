@@ -66,30 +66,5 @@ public class ApplicationContext : DbContext
             .HasOne(x => x.User)
             .WithMany(x => x.Connections)
             .OnDelete(DeleteBehavior.NoAction);
-
-        modelBuilder.Entity<Dialog>()
-            .Property(x => x.Created)
-            .HasComputedColumnSql("GETDATE()");
-        modelBuilder.Entity<DialogRequest>()
-            .Property(x => x.CreatedAt)
-            .HasComputedColumnSql("GETDATE()");
-        modelBuilder.Entity<DialogSecret>()
-            .Property(x => x.CreatedAt)
-            .HasComputedColumnSql("GETDATE()");
-        modelBuilder.Entity<Message>()
-            .Property(x => x.CreatedAt)
-            .HasComputedColumnSql("GETDATE()");
-        modelBuilder.Entity<RefreshToken>()
-            .Property(x => x.CreatedAt)
-            .HasComputedColumnSql("GETDATE()");
-        modelBuilder.Entity<Session>()
-            .Property(x => x.CreatedAt)
-            .HasComputedColumnSql("GETDATE()");
-        modelBuilder.Entity<User>()
-            .Property(x => x.CreatedAt)
-            .HasComputedColumnSql("GETDATE()");
-        modelBuilder.Entity<Connection>()
-            .Property(x => x.CreatedAt)
-            .HasComputedColumnSql("GETDATE()");
     }
 }

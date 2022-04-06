@@ -14,12 +14,13 @@ namespace Core.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CryptControlle : BaseController
+[Produces("application/json")]
+public class CryptController : BaseController
 {
     private readonly IRsaCypher _rsaCypher;
     private readonly IAesCypher _aesCypher;
     
-    public CryptControlle(IServiceProvider serviceProvider,
+    public CryptController(IServiceProvider serviceProvider,
         IUserRepository userRepository,
         IRsaCypher rsaCypher,
         IAesCypher aesCypher) 

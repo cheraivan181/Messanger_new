@@ -95,7 +95,7 @@ namespace Core.Controllers
         [HttpPost("signin")]
         public async Task<IActionResult> SignInAsync([FromBody]SignInRequestModel request)
         {
-            var result = await _identityService.SignInAsync(request.UserName, request.Password);
+            var result = await _identityService.SignInAsync(request.UserName, request.Password, request.SessionId);
 
             if (!result.IsSucess)
             {
@@ -135,7 +135,7 @@ namespace Core.Controllers
         [HttpPost("updatetoken")]
         public async Task<IActionResult> UpdateAcessTokenAsync([FromBody]UpdateAcessTokenRequest request)
         {
-            var result = await _identityService.UpdateJwtAsync(request.RefreshToken);
+            var result = await _identityService.UpdateJwtAsync(request.RefreshToken, request.SessionId);
 
             if (!result.IsSucess)
             {

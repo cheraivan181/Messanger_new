@@ -29,7 +29,7 @@ namespace Core.Repositories.Impl
             string sql = "INSERT INTO UserRoles (UserId, RoleId)" +
                 "VALUES (@userId, @roleId)";
 
-            await connection.ExecuteAsync(sql, new { userId = userId, roleId = roleId });
+            await connection.ExecuteAsync(sql, new { userId = userId, roleId = roleId, createdAt = DateTime.Now });
         }
 
         public async Task<List<Role>> GetUserRolesAsync(long userId)

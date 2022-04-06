@@ -14,5 +14,8 @@ namespace Core.ApiRequests.Account
         [MinLength(6)]
         [JsonPropertyName("password")]
         public string Password { get; set; }
+        
+        [JsonPropertyName("sessionId")]
+        public long? SessionId { get; set; }
     }
 }

@@ -8,4 +8,7 @@ public class UpdateRefreshTokenRequest
     [Required]
     [JsonPropertyName("refreshToken")]
     public string RefreshToken { get; set; }
+
+    [JsonPropertyName("sessionId")]
+    public long? SessionId { get; set; }
 }

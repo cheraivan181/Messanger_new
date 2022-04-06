@@ -7,6 +7,7 @@ namespace Front.Services.Interfaces.Auth
     {
         Task<SignInResult> SignInAsync(AuthModel authModel);
         Task<SignInResult> SignUpAsync(RegisterModel registerModel);
+        Task UpdateRefreshTokenAsync();
         Task Logout();
     }
 }

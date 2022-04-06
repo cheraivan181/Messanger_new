@@ -4,7 +4,6 @@ using Core.IdentityService.Domain.Options;
 using Core.IdentityService.Interfaces;
 using Core.Repositories.Interfaces;
 using Core.Utils;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Serilog;
 
@@ -16,6 +15,7 @@ namespace Core.IdentityService
         private readonly IRoleRepository _roleRepository;
         private readonly IUserRoleRepository _userRoleRepository;
         private readonly IRefreshTokenRepository _refreshTokenRepository;
+        private readonly ISessionRepository _sessionRepository;
 
         private readonly IJwtService _jwtService;
         private readonly IHashService _hashService;
@@ -26,6 +26,7 @@ namespace Core.IdentityService
             IRoleRepository roleRepository,
             IUserRoleRepository userRoleRepository,
             IRefreshTokenRepository refreshTokenRepository,
+            ISessionRepository sessionRepository,
             IJwtService jwtService,
             IHashService hashService,
             IOptions<TokenLifeTimeOptions> tokenLifeTimeOptions)
@@ -34,6 +35,7 @@ namespace Core.IdentityService
             _roleRepository = roleRepository;
             _userRoleRepository = userRoleRepository;
             _refreshTokenRepository = refreshTokenRepository;
+            _sessionRepository = sessionRepository;
             _jwtService = jwtService;
             _hashService = hashService;
             _tokenLifeTimeOptions = tokenLifeTimeOptions;
@@ -82,7 +84,7 @@ namespace Core.IdentityService
             return result;
         }
 
-        public async Task<SignInResult> SignInAsync(string userName, string password)
+        public async Task<SignInResult> SignInAsync(string userName, string password, long? sessionId)
         {
             var result = new SignInResult();
 
@@ -93,12 +95,12 @@ namespace Core.IdentityService
                 result.SetUnAuthorizedError("Cannot find user with this username and password");
                 return result;
             }
-
-            result = await SignInAsync(result, user.Id, userName);
+            
+            result = await SignInAsync(result, user.Id, userName, sessionId);
             return result;
         }
 
-        public async Task<SignInResult> UpdateJwtAsync(string refreshTokenValue)
+        public async Task<SignInResult> UpdateJwtAsync(string refreshTokenValue, long? sessionId)
         {
             var result = new SignInResult();
             var refreshToken = await _refreshTokenRepository.GetRefreshTokenByValueAsync(refreshTokenValue);
@@ -108,27 +110,28 @@ namespace Core.IdentityService
                 return result;
             }
 
-            if (refreshToken.CreatedAt.AddDays(_tokenLifeTimeOptions.Value.RefreshTokenLifeTime) < DateTime.Now)
+            if (refreshToken.CreatedAt.AddYears(_tokenLifeTimeOptions.Value.RefreshTokenLifeTime) < DateTime.Now)
             {
                 result.SetUnAuthorizedError("Token is expired");
                 return result;
             }
 
-            result = await SignInAsync(result , refreshToken.User.Id, refreshToken.User.UserName, oldRefreshToken: refreshTokenValue);
+            result = await SignInAsync(result , refreshToken.User.Id, refreshToken.User.UserName, sessionId,
+                oldRefreshToken: refreshTokenValue);
             return result;
         }
 
         private async Task<SignInResult> SignInAsync(SignInResult result, long userId, 
-            string userName, string oldRefreshToken = "")
+            string userName, long? sessionId, string oldRefreshToken = "")
         {
             var refreshToken = _jwtService.GenarateRefreshToken();
             bool refreshTokenResult;
-
+            
             if (string.IsNullOrEmpty(oldRefreshToken))
                 refreshTokenResult = await _refreshTokenRepository.CreateRefreshTokenAsync(userId, refreshToken);
             else
                 refreshTokenResult = await _refreshTokenRepository.UpdateRefreshTokenAsync(userId, oldRefreshToken, refreshToken);    
-
+            
             if (!refreshTokenResult)
             {
                 Log.Error($"Cannot create or update refresh token for user#({userId})");
@@ -144,8 +147,28 @@ namespace Core.IdentityService
                 result.SetServerError();
             }
 
-            var jwtToken = _jwtService.GenereteJwtToken(userName, userId, roles.Select(x => x.Name)
-                .ToList());
+            string jwtToken;
+            if (sessionId.HasValue)
+            {
+                var session = await _sessionRepository.GetSessionAsync(sessionId.Value);
+                if (session == null)
+                {
+                    Log.Error($"Cannot find session #({sessionId.Value})");
+                    result.SetError("Cannot find session");
+                }
+
+                if (session.UserId != userId)
+                {
+                    Log.Error($"User try use not persionalized session. User #({userId}), Session #({sessionId.Value})");
+                    result.SetError("Incorrect session value");
+                }
+                
+                jwtToken = _jwtService.GenereteJwtToken(userName, userId, roles.Select(x => x.Name)
+                    .ToList(), sessionId.Value);
+            }
+            else 
+                jwtToken = _jwtService.GenereteJwtToken(userName, userId, roles.Select(x => x.Name)
+                    .ToList());
 
             result.SetSucessResult(jwtToken, refreshToken);
             return result;

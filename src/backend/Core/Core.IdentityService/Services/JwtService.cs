@@ -32,7 +32,7 @@ namespace Core.IdentityService.Services
         public string GenereteJwtToken(string userName, 
             long userid, 
             List<string> roles,
-            string sessionId = "")
+            long? sessionId = null)
         {
             var claims = new List<Claim>()
             {
@@ -42,13 +42,13 @@ namespace Core.IdentityService.Services
                 new Claim(CommonConstants.UniqueClaimName, CryptoRandomizer.GetRandomString(16))
             };
 
-            if (!string.IsNullOrEmpty(sessionId))
-                claims.Add(new Claim(CommonConstants.SessionClaimName, sessionId));
+            if (sessionId.HasValue)
+                claims.Add(new Claim(CommonConstants.SessionClaimName, sessionId.ToString()));
             
             foreach (var role in roles)
                 claims.Add(new Claim(ClaimsIdentity.DefaultRoleClaimType, role));
 
-            var expires = DateTime.Now.AddMinutes(Convert.ToDouble(_tokenLifeTimeOptions.Value.AccessTokenLifeTime));
+            var expires = DateTime.Now.AddHours(Convert.ToDouble(_tokenLifeTimeOptions.Value.AccessTokenLifeTime));
             var now = DateTime.Now;
 
             var signInEncodingKey = new SignInSymmetricKey(_tokenOptions.Value.Key);

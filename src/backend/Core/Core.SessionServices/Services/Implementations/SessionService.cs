@@ -84,7 +84,7 @@ public class SessionService : ISessionService
         
         Log.Debug($"Session #({createdSessionId}) was added to cache");
         
-        result.SetSucessResult(serverKeys.publicKey, isNeedUpdateToken);
+        result.SetSucessResult(serverKeys.publicKey, createdSessionId, isNeedUpdateToken);
         return result;
     }
 

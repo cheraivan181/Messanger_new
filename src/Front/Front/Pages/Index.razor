@@ -5,17 +5,7 @@
 @inject IAliveService _aliveService;
 @inject NavigationManager _navigationManager;
 @inject AuthenticationStateProvider _authStateProvider;
-
-<PageTitle>Index</PageTitle>
-
-<AuthorizeView>
-    <Authorized>
-        <p>Auth</p>
-    </Authorized>
-    <NotAuthorized>
-        <p>NoAuthorized</p>
-    </NotAuthorized>
-</AuthorizeView>
+@inject IAuthService _authService;
 
 @if (!IsApiAlive)
 {
@@ -30,11 +20,13 @@
         await base.OnInitializedAsync();
 
         IsApiAlive = await _aliveService.IsApiAliveAsync();
+
         var authState = await _authStateProvider.GetAuthenticationStateAsync();
         var user = authState.User.Identity.IsAuthenticated;
 
         if (authState.User.Identity.IsAuthenticated)
         {
+            await _authService.UpdateRefreshTokenAsync();
             _navigationManager.NavigateTo("/messanger");
         }
         else

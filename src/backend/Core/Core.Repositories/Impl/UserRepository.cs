@@ -53,12 +53,12 @@ namespace Core.Repositories.Impl
         {
             using var conn = await _connectionFactory.GetDbConnectionAsync();
 
-            string sql = "INSERT INTO Users (Phone, UserName, Email, Password) " +
-                "VALUES (@phone, @userName, @email, @password); " +
+            string sql = "INSERT INTO Users (Phone, UserName, Email, Password, CreatedAt) " +
+                "VALUES (@phone, @userName, @email, @password, @createdAt); " +
                 "SELECT SCOPE_IDENTITY();";
 
             var userId = await conn.ExecuteScalarAsync<long>(sql, 
-                new { phone = phone, userName = userName, email = email, password = password });
+                new { phone = phone, userName = userName, email = email, password = password, createdAt = DateTime.Now });
             return userId;
         }
 

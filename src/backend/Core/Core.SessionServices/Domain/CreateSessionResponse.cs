@@ -20,8 +20,13 @@ public class CreateSessionResponse
         IsSucess = false;
     }
 
-    public void SetSucessResult(string serverPublicKey, bool isNeedUpdateToken)
+    public void SetSucessResult(string serverPublicKey,
+        long sessionId,
+        bool isNeedUpdateToken)
     {
         IsSucess = true;
+        SessionId = sessionId;
+        IsNeedUpdateToken = isNeedUpdateToken;
+        ServerPublicKey = serverPublicKey;
     }
 }

@@ -5,7 +5,7 @@
         string GenereteJwtToken(string userName,
             long userid,
             List<string> roles,
-            string sessionId = "");
+            long? sessionId = null);
         string GenarateRefreshToken();
     }
 }

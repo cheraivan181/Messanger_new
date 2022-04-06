@@ -8,6 +8,7 @@ using Front.Clients.Interfaces;
 using Front.Domain.Requests;
 using Front.Domain.Responses;
 using Front.Domain.Responses.Base;
+using Front.Json;
 
 namespace Front.Clients.Implementations;
 
@@ -50,7 +51,7 @@ public class RestClient : IRestClient
 
         if (data != null)
         {
-            request.Content = new StringContent(JsonSerializer.Serialize(data), Encoding.UTF8, "application/json");
+            request.Content = new StringContent(data.ToJson(), Encoding.UTF8, "application/json");
         }
 
         var responseMessage = await _httpClient.SendAsync(request);
@@ -59,7 +60,7 @@ public class RestClient : IRestClient
         var responseStream = await responseMessage.Content.ReadAsStreamAsync();
         if (responseMessage.StatusCode == exceptedStatusCode)
         {
-            var responseModel = await JsonSerializer.DeserializeAsync<SucessResponse<T>>(responseStream);
+            var responseModel = await responseStream.FromJson<SucessResponse<T>>();
             response.IsSucess = true;
             response.SucessResponse = responseModel;
 
@@ -68,7 +69,7 @@ public class RestClient : IRestClient
         
         try
         {
-            var errorResponse = await JsonSerializer.DeserializeAsync<ErrorResponse>(responseStream);
+            var errorResponse = await responseStream.FromJson<ErrorResponse>();
             response.IsSucess = false;
             response.IsCanHandleError = true;
             response.ErrorResponse = errorResponse;
@@ -111,7 +112,7 @@ public class RestClient : IRestClient
         var responseStream = await responseMessage.Content.ReadAsStreamAsync();
         try
         {
-            var errorResponse = await JsonSerializer.DeserializeAsync<ErrorResponse>(responseStream);
+            var errorResponse = await responseStream.FromJson<ErrorResponse>();
             result.IsSucess = false;
             result.IsCanHandleError = true;
             result.ErrorResponse = errorResponse;
@@ -152,7 +153,7 @@ public class RestClient : IRestClient
             };
 
             var updateTokenRequestMessage = new HttpRequestMessage();
-            updateTokenRequestMessage.Content = new StringContent(JsonSerializer.Serialize(updateTokenRefreshModel),
+            updateTokenRequestMessage.Content = new StringContent(updateTokenRefreshModel.ToJson(),
                 Encoding.UTF8, "application/json");
             updateTokenRequestMessage.Method = HttpMethod.Post;
             updateTokenRequestMessage.RequestUri = new Uri($"{_httpClient.BaseAddress}/Account/updatetoken");
@@ -162,8 +163,7 @@ public class RestClient : IRestClient
                 return;
 
             var responseStream = await updateTokenResponseMessage.Content.ReadAsStreamAsync();
-            var responseModel = await JsonSerializer.DeserializeAsync<SucessResponse<UpdateRefreshTokenResponse>>
-                (responseStream);
+            var responseModel = await responseStream.FromJson<SucessResponse<UpdateRefreshTokenResponse>>();
 
             _httpClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", responseModel.Response.AcessToken);
@@ -197,6 +197,6 @@ public class RestClient : IRestClient
         _logger.LogDebug(content);
 
         var responseStream = await responseMessage.Content.ReadAsStreamAsync();
-        _authOptions = await JsonSerializer.DeserializeAsync<SucessResponse<AuthOptions>>(responseStream);
+        _authOptions = await responseStream.FromJson<SucessResponse<AuthOptions>>();
     }
 }

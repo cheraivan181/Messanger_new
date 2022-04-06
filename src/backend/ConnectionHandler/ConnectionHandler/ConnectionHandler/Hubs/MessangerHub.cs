@@ -1,34 +1,34 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
+using Serilog;
 
 namespace ConnectionHandler.Hubs;
 
-public class MessangerHub : Hub
+public class MessangerHub : BaseHub
 {
-    public override Task OnConnectedAsync()
+    [Authorize(Roles = "ProtocoledUser")]
+    public async override Task OnConnectedAsync()
     {
-        return base.OnConnectedAsync();
+        Log.Debug($"{Context.User.Identity.Name} was connected");
+        await base.OnConnectedAsync();
     }
-
+    
+    [Authorize(Roles = "ProtocoledUser")]
     [HubMethodName("SendMessage")]
-    public async Task OnSendMessageAsync()
+    public async Task SendMessageAsync()
     {
-
     }
-
+    
+    
+    [Authorize(Roles = "ProtocoledUser")]
     [HubMethodName("ReadMessage")]
-    public async Task OnReadMessageAsync()
+    public async Task ReadMessageAsync()
     {
-
     }
-
-    [HubMethodName("OnWriteMessageAsync")]
-    public async Task OnWriteMessageAsync()
-    {
-
-    }
-
+    
+    [Authorize(Roles = "ProtocoledUser")]
     [HubMethodName("getmessages")]
-    public async IAsyncEnumerable<string> GetMessagesAsync()
+    public async IAsyncEnumerable<string> SubscribeToMessageTopic()
     {
         yield break;
     }

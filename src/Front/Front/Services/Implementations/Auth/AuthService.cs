@@ -1,10 +1,12 @@
 ﻿using Blazored.LocalStorage;
-using Blazored.SessionStorage;
 using Front.Clients.Interfaces;
 using Front.Domain.Auth;
 using Front.Domain.FormModels;
+using Front.Domain.Session;
+using Front.Json;
 using Front.Services.Interfaces.Auth;
 using Front.Servives.Implementations;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace Front.Services.Implementations.Auth
@@ -14,20 +16,27 @@ namespace Front.Services.Implementations.Auth
         private readonly IAccountClient _accountClient;
         private readonly ILocalStorageService _localStorageService;
         private readonly AuthenticationStateProvider _authenticationStateProvider;
+        private readonly NavigationManager _navigationManager;
 
+        
         public AuthService(ILocalStorageService localStorageService,
             IAccountClient accountClient,
-            AuthenticationStateProvider authenticationStateProvider)
+            AuthenticationStateProvider authenticationStateProvider,
+            NavigationManager navigationManager)
         {
             _accountClient = accountClient;
             _localStorageService = localStorageService;
-            _authenticationStateProvider =  authenticationStateProvider; 
+            _authenticationStateProvider =  authenticationStateProvider;
+            _navigationManager = navigationManager;
         }
 
         public async Task<SignInResult> SignInAsync(AuthModel authModel)
         {
             var result = new SignInResult();
-            var response = await _accountClient.SignInAsync(authModel.UserName, authModel.Password);
+            var session = (await _localStorageService.GetItemAsStringAsync(Constants.SessionName))
+                ?.FromJson<SessionModel>();
+            
+            var response = await _accountClient.SignInAsync(authModel.UserName, authModel.Password, session?.SessionId);
 
             if (!response.IsSucess)
             {
@@ -39,7 +48,7 @@ namespace Front.Services.Implementations.Auth
             result.IsSucess = true;
 
             await _localStorageService
-                .SetItemAsStringAsync(Constants.TokenUpdateTime, response.SucessResponse.Response.AcessToken);
+                .SetItemAsStringAsync(Constants.TokenUpdateTime, DateTime.Now.ToString());
             await _localStorageService
                 .SetItemAsStringAsync(Constants.RefreshTokenName, response.SucessResponse.Response.RefreshToken);
 
@@ -62,7 +71,7 @@ namespace Front.Services.Implementations.Auth
             result.IsSucess = true;
 
             await _localStorageService
-                .SetItemAsStringAsync(Constants.TokenUpdateTime, response.SucessResponse.Response.AcessToken);
+                .SetItemAsStringAsync(Constants.TokenUpdateTime, DateTime.Now.ToString());
             await _localStorageService
                 .SetItemAsStringAsync(Constants.AcessTokenName, response.SucessResponse.Response.AcessToken);
             await _localStorageService
@@ -73,17 +82,45 @@ namespace Front.Services.Implementations.Auth
             return result;
         }
 
+        public async Task UpdateRefreshTokenAsync()
+        {
+            var refreshToken = await _localStorageService.GetItemAsStringAsync(Constants.RefreshTokenName);
+            var session = (await _localStorageService.GetItemAsStringAsync(Constants.SessionName)).FromJson<SessionModel>();
+
+            if (string.IsNullOrEmpty(refreshToken))
+            {
+                _navigationManager.NavigateTo("signin");
+                return;
+            }
+
+            var response = await _accountClient.UpdateRefreshTokenAsync(refreshToken, session?.SessionId);
+            if (!response.IsSucess)
+            {
+                _navigationManager.NavigateTo("signin");
+                return;
+            }
+
+            await _localStorageService
+                .SetItemAsStringAsync(Constants.TokenUpdateTime, DateTime.Now.ToString());
+            await _localStorageService
+                .SetItemAsStringAsync(Constants.AcessTokenName, response.SucessResponse.Response.AcessToken);
+            await _localStorageService
+                .SetItemAsStringAsync(Constants.RefreshTokenName, response.SucessResponse.Response.RefreshToken);
+        }
+
         public async Task Logout()
         {
             var itemsToRemove = new string[]
             {
                 Constants.TokenUpdateTime,
                 Constants.AcessTokenName,
-                Constants.RefreshTokenName
+                Constants.RefreshTokenName,
+                Constants.SessionName
             };
 
             await _localStorageService.RemoveItemsAsync(itemsToRemove);
             ((ApiAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsLoggedOut();
+            _navigationManager.NavigateTo("/signin");
         }
     }
 }

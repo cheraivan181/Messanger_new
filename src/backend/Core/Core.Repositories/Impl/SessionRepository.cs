@@ -18,8 +18,8 @@ public class SessionRepository : ISessionRepository
         string serverPublicKey, string clientPublicKey)
     {
         using var connection = await _connectionFactory.GetDbConnectionAsync();
-        string sql = "INSERT INTO Sessions (UserId, ClientPublicKey, ServerPublicKey, ServerPrivateKey) " 
-            + "VALUES (@userId, @clientPublicKey, @serverPublicKey, @serverPrivateKey); "
+        string sql = "INSERT INTO Sessions (UserId, ClientPublicKey, ServerPublicKey, ServerPrivateKey, CreatedAt) " 
+            + "VALUES (@userId, @clientPublicKey, @serverPublicKey, @serverPrivateKey, @createdAt); "
             + "SELECT SCOPE_IDENTITY();";
         
         var result = await connection.ExecuteScalarAsync<long>(sql, new
@@ -27,7 +27,8 @@ public class SessionRepository : ISessionRepository
             userId = userId,
             clientPublicKey = clientPublicKey,
             serverPublicKey = serverPublicKey,
-            serverPrivateKey = serverPrivateKey
+            serverPrivateKey = serverPrivateKey,
+            createdAt = DateTime.Now
         });
 
         return result;
@@ -37,7 +38,7 @@ public class SessionRepository : ISessionRepository
     {
         using var connection = await _connectionFactory.GetDbConnectionAsync();
         string sql = "SELECT * FROM Sessions WHERE Id = @sessionId";
-        var result = await connection.QueryFirstAsync<Session>(sql, new {Id = sessionId});
+        var result = await connection.QueryFirstAsync<Session>(sql, new {sessionId = sessionId});
         return result;
     }
 }
