@@ -11,7 +11,11 @@
     <nav class="flex-column">
         <AuthorizeView>
             <Authorized>
-                
+                <section style="margin-bottom: 10px">
+                    <input type="text" class="form-control" placeholder="Search by username" 
+                        @bind-value="@SearchedUser" @bind-value:event="oninput" @onkeyup="SearchChanged" />
+                </section>
+                <Front.Components.Contact UserName="test"></Front.Components.Contact>
             </Authorized>
             <NotAuthorized>
                 <div class="nav-item px-3">
@@ -31,8 +35,18 @@
 
 @code {
     private bool collapseNavMenu = true;
-
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+
+    public string SearchedUser{ get; set; }
+
+    public EventCallback<string> OnSearchChanged{ get; set; }
+
+
+    private void SearchChanged()
+    {
+       
+    }
 
     private void ToggleNavMenu()
     {

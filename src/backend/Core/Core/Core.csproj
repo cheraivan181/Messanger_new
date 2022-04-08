@@ -50,6 +50,7 @@
     <ProjectReference Include="..\Core.IdentityService\Core.IdentityService.csproj" />
     <ProjectReference Include="..\Core.Kafka\Core.Kafka.csproj" />
     <ProjectReference Include="..\Core.Repositories\Core.Repositories.csproj" />
+    <ProjectReference Include="..\Core.SearchServices\Core.SearchServices.csproj" />
     <ProjectReference Include="..\Core.SessionServices\Core.SessionServices.csproj" />
     <ProjectReference Include="..\Core.Utils\Core.Utils.csproj" />
   </ItemGroup>

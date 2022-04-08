@@ -14,6 +14,7 @@ namespace Core.Repositories
             serviceCollection.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
             serviceCollection.AddScoped<ISessionRepository, SessionRepository>();
             serviceCollection.AddScoped<IConnectionRepository, ConnectionRepository>();
+            serviceCollection.AddScoped<IDialogRepository, DialogRepository>();
         }
     }
 }

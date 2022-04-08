@@ -46,6 +46,7 @@ public class ApplicationContext : DbContext
         modelBuilder.Entity<Dialog>().HasIndex(x => x.User1Id);
         modelBuilder.Entity<Dialog>().HasIndex(x => x.User2Id);
 
+        modelBuilder.Entity<DialogRequest>().HasIndex(x => x.OwnerUserId);
         modelBuilder.Entity<DialogRequest>().HasIndex(x => new {x.OwnerUserId, x.RequestUserId});
 
         modelBuilder.Entity<Message>().HasIndex(x => x.AnswerMessageId);

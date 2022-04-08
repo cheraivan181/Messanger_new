@@ -6,16 +6,11 @@
 @using Front.Services.Interfaces.WebSocket
 
 
-<h3>Messanger</h3>
-
 @if (!string.IsNullOrEmpty(ErrorMessage))
 {
     <p>@ErrorMessage</p>
 }
-else
-{
-    <p>session create sucess</p>
-}
+
 
 @code {
 

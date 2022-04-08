@@ -5,6 +5,7 @@ using Core.IdentityService;
 using Core.Kafka;
 using Core.Mapping;
 using Core.Repositories;
+using Core.SearchServices;
 using Core.SessionServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +24,7 @@ namespace Core
             serviceCollection.AddRedisServices(configuration);
             serviceCollection.AddKafkaServices(configuration);
             serviceCollection.AddSessionServices();
+            serviceCollection.AddSearchUserServices();
         } 
     }
 }

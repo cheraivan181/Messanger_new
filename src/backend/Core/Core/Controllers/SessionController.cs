@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Controllers
 {
+    [Produces("application/json")]
     [ApiController]
     [Route("api/[controller]")]
     public class SessionController : BaseController
