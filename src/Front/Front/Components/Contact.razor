@@ -1,8 +1,13 @@
-﻿<NavLink class="nav-link" href="signIn" Match="NavLinkMatch.All">
+﻿<NavLink class="nav-link" href="@GetHref()" Match="NavLinkMatch.All">
      <MudAvatar Color="Color.Primary">@UserName[0]</MudAvatar> <span aria-hidden="true"></span> @UserName
  </NavLink>
 
 @code {
     [Parameter]
     public string UserName{ get; set; }
+
+    private string GetHref()
+    {
+        return $"/dialog/{UserName}";
+    }
 }

@@ -24,7 +24,7 @@ public sealed class SessionCacheService : ISessionCacheService
             .ToJson();
         
         // продумать логику удаления старых данных...
-
+        
         await database.ListRightPushAsync(new RedisKey(cacheKey), new RedisValue(cacheModel));
     }
         

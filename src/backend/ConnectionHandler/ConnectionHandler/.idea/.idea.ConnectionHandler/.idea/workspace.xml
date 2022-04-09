@@ -9,14 +9,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc7ec941-6ead-44a2-b075-d1856d7f9953" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../Core/Core/Controllers/MessageController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core/Controllers/MessageCryptController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.DialogServices/DiExtensions.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.DialogServices/Implementations/DialogRequestService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/DialogRequestRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Search/SearchUserResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Search/SearchUserResponse.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Front/Front/Components/Contact.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Components/Contact.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Pages/Messanger.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Pages/Messanger.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Shared/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Shared/NavMenu.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ConnectionHandler/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ConnectionHandler/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConnectionHandler/Hubs/MessangerHub.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler/Hubs/MessangerHub.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConnectionHandler/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/Controllers/DialogController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Controllers/DialogController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/Connection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/Connection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/Dialog.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/Dialog.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/DialogRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/DialogRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/DialogSecret.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/DialogSecret.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/Message.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/Message.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/RefreshToken.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/RefreshToken.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/Session.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/Session.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/User.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/UserRoles.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/UserRoles.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/DialogRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/DialogRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/SessionCacheService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/SessionCacheService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.sln" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +136,7 @@
       <workItem from="1649203369373" duration="611000" />
       <workItem from="1649292623980" duration="2037000" />
       <workItem from="1649405674390" duration="1560000" />
-      <workItem from="1649475196489" duration="2656000" />
+      <workItem from="1649475196489" duration="4762000" />
     </task>
     <servers />
   </component>

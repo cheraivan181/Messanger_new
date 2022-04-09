@@ -7,7 +7,7 @@ namespace Front.ClientsDomain.Responses.Search
         [JsonPropertyName("isFoundUsers")]
         public bool IsFoundUsers { get; set; }
         [JsonPropertyName("searchUserResults")]
-        public List<SearchUserModel> SearchUserResults { get; set; }
+        public List<SearchUserModel> SearchUserResults { get; set; }  = new List<SearchUserModel>();
 
         [JsonPropertyName("count")]
         public int Count { get; set; }

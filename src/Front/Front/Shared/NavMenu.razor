@@ -19,7 +19,7 @@
             <Authorized>
                 <section style="margin-bottom: 10px">
                     <input type="text" class="form-control" placeholder="Search by username" 
-                        @bind-value="@SearchedUser" @bind-value:event="oninput" @onkeyup="async () => await OnSearchChanged.InvokeAsync(SearchedUser)" />
+                        @bind-value="@SearchedUser" @bind-value:event="oninput" @onkeyup="async () => await SearchChangedAsync()" />
                 </section>
                 @foreach (var user in SearchUserResponse.SearchUserResults)
                 {
@@ -48,11 +48,11 @@
 
     private string SearchedUser { get; set; }
 
-    private EventCallback<string> OnSearchChanged { get; set; }
     private SearchUserResponse SearchUserResponse = new SearchUserResponse();
 
     private async Task SearchChangedAsync()
     {
+        SearchUserResponse.SearchUserResults = new List<SearchUserModel>();
         var response = await _searchClient.SearchUserByUserNameAsync(SearchedUser);
         if (response.IsSucess)
         {
