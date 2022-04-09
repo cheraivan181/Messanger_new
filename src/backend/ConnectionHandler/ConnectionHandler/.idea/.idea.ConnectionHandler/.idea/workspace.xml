@@ -9,31 +9,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc7ec941-6ead-44a2-b075-d1856d7f9953" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.ApiResponses/Search/SearchUserResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/DialogRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IDialogRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.SearchServices/Core.SearchServices.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.SearchServices/Domain/SearchUserResult.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.SearchServices/Interfaces/IUserSearchService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.SearchServices/Services/UserSearchService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core/Mapping/Impl/SearchMapper.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core/Mapping/Interfaces/ISearchMapper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core/Controllers/MessageController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core/Controllers/MessageCryptController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Components/Contact.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Components/Contact.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ConnectionHandler/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ConnectionHandler/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.ApiResponses/Core.ApiResponses.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.ApiResponses/Core.ApiResponses.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.Business/Core.Business.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/Base/ApplicationContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/Base/ApplicationContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/Dialog.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/Dialog.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/DialogRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/DialogRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/Migrations/ApplicationContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/Migrations/ApplicationContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/DiExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/DiExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/UserRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IUserRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/Controllers/SearchUserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Controllers/SearchUserController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/Controllers/SessionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Controllers/SessionController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/Core.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Core.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/DiExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/DiExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/Mapping/DiExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Mapping/DiExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConnectionHandler/Hubs/MessangerHub.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler/Hubs/MessangerHub.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConnectionHandler/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core/Controllers/DialogController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Controllers/DialogController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,6 +75,7 @@
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected=".NET Launch Settings Profile.ConnectionHandler">
@@ -139,7 +123,8 @@
       <workItem from="1649030496377" duration="31084000" />
       <workItem from="1649203369373" duration="611000" />
       <workItem from="1649292623980" duration="2037000" />
-      <workItem from="1649405674390" duration="680000" />
+      <workItem from="1649405674390" duration="1560000" />
+      <workItem from="1649475196489" duration="2656000" />
     </task>
     <servers />
   </component>

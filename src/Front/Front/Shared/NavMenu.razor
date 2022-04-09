@@ -1,4 +1,10 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@using Front.Clients.Interfaces
+@using Front.ClientsDomain.Responses.Search
+
+@inject ISearchClient _searchClient
+
+
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">Front</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -13,9 +19,12 @@
             <Authorized>
                 <section style="margin-bottom: 10px">
                     <input type="text" class="form-control" placeholder="Search by username" 
-                        @bind-value="@SearchedUser" @bind-value:event="oninput" @onkeyup="SearchChanged" />
+                        @bind-value="@SearchedUser" @bind-value:event="oninput" @onkeyup="async () => await OnSearchChanged.InvokeAsync(SearchedUser)" />
                 </section>
-                <Front.Components.Contact UserName="test"></Front.Components.Contact>
+                @foreach (var user in SearchUserResponse.SearchUserResults)
+                {
+                    <Front.Components.Contact UserName="@user.UserName"></Front.Components.Contact>
+                }
             </Authorized>
             <NotAuthorized>
                 <div class="nav-item px-3">
@@ -37,15 +46,18 @@
     private bool collapseNavMenu = true;
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
+    private string SearchedUser { get; set; }
 
-    public string SearchedUser{ get; set; }
+    private EventCallback<string> OnSearchChanged { get; set; }
+    private SearchUserResponse SearchUserResponse = new SearchUserResponse();
 
-    public EventCallback<string> OnSearchChanged{ get; set; }
-
-
-    private void SearchChanged()
+    private async Task SearchChangedAsync()
     {
-       
+        var response = await _searchClient.SearchUserByUserNameAsync(SearchedUser);
+        if (response.IsSucess)
+        {
+            SearchUserResponse = response.SucessResponse.Response;
+        }
     }
 
     private void ToggleNavMenu()

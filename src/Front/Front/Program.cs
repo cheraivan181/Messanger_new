@@ -40,6 +40,7 @@ builder.Services.AddScoped<IAliveClient, AliveClient>();
 builder.Services.AddScoped<IAccountClient, AccountClient>();
 builder.Services.AddScoped<ISessionClient, SessionClient>();
 builder.Services.AddScoped<ICryptClient, CryptClient>();
+builder.Services.AddScoped<ISearchClient, SearchClient>();
 
 #endregion
 

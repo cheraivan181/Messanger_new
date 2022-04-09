@@ -4,30 +4,27 @@ using Serilog;
 
 namespace ConnectionHandler.Hubs;
 
+[Authorize(Roles = "ProtocoledUser")]
 public class MessangerHub : BaseHub
 {
-    [Authorize(Roles = "ProtocoledUser")]
     public async override Task OnConnectedAsync()
     {
         Log.Debug($"{Context.User.Identity.Name} was connected");
         await base.OnConnectedAsync();
     }
     
-    [Authorize(Roles = "ProtocoledUser")]
     [HubMethodName("SendMessage")]
     public async Task SendMessageAsync()
     {
     }
     
     
-    [Authorize(Roles = "ProtocoledUser")]
     [HubMethodName("ReadMessage")]
     public async Task ReadMessageAsync()
     {
     }
     
-    [Authorize(Roles = "ProtocoledUser")]
-    [HubMethodName("getmessages")]
+    [HubMethodName("subscribeToMessageStream")]
     public async IAsyncEnumerable<string> SubscribeToMessageTopic()
     {
         yield break;
