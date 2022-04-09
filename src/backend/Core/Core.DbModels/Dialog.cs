@@ -4,9 +4,10 @@ namespace Core.DbModels;
 
 public class Dialog
 {
-    public long Id { get; set; }
-    public long User1Id { get; set; }
-    public long User2Id { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid User1Id { get; set; }
+    public Guid User2Id { get; set; }
     
     [NotMapped]
     public User User1 { get; set; }

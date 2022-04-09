@@ -16,7 +16,7 @@ public class ConnectionCollectorCacheService : IConnectionCollectorCacheService
         _databaseProvider = databaseProvider;
     }
 
-    public async Task<ConnectionStoreModel> GetConnectionsFromCacheAsync(long userId)
+    public async Task<ConnectionStoreModel> GetConnectionsFromCacheAsync(Guid userId)
     {
         var database = _databaseProvider.GetDatabase();
         var cacheKey = GetCacheKey(userId);
@@ -27,7 +27,7 @@ public class ConnectionCollectorCacheService : IConnectionCollectorCacheService
         return result;
     }
 
-    public async Task AddConnectionInCacheAsync(long userId, long sessionId, string connectionId)
+    public async Task AddConnectionInCacheAsync(Guid userId, Guid sessionId, string connectionId)
     {
         var database = _databaseProvider.GetDatabase();
         var cacheKey = GetCacheKey(userId);
@@ -51,7 +51,7 @@ public class ConnectionCollectorCacheService : IConnectionCollectorCacheService
         }
     }
 
-    public async Task RemoveConnectionsFromCacheAsync(long userId, string connectionId)
+    public async Task RemoveConnectionsFromCacheAsync(Guid userId, string connectionId)
     {
         var database = _databaseProvider.GetDatabase();
         var cacheKey = new RedisKey(GetCacheKey(userId));
@@ -72,7 +72,7 @@ public class ConnectionCollectorCacheService : IConnectionCollectorCacheService
         await database.StringSetAsync(cacheKey, new RedisValue(dataFromCache.ToJson()));
     }
     
-    private string GetCacheKey(long userId)
+    private string GetCacheKey(Guid userId)
     {
         return $"Connections-{userId}";
     }

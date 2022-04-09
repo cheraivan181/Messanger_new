@@ -8,7 +8,4 @@ public class UpdateRefreshTokenResponse
     public string AcessToken { get; set; }
     [JsonPropertyName("refreshToken")]
     public string RefreshToken { get; set; }
-
-    [JsonPropertyName("sessionId")]
-    public string SessionId { get; set; }
 }

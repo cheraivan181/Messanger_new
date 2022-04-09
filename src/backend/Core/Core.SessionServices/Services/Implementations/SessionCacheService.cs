@@ -15,7 +15,7 @@ public sealed class SessionCacheService : ISessionCacheService
         _databaseProvider = databaseProvider;
     }
     
-    public async Task AddSessionInCacheAsync(long userId, long sessionId, string serverPublicKey,
+    public async Task AddSessionInCacheAsync(Guid userId, Guid sessionId, string serverPublicKey,
         string serverPrivateKey, string clientPublicKey)
     {
         var database = _databaseProvider.GetDatabase();
@@ -28,7 +28,7 @@ public sealed class SessionCacheService : ISessionCacheService
         await database.ListRightPushAsync(new RedisKey(cacheKey), new RedisValue(cacheModel));
     }
         
-    public async Task<List<SessionModel>> GetSessionsAsync(long userId)
+    public async Task<List<SessionModel>> GetSessionsAsync(Guid userId)
     { 
         var database = _databaseProvider.GetDatabase();
         var cacheKey = GetSessionCacheKey(userId);
@@ -43,13 +43,13 @@ public sealed class SessionCacheService : ISessionCacheService
         return result;
     }
 
-    public async Task<SessionModel> GetSessionAsync(long userId, long sessionId)
+    public async Task<SessionModel> GetSessionAsync(Guid userId, Guid sessionId)
     {
         var cacheModels = await GetSessionsAsync(userId);
         return cacheModels.FirstOrDefault(x => x.SessionId == sessionId);
     }
     
-    private string GetSessionCacheKey(long userId)
+    private string GetSessionCacheKey(Guid userId)
     {
         return $"session-{userId}";
     }

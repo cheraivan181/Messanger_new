@@ -10,5 +10,5 @@ public class UpdateRefreshTokenRequest
     public string RefreshToken { get; set; }
 
     [JsonPropertyName("sessionId")]
-    public long? SessionId { get; set; }
+    public Guid? SessionId { get; set; }
 }

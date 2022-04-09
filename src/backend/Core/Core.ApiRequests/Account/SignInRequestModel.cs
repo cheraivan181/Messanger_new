@@ -16,6 +16,6 @@ namespace Core.ApiRequests.Account
         public string Password { get; set; }
         
         [JsonPropertyName("sessionId")]
-        public long? SessionId { get; set; }
+        public Guid? SessionId { get; set; }
     }
 }

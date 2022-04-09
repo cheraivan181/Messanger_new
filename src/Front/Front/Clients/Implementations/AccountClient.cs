@@ -15,7 +15,7 @@ namespace Front.Clients.Implementations
             _restClient = restClient;
         }
         
-        public async Task<RestClientResponse<SignInResponse>> SignInAsync(string userName, string password, long? sessionId)
+        public async Task<RestClientResponse<SignInResponse>> SignInAsync(string userName, string password, Guid? sessionId)
         {
             var signInRequest = new SignInRequest()
             {
@@ -44,7 +44,7 @@ namespace Front.Clients.Implementations
             return response;
         }
 
-        public async Task<RestClientResponse<SignInResponse>> UpdateRefreshTokenAsync(string refreshToken, long? sessionId)
+        public async Task<RestClientResponse<SignInResponse>> UpdateRefreshTokenAsync(string refreshToken, Guid? sessionId)
         {
             var acessTokenUpdateRequest = new UpdateRefreshTokenRequest()
             {

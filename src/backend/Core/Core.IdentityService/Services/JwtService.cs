@@ -30,9 +30,9 @@ namespace Core.IdentityService.Services
         }
 
         public string GenereteJwtToken(string userName, 
-            long userid, 
+            Guid userid, 
             List<string> roles,
-            long? sessionId = null)
+            Guid? sessionId = null)
         {
             var claims = new List<Claim>()
             {

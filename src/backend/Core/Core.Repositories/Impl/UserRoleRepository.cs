@@ -14,7 +14,7 @@ namespace Core.Repositories.Impl
             _connectionFactory = connectionFactory;
         }
 
-        public async Task<bool> IsUserRoleExist(long userId, int roleId)
+        public async Task<bool> IsUserRoleExist(Guid userId, int roleId)
         {
             using var connection = await _connectionFactory.GetDbConnectionAsync();
             string sql = "SELECT COUNT(*) FROM UserRoles WHERE UserId = @userId and RoleId = @roleId";
@@ -23,23 +23,37 @@ namespace Core.Repositories.Impl
             return result > 0;
         } 
 
-        public async Task AddUserRoleAsync(long userId, int roleId)
+        public async Task AddUserRoleAsync(Guid userId, int roleId)
         {
             using var connection = await _connectionFactory.GetDbConnectionAsync();
-            string sql = "INSERT INTO UserRoles (UserId, RoleId)" +
-                "VALUES (@userId, @roleId)";
+            string sql = "INSERT INTO UserRoles (Id, UserId, RoleId) " +
+                         "VALUES (@id, @userId, @roleId)";
 
-            await connection.ExecuteAsync(sql, new { userId = userId, roleId = roleId, createdAt = DateTime.Now });
+            await connection.ExecuteAsync(sql, new
+            {
+                id = Guid.NewGuid(),
+                userId = userId, 
+                roleId = roleId,
+                createdAt = DateTime.Now
+            });
         }
 
-        public async Task<List<Role>> GetUserRolesAsync(long userId)
+        public async Task<List<Role>> GetUserRolesAsync(Guid userId)
         {
-            using var connection = await _connectionFactory.GetDbConnectionAsync();
-            string sql = "SELECT * FROM Roles r " +
-                "INNER JOIN UserRoles u ON r.Id = u.RoleId AND u.UserId = @userId";
+            try
+            {
+                using var connection = await _connectionFactory.GetDbConnectionAsync();
+                string sql = "SELECT r.Id, r.Name FROM Roles r " +
+                             "INNER JOIN UserRoles u ON r.Id = u.RoleId " +
+                             "WHERE u.UserId = @userId";
 
-            var roles = await connection.QueryAsync<Role>(sql, new { userId = userId });
-            return roles.ToList();
+                var roles = await connection.QueryAsync<Role>(sql, new {userId = userId});
+                return roles.ToList();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }

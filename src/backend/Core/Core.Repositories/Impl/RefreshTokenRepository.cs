@@ -30,17 +30,25 @@ namespace Core.Repositories.Impl
             return refreshToken?.FirstOrDefault();
         }
 
-        public async Task<bool> CreateRefreshTokenAsync(long userId, string value)
+        public async Task<bool> CreateRefreshTokenAsync(Guid userId, string value)
         {
             await using var conn = await _connectionFactory.GetDbConnectionAsync();
-            string sql = "INSERT INTO RefreshTokens (UserId, Value, CreatedAt) " +
-                "VALUES (@userId, @value, @createdAt)";
+            
+            string sql = "INSERT INTO RefreshTokens (Id, UserId, Value, CreatedAt) " +
+                "VALUES (@id, @userId, @value, @createdAt)";
 
-            var result = await conn.ExecuteAsync(sql, new { userId = userId, value = value, createdAt = DateTime.Now });
+            var result = await conn.ExecuteAsync(sql, 
+                new
+                {
+                    id = Guid.NewGuid(),
+                    userId = userId, 
+                    value = value,
+                    createdAt = DateTime.Now
+                });
             return result > 0;
         }
 
-        public async Task<List<string>> GetUserRefreshTokenValuesAsync(long userId)
+        public async Task<List<string>> GetUserRefreshTokenValuesAsync(Guid userId)
         {
             using var conn = await _connectionFactory.GetDbConnectionAsync();
             var sql = "SELECT Value FROM RefreshTokens WHERE UserId = @userId";
@@ -48,7 +56,7 @@ namespace Core.Repositories.Impl
             return result.ToList();
         }
 
-        public async Task<bool> UpdateRefreshTokenAsync(long userId, string oldValue, string newValue)
+        public async Task<bool> UpdateRefreshTokenAsync(Guid userId, string oldValue, string newValue)
         {
             using var conn = await _connectionFactory.GetDbConnectionAsync();
             string sql = "UPDATE RefreshTokens " +

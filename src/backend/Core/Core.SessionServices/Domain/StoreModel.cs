@@ -1,3 +1,3 @@
 ﻿namespace Core.SessionServices.Domain;
 
-public record StoreModel(long sessionId, string connectionId);
+public record StoreModel(Guid sessionId, string connectionId);

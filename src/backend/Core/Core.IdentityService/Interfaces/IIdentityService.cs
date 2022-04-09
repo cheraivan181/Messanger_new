@@ -8,7 +8,7 @@ namespace Core.IdentityService.Interfaces
             string phone,
             string email,
             string password);
-        Task<SignInResult> SignInAsync(string userName, string password, long? sessionId);
-        Task<SignInResult> UpdateJwtAsync(string refreshToken, long? sessionId);
+        Task<SignInResult> SignInAsync(string userName, string password, Guid? sessionId);
+        Task<SignInResult> UpdateJwtAsync(string refreshToken, Guid? sessionId);
     }
 }

@@ -15,7 +15,7 @@ public class DialogRepository : IDialogRepository
     }
 
     public async Task<(List<Dialog> dialogs, List<DialogRequest> dialogRequest)>
-        GetUserDialogsAndDialogRequestsAsync(long userId, string predicate)
+        GetUserDialogsAndDialogRequestsAsync(Guid userId, string predicate)
     {
         using var connection = await _connectionFactory.GetDbConnectionAsync();
         var queryParams = new

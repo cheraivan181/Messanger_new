@@ -1,16 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.DbModels;
 
 public class Message
 {
-    public long Id { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public Guid Id { get; set; } = Guid.NewGuid();
     [MaxLength(3500)]
     public string CryptedText { get; set; }
-    public long? AnswerMessageId { get; set; }
+    public Guid? AnswerMessageId { get; set; }
     public bool IsReaded { get; set; }
     public bool IsDelivery { get; set; }
-    public long DialogId { get; set; }
+    public Guid DialogId { get; set; }
     public DateTime CreatedAt { get; set; }
 
     public Message()

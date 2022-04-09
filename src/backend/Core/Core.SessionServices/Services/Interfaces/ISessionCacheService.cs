@@ -4,9 +4,9 @@ namespace Core.SessionServices.Services.Interfaces;
 
 public interface ISessionCacheService
 {
-    Task AddSessionInCacheAsync(long userId, long sessionId, string serverPublicKey,
+    Task AddSessionInCacheAsync(Guid userId, Guid sessionId, string serverPublicKey,
         string serverPrivateKey, string clientPublicKey);
 
-    Task<List<SessionModel>> GetSessionsAsync(long userId);
-    Task<SessionModel> GetSessionAsync(long userId, long sessionId);
+    Task<List<SessionModel>> GetSessionsAsync(Guid userId);
+    Task<SessionModel> GetSessionAsync(Guid userId, Guid sessionId);
 }

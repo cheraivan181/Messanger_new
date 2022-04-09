@@ -31,7 +31,7 @@ public class SessionService : ISessionService
         _sessionCacheService = sessionCacheService;
     }
     
-    public async Task<CreateSessionResponse> CreateSessionAsync(long userId,
+    public async Task<CreateSessionResponse> CreateSessionAsync(Guid userId,
         string clientPublicKey)
     {
         Log.Debug($"User #({userId}) try to create session");
@@ -63,7 +63,7 @@ public class SessionService : ISessionService
             ClientPublicKey = clientPublicKey
         };
 
-        long createdSessionId;
+        Guid createdSessionId;
 
         try
         {
@@ -88,7 +88,7 @@ public class SessionService : ISessionService
         return result;
     }
 
-    public async Task AddSessionInCacheAsync(long userId, long sessionId)
+    public async Task AddSessionInCacheAsync(Guid userId, Guid sessionId)
     {
         var sessionFromCache = await _sessionCacheService.GetSessionAsync(userId, sessionId);
         if (sessionFromCache != null)

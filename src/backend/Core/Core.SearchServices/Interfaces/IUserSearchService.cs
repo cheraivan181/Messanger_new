@@ -4,5 +4,5 @@ namespace Core.SearchServices.Interfaces;
 
 public interface IUserSearchService
 {
-    Task<SearchUserResult> SearchUsersAsync(long requestUserId, string requestUserName, string predicate);
+    Task<SearchUserResult> SearchUsersAsync(Guid requestUserId, string requestUserName, string predicate);
 }

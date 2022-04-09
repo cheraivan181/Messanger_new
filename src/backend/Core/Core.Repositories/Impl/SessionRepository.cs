@@ -14,16 +14,17 @@ public class SessionRepository : ISessionRepository
         _connectionFactory = connectionFactory;
     }
 
-    public async Task<long> CreateSessionAsync(long userId, string serverPrivateKey, 
+    public async Task<Guid> CreateSessionAsync(Guid userId, string serverPrivateKey, 
         string serverPublicKey, string clientPublicKey)
     {
         using var connection = await _connectionFactory.GetDbConnectionAsync();
-        string sql = "INSERT INTO Sessions (UserId, ClientPublicKey, ServerPublicKey, ServerPrivateKey, CreatedAt) " 
-            + "VALUES (@userId, @clientPublicKey, @serverPublicKey, @serverPrivateKey, @createdAt); "
-            + "SELECT SCOPE_IDENTITY();";
+        var result = Guid.NewGuid();
+        string sql = "INSERT INTO Sessions (Id, UserId, ClientPublicKey, ServerPublicKey, ServerPrivateKey, CreatedAt) "
+                     + "VALUES (@id, @userId, @clientPublicKey, @serverPublicKey, @serverPrivateKey, @createdAt);";
         
-        var result = await connection.ExecuteScalarAsync<long>(sql, new
+        await connection.ExecuteAsync(sql, new
         {
+            id = result,
             userId = userId,
             clientPublicKey = clientPublicKey,
             serverPublicKey = serverPublicKey,
@@ -34,7 +35,7 @@ public class SessionRepository : ISessionRepository
         return result;
     }
 
-    public async Task<Session> GetSessionAsync(long sessionId)
+    public async Task<Session> GetSessionAsync(Guid sessionId)
     {
         using var connection = await _connectionFactory.GetDbConnectionAsync();
         string sql = "SELECT * FROM Sessions WHERE Id = @sessionId";

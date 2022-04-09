@@ -43,7 +43,7 @@ namespace Core.Controllers
             }
         }
 
-        public long UserId
+        public Guid UserId
         {
             get
             {
@@ -53,14 +53,14 @@ namespace Core.Controllers
 
                 if (!string.IsNullOrEmpty(userId))
                 {
-                    if (long.TryParse(userId, out long result))
+                    if (Guid.TryParse(userId, out Guid result))
                     {
                         return result;
                     }
                 }
 
                 Log.Error($"Cannot parse user id from #({userId})");
-                return -1;
+                throw new Exception("Cannot parse guid");
             }
         }
 

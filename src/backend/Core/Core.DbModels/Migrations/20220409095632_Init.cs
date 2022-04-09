@@ -13,10 +13,9 @@ namespace Core.DbModels.Migrations
                 name: "DialogRequests",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OwnerUserId = table.Column<long>(type: "bigint", nullable: false),
-                    RequestUserId = table.Column<long>(type: "bigint", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OwnerUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RequestUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsAccepted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -29,10 +28,9 @@ namespace Core.DbModels.Migrations
                 name: "Dialogs",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    User1Id = table.Column<long>(type: "bigint", nullable: false),
-                    User2Id = table.Column<long>(type: "bigint", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    User1Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    User2Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -44,13 +42,12 @@ namespace Core.DbModels.Migrations
                 name: "Messages",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CryptedText = table.Column<string>(type: "nvarchar(3500)", maxLength: 3500, nullable: false),
-                    AnswerMessageId = table.Column<long>(type: "bigint", nullable: true),
+                    AnswerMessageId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsReaded = table.Column<bool>(type: "bit", nullable: false),
                     IsDelivery = table.Column<bool>(type: "bit", nullable: false),
-                    DialogId = table.Column<long>(type: "bigint", nullable: false),
+                    DialogId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -75,8 +72,7 @@ namespace Core.DbModels.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
@@ -92,9 +88,8 @@ namespace Core.DbModels.Migrations
                 name: "DialogSecrets",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DialogId = table.Column<long>(type: "bigint", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DialogId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CypherKey = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -113,9 +108,8 @@ namespace Core.DbModels.Migrations
                 name: "RefreshTokens",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserID = table.Column<long>(type: "bigint", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -134,9 +128,8 @@ namespace Core.DbModels.Migrations
                 name: "Sessions",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<long>(type: "bigint", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ClientPublicKey = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: false),
                     ServerPublicKey = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: false),
                     ServerPrivateKey = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: false),
@@ -157,9 +150,8 @@ namespace Core.DbModels.Migrations
                 name: "UserRoles",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<long>(type: "bigint", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RoleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -183,11 +175,10 @@ namespace Core.DbModels.Migrations
                 name: "Connections",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<long>(type: "bigint", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    SessionId = table.Column<long>(type: "bigint", nullable: false),
+                    SessionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -215,6 +206,11 @@ namespace Core.DbModels.Migrations
                 name: "IX_Connections_UserId",
                 table: "Connections",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DialogRequests_OwnerUserId",
+                table: "DialogRequests",
+                column: "OwnerUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DialogRequests_OwnerUserId_RequestUserId",

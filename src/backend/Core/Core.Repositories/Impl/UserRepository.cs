@@ -14,7 +14,7 @@ namespace Core.Repositories.Impl
             _connectionFactory = connectionFactory;
         }
 
-        public async Task<User> GetUserByIdAsync(long userId)
+        public async Task<User> GetUserByIdAsync(Guid userId)
         {
             using var conn = await _connectionFactory.GetDbConnectionAsync();
             return 
@@ -46,20 +46,29 @@ namespace Core.Repositories.Impl
             return result == 1;
         }
 
-        public async Task<long> CreateUserAsync(string userName,
+        public async Task<Guid> CreateUserAsync(string userName,
             string phone,
             string email,
             string password)
         {
-            using var conn = await _connectionFactory.GetDbConnectionAsync();
-
-            string sql = "INSERT INTO Users (Phone, UserName, Email, Password, CreatedAt) " +
-                "VALUES (@phone, @userName, @email, @password, @createdAt); " +
-                "SELECT SCOPE_IDENTITY();";
-
-            var userId = await conn.ExecuteScalarAsync<long>(sql, 
-                new { phone = phone, userName = userName, email = email, password = password, createdAt = DateTime.Now });
-            return userId;
+              using var conn = await _connectionFactory.GetDbConnectionAsync();
+              var result = Guid.NewGuid();
+              
+              string sql = "INSERT INTO Users (Id, Phone, UserName, Email, Password, CreatedAt) " +
+                           "VALUES (@id, @phone, @userName, @email, @password, @createdAt);";
+            
+              await conn.ExecuteAsync(sql,
+                    new
+                    {
+                        id = result,
+                        phone = phone,
+                        userName = userName,
+                        email = email,
+                        password = password,
+                        createdAt = DateTime.Now
+                    });
+            
+              return result;
         }
 
         public async Task<User> GetUserByRefreshTokenAsync(string refreshToken)

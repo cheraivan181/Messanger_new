@@ -84,7 +84,7 @@ namespace Core.IdentityService
             return result;
         }
 
-        public async Task<SignInResult> SignInAsync(string userName, string password, long? sessionId)
+        public async Task<SignInResult> SignInAsync(string userName, string password, Guid? sessionId)
         {
             var result = new SignInResult();
 
@@ -100,7 +100,7 @@ namespace Core.IdentityService
             return result;
         }
 
-        public async Task<SignInResult> UpdateJwtAsync(string refreshTokenValue, long? sessionId)
+        public async Task<SignInResult> UpdateJwtAsync(string refreshTokenValue, Guid? sessionId)
         {
             var result = new SignInResult();
             var refreshToken = await _refreshTokenRepository.GetRefreshTokenByValueAsync(refreshTokenValue);
@@ -121,8 +121,8 @@ namespace Core.IdentityService
             return result;
         }
 
-        private async Task<SignInResult> SignInAsync(SignInResult result, long userId, 
-            string userName, long? sessionId, string oldRefreshToken = "")
+        private async Task<SignInResult> SignInAsync(SignInResult result, Guid userId, 
+            string userName, Guid? sessionId, string oldRefreshToken = "")
         {
             var refreshToken = _jwtService.GenarateRefreshToken();
             bool refreshTokenResult;

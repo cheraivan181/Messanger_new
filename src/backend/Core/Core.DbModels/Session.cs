@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.DbModels;
 
 public class Session
 {
-    public long Id { get; set; }
-    public long UserId { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid UserId { get; set; }
     [MaxLength(3000)]
     public string ClientPublicKey { get; set; }
     [MaxLength(3000)]

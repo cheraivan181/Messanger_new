@@ -4,5 +4,5 @@ namespace Core.SessionServices.Services.Interfaces;
 
 public interface ISessionGetterService
 {
-    Task<SessionModel> GetSessionAsync(long userId, long sessionId);
+    Task<SessionModel> GetSessionAsync(Guid userId, Guid sessionId);
 }

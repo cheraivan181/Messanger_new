@@ -4,8 +4,8 @@ namespace Core.SessionServices.Services.Interfaces;
 
 public interface ISessionService
 {
-    Task<CreateSessionResponse> CreateSessionAsync(long userId,
+    Task<CreateSessionResponse> CreateSessionAsync(Guid userId,
         string clientPublicKey);
 
-    Task AddSessionInCacheAsync(long userId, long sessionId);
+    Task AddSessionInCacheAsync(Guid userId, Guid sessionId);
 }

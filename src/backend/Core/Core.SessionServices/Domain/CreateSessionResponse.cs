@@ -2,7 +2,7 @@
 
 public class CreateSessionResponse
 {
-    public long SessionId { get; set; }
+    public Guid SessionId { get; set; }
     public bool IsSucess { get; set; }
     public string ServerPublicKey { get; set; }
     public string ErrorMessage { get; set; }
@@ -21,7 +21,7 @@ public class CreateSessionResponse
     }
 
     public void SetSucessResult(string serverPublicKey,
-        long sessionId,
+        Guid sessionId,
         bool isNeedUpdateToken)
     {
         IsSucess = true;

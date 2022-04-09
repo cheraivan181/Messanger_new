@@ -7,7 +7,7 @@ namespace Front.ClientsDomain.Responses
         [JsonPropertyName("userName")]
         public string UserName { get; set; }
         [JsonPropertyName("userId")]
-        public long UserId { get; set; }
+        public Guid UserId { get; set; }
         [JsonPropertyName("roles")]
         public List<string> Roles { get; set; }
         [JsonPropertyName("tokenId")]

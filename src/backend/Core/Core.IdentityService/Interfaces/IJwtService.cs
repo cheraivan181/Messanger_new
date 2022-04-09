@@ -3,9 +3,9 @@
     public interface IJwtService
     {
         string GenereteJwtToken(string userName,
-            long userid,
+            Guid userid,
             List<string> roles,
-            long? sessionId = null);
+            Guid? sessionId = null);
         string GenarateRefreshToken();
     }
 }

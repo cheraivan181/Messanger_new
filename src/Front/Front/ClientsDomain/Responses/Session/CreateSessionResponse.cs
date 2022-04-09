@@ -6,7 +6,7 @@ namespace Front.ClientsDomain.Responses.Session
     public class CreateSessionResponse
     {
         [JsonPropertyName("sessionId")]
-        public long SessionId { get; set; }
+        public Guid SessionId { get; set; }
 
         [JsonPropertyName("serverPublicKey")]
         public string ServerPublicKey { get; set; }

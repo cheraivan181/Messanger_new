@@ -2,6 +2,6 @@
 
 public interface IConnectionCollectorService
 {
-    Task AddConnectionAsync(long userId, long sessionId, string connectionId);
-    Task RemoveConnectionAsync(long userId, string connectionId);
+    Task AddConnectionAsync(Guid userId, Guid sessionId, string connectionId);
+    Task RemoveConnectionAsync(Guid userId, string connectionId);
 }

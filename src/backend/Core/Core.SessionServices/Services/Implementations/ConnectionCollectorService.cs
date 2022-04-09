@@ -15,13 +15,13 @@ public class ConnectionCollectorService : IConnectionCollectorService
         _connectionCollectorCacheService = connectionCollectorCacheService;
     }
     
-    public async Task AddConnectionAsync(long userId, long sessionId, string connectionId)
+    public async Task AddConnectionAsync(Guid userId, Guid sessionId, string connectionId)
     {
         await _connectionRepository.AddConnectionAsync(userId, sessionId, connectionId);
         await _connectionCollectorCacheService.AddConnectionInCacheAsync(userId, sessionId, connectionId);
     }
     
-    public async Task RemoveConnectionAsync(long userId, string connectionId)
+    public async Task RemoveConnectionAsync(Guid userId, string connectionId)
     {
         await _connectionRepository.RemoveConnectionAsync(connectionId);
         await _connectionCollectorCacheService.RemoveConnectionsFromCacheAsync(userId, connectionId);

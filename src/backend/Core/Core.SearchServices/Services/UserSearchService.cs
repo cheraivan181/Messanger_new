@@ -17,7 +17,7 @@ public class UserSearchService : IUserSearchService
         _dialogRepository = dialogRepository;
     }
 
-    public async Task<SearchUserResult> SearchUsersAsync(long requestUserId, string requestUserName, string predicate)
+    public async Task<SearchUserResult> SearchUsersAsync(Guid requestUserId, string requestUserName, string predicate)
     {
         Log.Debug($"Method {nameof(SearchUsersAsync)} was started, requestUserId #({requestUserId}), " +
                   $"predicate #({predicate})");

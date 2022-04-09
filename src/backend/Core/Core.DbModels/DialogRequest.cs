@@ -1,12 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.DbModels;
 
 public class DialogRequest
 {
-    public long Id { get; set; }
-    public long OwnerUserId { get; set; }
-    public long RequestUserId { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid OwnerUserId { get; set; }
+    public Guid RequestUserId { get; set; }
     public bool IsAccepted { get; set; }
     
     [NotMapped]

@@ -24,20 +24,18 @@ namespace Core.DbModels.Migrations
 
             modelBuilder.Entity("Core.DbModels.Connection", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("SessionId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("SessionId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Value")
                         .IsRequired()
@@ -55,20 +53,18 @@ namespace Core.DbModels.Migrations
 
             modelBuilder.Entity("Core.DbModels.Dialog", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("User1Id")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("User1Id")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<long>("User2Id")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("User2Id")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -81,11 +77,9 @@ namespace Core.DbModels.Migrations
 
             modelBuilder.Entity("Core.DbModels.DialogRequest", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -93,11 +87,11 @@ namespace Core.DbModels.Migrations
                     b.Property<bool>("IsAccepted")
                         .HasColumnType("bit");
 
-                    b.Property<long>("OwnerUserId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("OwnerUserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<long>("RequestUserId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("RequestUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -110,11 +104,9 @@ namespace Core.DbModels.Migrations
 
             modelBuilder.Entity("Core.DbModels.DialogSecret", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -124,8 +116,8 @@ namespace Core.DbModels.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
-                    b.Property<long>("DialogId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("DialogId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -136,14 +128,12 @@ namespace Core.DbModels.Migrations
 
             modelBuilder.Entity("Core.DbModels.Message", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<long?>("AnswerMessageId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid?>("AnswerMessageId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -153,8 +143,8 @@ namespace Core.DbModels.Migrations
                         .HasMaxLength(3500)
                         .HasColumnType("nvarchar(3500)");
 
-                    b.Property<long>("DialogId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("DialogId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsDelivery")
                         .HasColumnType("bit");
@@ -171,17 +161,15 @@ namespace Core.DbModels.Migrations
 
             modelBuilder.Entity("Core.DbModels.RefreshToken", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("UserID")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("UserID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Value")
                         .IsRequired()
@@ -214,11 +202,9 @@ namespace Core.DbModels.Migrations
 
             modelBuilder.Entity("Core.DbModels.Session", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ClientPublicKey")
                         .IsRequired()
@@ -238,8 +224,8 @@ namespace Core.DbModels.Migrations
                         .HasMaxLength(3000)
                         .HasColumnType("nvarchar(3000)");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -250,11 +236,9 @@ namespace Core.DbModels.Migrations
 
             modelBuilder.Entity("Core.DbModels.User", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -286,17 +270,15 @@ namespace Core.DbModels.Migrations
 
             modelBuilder.Entity("Core.DbModels.UserRoles", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 

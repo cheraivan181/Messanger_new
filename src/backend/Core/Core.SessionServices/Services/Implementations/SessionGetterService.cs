@@ -17,7 +17,7 @@ public class SessionGetterService : ISessionGetterService
         _sessionCacheService = sessionCacheService;
     }
 
-    public async Task<SessionModel> GetSessionAsync(long userId, long sessionId)
+    public async Task<SessionModel> GetSessionAsync(Guid userId, Guid sessionId)
     {
         var sessionsFromCache = await _sessionCacheService.GetSessionAsync(userId, sessionId);
         if (sessionsFromCache == null)
@@ -43,7 +43,7 @@ public class SessionGetterService : ISessionGetterService
         return sessionsFromCache;
     }
 
-    public async Task<List<SessionModel>> GetSessionsModelAsync(long userId)
+    public async Task<List<SessionModel>> GetSessionsModelAsync(Guid userId)
     {
         var sessionsFromCache = await _sessionCacheService.GetSessionsAsync(userId);
         return sessionsFromCache;

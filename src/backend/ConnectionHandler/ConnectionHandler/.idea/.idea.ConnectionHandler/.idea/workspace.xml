@@ -9,26 +9,67 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc7ec941-6ead-44a2-b075-d1856d7f9953" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.DialogServices/DiExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.DialogServices/Implementations/DialogRequestService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/DialogRequestRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Search/SearchUserResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Search/SearchUserResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Components/Contact.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Components/Contact.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Pages/Messanger.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Pages/Messanger.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Shared/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Shared/NavMenu.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Clients/Implementations/AccountClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Clients/Implementations/AccountClient.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Clients/Interfaces/IAccountClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Clients/Interfaces/IAccountClient.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Requests/Account/SignInRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Requests/Account/SignInRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Requests/Account/UpdateRefreshTokenRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Requests/Account/UpdateRefreshTokenRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Account/AuthInfoResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Account/AuthInfoResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Account/SignInResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Account/SignInResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Account/UpdateRefreshTokenResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Account/UpdateRefreshTokenResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Session/CreateSessionResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Session/CreateSessionResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Domain/Session/SessionModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Domain/Session/SessionModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ConnectionHandler/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ConnectionHandler/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.ApiRequests/Account/SignInRequestModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.ApiRequests/Account/SignInRequestModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.ApiRequests/Account/UpdateAcessTokenRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.ApiRequests/Account/UpdateAcessTokenRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.ApiResponses/Account/AuthInfoResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.ApiResponses/Account/AuthInfoResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.ApiResponses/Session/CreateSessionResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.ApiResponses/Session/CreateSessionResponse.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/Connection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/Connection.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/Dialog.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/Dialog.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/DialogRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/DialogRequest.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/DialogSecret.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/DialogSecret.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/Message.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/Message.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/Migrations/20220403071813_Init.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/Migrations/20220403071813_Init.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/Migrations/20220407081008_Add_Index_In_DialogRequests.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/Migrations/20220407081008_Add_Index_In_DialogRequests.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/Migrations/ApplicationContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/Migrations/ApplicationContextModelSnapshot.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/RefreshToken.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/RefreshToken.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/Session.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/Session.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/User.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/UserRoles.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/UserRoles.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.IdentityService/Interfaces/IIdentityService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.IdentityService/Interfaces/IIdentityService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.IdentityService/Interfaces/IJwtService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.IdentityService/Interfaces/IJwtService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.IdentityService/Services/IdentityService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.IdentityService/Services/IdentityService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.IdentityService/Services/JwtService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.IdentityService/Services/JwtService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/DialogRequestRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/DialogRequestRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/ConnectionRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/ConnectionRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/DialogRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/DialogRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/RefreshTokenRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/RefreshTokenRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/SessionRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/SessionRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/UserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/UserRoleRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/UserRoleRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IConnectionRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IConnectionRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IDialogRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IDialogRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IRefreshTokenRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IRefreshTokenRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/ISessionRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/ISessionRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IUserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IUserRoleRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IUserRoleRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SearchServices/Interfaces/IUserSearchService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SearchServices/Interfaces/IUserSearchService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SearchServices/Services/UserSearchService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SearchServices/Services/UserSearchService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Domain/CreateSessionResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Domain/CreateSessionResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Domain/SessionModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Domain/SessionModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Domain/StoreModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Domain/StoreModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/ConnectionCollectorCacheService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/ConnectionCollectorCacheService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/ConnectionCollectorService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/ConnectionCollectorService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/SessionCacheService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/SessionCacheService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/SessionGetterService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/SessionGetterService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/SessionService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/SessionService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Interfaces/IConnectionCollectorCacheService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Interfaces/IConnectionCollectorCacheService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Interfaces/IConnectionCollectorService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Interfaces/IConnectionCollectorService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Interfaces/ISessionCacheService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Interfaces/ISessionCacheService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Interfaces/ISessionGetterService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Interfaces/ISessionGetterService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Interfaces/ISessionService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Interfaces/ISessionService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core/Controllers/BaseController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Controllers/BaseController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
