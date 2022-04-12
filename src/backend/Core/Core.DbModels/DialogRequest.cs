@@ -9,6 +9,8 @@ public class DialogRequest
     public Guid Id { get; set; } = Guid.NewGuid();
     public Guid OwnerUserId { get; set; }
     public Guid RequestUserId { get; set; }
+    
+    public bool IsProcessed { get; set; }
     public bool IsAccepted { get; set; }
     
     [NotMapped]

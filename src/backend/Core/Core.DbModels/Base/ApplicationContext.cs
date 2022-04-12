@@ -67,5 +67,7 @@ public class ApplicationContext : DbContext
             .HasOne(x => x.User)
             .WithMany(x => x.Connections)
             .OnDelete(DeleteBehavior.NoAction);
+        modelBuilder.Entity<Dialog>()
+            .HasOne(x => x.DialogRequest);
     }
 }

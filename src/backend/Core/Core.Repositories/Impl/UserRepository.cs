@@ -88,12 +88,11 @@ namespace Core.Repositories.Impl
             using var connection = await _connectionFactory.GetDbConnectionAsync();
             
             string sql =
-                $"SELECT TOP({skipUsers + countUsersInPage}) u.Id, u.UserName, COUNT(d.Id) as 'DialogCounts', COUNT(dr.Id) as 'DialogRequestCounts' FROM Users u "
+                $"SELECT TOP({skipUsers + countUsersInPage}) u.Id, u.UserName, COUNT(d.Id) as 'DialogCounts' FROM Users u "
                 + "LEFT JOIN Dialogs d ON d.User1Id = u.Id or d.User2Id = u.Id "
-                + "LEFT JOIN DialogRequests dr ON dr.OwnerUserId = u.Id "
                 + "WHERE UserName LIKE @userName "
                 + "GROUP BY u.Id, u.UserName "
-                + "HAVING COUNT(d.Id) = 0 and COUNT(dr.Id) = 0";
+                + "HAVING COUNT(d.Id) = 0";
             
             var result = (await connection.QueryAsync<User>(sql, new {userName = $"{userName}%"}))
                 .ToList();

@@ -40,20 +40,14 @@ namespace Core.Repositories.Impl
 
         public async Task<List<Role>> GetUserRolesAsync(Guid userId)
         {
-            try
-            {
-                using var connection = await _connectionFactory.GetDbConnectionAsync();
-                string sql = "SELECT r.Id, r.Name FROM Roles r " +
-                             "INNER JOIN UserRoles u ON r.Id = u.RoleId " +
-                             "WHERE u.UserId = @userId";
+            using var connection = await _connectionFactory.GetDbConnectionAsync();
+            
+            string sql = "SELECT r.Id, r.Name FROM Roles r " +
+                         "INNER JOIN UserRoles u ON r.Id = u.RoleId " +
+                         "WHERE u.UserId = @userId";
 
-                var roles = await connection.QueryAsync<Role>(sql, new {userId = userId});
-                return roles.ToList();
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
+            var roles = await connection.QueryAsync<Role>(sql, new {userId = userId});
+            return roles.ToList();
         }
     }
 }

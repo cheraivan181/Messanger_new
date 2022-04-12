@@ -1,6 +1,7 @@
 ﻿using Core.CacheServices.Domain;
 using Core.CryptService;
 using Core.DbModels.Base.Di;
+using Core.DialogServices;
 using Core.IdentityService;
 using Core.Kafka;
 using Core.Mapping;
@@ -25,6 +26,7 @@ namespace Core
             serviceCollection.AddKafkaServices(configuration);
             serviceCollection.AddSessionServices();
             serviceCollection.AddSearchUserServices();
+            serviceCollection.AddDialogServices();
         } 
     }
 }

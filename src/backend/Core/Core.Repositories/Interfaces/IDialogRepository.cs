@@ -4,6 +4,6 @@ namespace Core.Repositories.Interfaces;
 
 public interface IDialogRepository
 {
-    Task<(List<Dialog> dialogs, List<DialogRequest> dialogRequest)>
-        GetUserDialogsAndDialogRequestsAsync(Guid userId, string predicate);
+    Task<Guid> CreateDialogAsync(Guid user1Id, Guid user2Id, Guid dialogRequestId);
+    Task<List<Dialog>> GetUserDialogsAsync(Guid userId);
 }

@@ -47,6 +47,7 @@
     <ProjectReference Include="..\Core.ApiResponses\Core.ApiResponses.csproj" />
     <ProjectReference Include="..\Core.CacheServices\Core.Redis.csproj" />
     <ProjectReference Include="..\Core.DbModels\Core.DbModels.csproj" />
+    <ProjectReference Include="..\Core.DialogServices\Core.DialogServices.csproj" />
     <ProjectReference Include="..\Core.IdentityService\Core.IdentityService.csproj" />
     <ProjectReference Include="..\Core.Kafka\Core.Kafka.csproj" />
     <ProjectReference Include="..\Core.Repositories\Core.Repositories.csproj" />

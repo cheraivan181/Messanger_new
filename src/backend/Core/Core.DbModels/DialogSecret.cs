@@ -8,8 +8,12 @@ public class DialogSecret
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Id { get; set; } = Guid.NewGuid();
     public Guid DialogId { get; set; }
+    
     [MaxLength(300)]
     public string CypherKey { get; set; }
+    
+    [MaxLength(100)]
+    public string IV { get; set; }
     public Dialog Dialog { get; set; }
     public DateTime CreatedAt { get; set; }
 

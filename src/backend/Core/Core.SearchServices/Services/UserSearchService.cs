@@ -26,36 +26,8 @@ public class UserSearchService : IUserSearchService
         var searchModels = new List<SearchUserModel>();
         
         var users = await _userRepository.SearchUsersByUserNameAsync(predicate);
-        var dialogAndDialogRequests = await _dialogRepository
-            .GetUserDialogsAndDialogRequestsAsync(requestUserId, predicate);
-        
-        foreach (var dialog in dialogAndDialogRequests.dialogs)
-        {
-            string userName = string.Empty;
-            if (!string.IsNullOrEmpty(dialog.User1.UserName) && dialog.User1.UserName != requestUserName)
-                userName = dialog.User1.UserName;
-            else if (!string.IsNullOrEmpty(dialog.User2?.UserName) && dialog.User2.UserName != requestUserName)
-                userName = dialog.User2.UserName;
-            else
-                continue;
 
-            searchModels.Add(new SearchUserModel(userName, true));
-        }
-        
-        foreach (var dialogRequest in dialogAndDialogRequests.dialogRequest)
-        {
-            string userName = dialogRequest.RequestUser.UserName;
-            if (string.IsNullOrEmpty(userName))
-            {
-                result.SetServerError();
-                return result;
-            }
-
-            searchModels.Add(new SearchUserModel(userName, false));
-        }
-
-        var alredyAddedUsers = searchModels.Select(x => x.UserName);
-        foreach (var user in users.Where(x => !alredyAddedUsers.Contains(x.UserName) && x.UserName != requestUserName))
+        foreach (var user in users)
         {
             searchModels.Add(new SearchUserModel(user.UserName, false));
         }

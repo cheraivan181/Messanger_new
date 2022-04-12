@@ -179,7 +179,6 @@ namespace Core.Controllers
             return Unauthorized(ErrorResponseBuilder.Build("User is not authorized"));
         }
         
-        
         /// <summary>
         /// get token life times options
         /// </summary>

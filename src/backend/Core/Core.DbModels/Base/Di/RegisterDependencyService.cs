@@ -9,6 +9,7 @@ namespace Core.DbModels.Base.Di
         public static void AddDbServices(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<IConnectionFactory, ConnectionFactory>();
+            serviceCollection.AddSingleton<ITransactionProvider, TransactionProvider>();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Core.Repositories.Interfaces;
+﻿using Core.DialogServices.Interfaces;
+using Core.Repositories.Interfaces;
 using Core.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,22 +12,21 @@ namespace Core.Controllers;
 [ApiController]
 public class DialogController : BaseController
 {
+    private readonly IDialogService _dialogService;
+    
     public DialogController(IServiceProvider serviceProvider, 
-        IUserRepository userRepository) : base(serviceProvider, userRepository)
+        IUserRepository userRepository,
+        IDialogService dialogService) : base(serviceProvider, userRepository)
     {
+        _dialogService = dialogService;
     }
 
-    public async Task CreateDialogRequestAsync()
-    {
-        
-    }
-
-    public async Task ConfirmDialogRequestAsync()
-    {
-        
-    }
-
-    public async Task CanceldialogRequestAsync()
+    
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [HttpPost("createDialog")]
+    public async Task CreateDialogAsync()
     {
         
     }

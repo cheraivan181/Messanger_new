@@ -7,7 +7,11 @@ public class Dialog
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Id { get; set; } = Guid.NewGuid();
     public Guid User1Id { get; set; }
-    public Guid User2Id { get; set; }
+    public Guid User2Id { get; set; } 
+    
+    public Guid DialogRequestId { get; set; }
+    
+    public DialogRequest DialogRequest { get; set; }
     
     [NotMapped]
     public User User1 { get; set; }

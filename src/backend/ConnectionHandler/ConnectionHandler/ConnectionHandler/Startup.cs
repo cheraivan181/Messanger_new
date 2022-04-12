@@ -1,6 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 using ConnectionHandler.Auth;
 using ConnectionHandler.Hubs;
+using ConnectionHandler.Services.Implementations;
+using ConnectionHandler.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -51,6 +53,8 @@ public class Startup
         {
 
         });
+
+        services.AddScoped<IHubCallerContextStore, HubCallerContextStore>();
         
         AddCorsConfig(services, Configuration);
         AddConfigureAuthenticationAndAuthorization(services, Configuration);

@@ -13,43 +13,46 @@ public class DialogRepository : IDialogRepository
     {
         _connectionFactory = connectionFactory;
     }
-
-    public async Task<(List<Dialog> dialogs, List<DialogRequest> dialogRequest)>
-        GetUserDialogsAndDialogRequestsAsync(Guid userId, string predicate)
+    
+    public async Task<Guid> CreateDialogAsync(Guid user1Id, Guid user2Id, Guid dialogRequestId)
     {
         using var connection = await _connectionFactory.GetDbConnectionAsync();
-        var queryParams = new
+        var result = Guid.NewGuid();
+
+        string sql = "INSERT INTO Dialogs (Id, User1Id, User2Id, Created, DialogRequestId) " +
+                     "VALUES (@id, @user1id, @user2id, @created, @dialogRequestId)";
+
+        await connection.ExecuteAsync(sql, new
         {
-            predicate = $"{predicate}%",
-            userId = userId
-        };
+            id = result,
+            user1id = user1Id,
+            user2id = user2Id,
+            created = DateTime.Now,
+            dialogRequestId = dialogRequestId
+        });
+        
+        return result;
+    }
 
-        string sql = "SELECT d.Id, u.Id, d.User1Id, d.User2Id, u.UserName FROM Dialogs d WITH(NOLOCK) "
-                     + "INNER JOIN Users u WITH(NOLOCK) ON d.User1Id = u.Id or d.User2Id = u.Id "
-                     + "WHERE (d.User1Id = @userId OR d.User2Id = @userId) and u.UserName LIKE @predicate;";
-
-
-        var dialogs = (await connection.QueryAsync<Dialog, User, Dialog>(sql, (dialog, user) =>
+    public async Task<List<Dialog>> GetUserDialogsAsync(Guid userId)
+    {
+        using var connection = await _connectionFactory.GetDbConnectionAsync();
+        
+        string sql = "SELECT d.Id, u.Id, dr.Id, d.User1Id, d.User2Id, d.DialogRequestId, u.UserName, dr.IsAccepted FROM Dialogs d " 
+                     + "INNER JOIN Users u ON u.Id = d.User1Id OR u.Id = d.User2Id " 
+                     + "INNER JOIN DialogRequestId dr ON dr.Id = d.DialogRequestId "
+                     + "WHERE User1Id = @userId OR User2Id = @userId";
+        var result = await connection.QueryAsync<Dialog, User, DialogRequest, Dialog>(sql,((dialog, user, dialogRequest) =>
         {
+            dialog.DialogRequest = dialogRequest;
             if (dialog.User1Id == userId)
                 dialog.User2 = user;
             else
                 dialog.User1 = user;
-
+            
             return dialog;
-        }, queryParams, splitOn: "Id")).ToList();
+        }), new {userId = userId}, splitOn:"Id, Id, Id");
 
-        sql = "SELECT d.Id, u.Id, d.OwnerUserId, u.UserName FROM DialogRequests d WITH(NOLOCK) "
-              + "INNER JOIN Users u WITH(NOLOCK) ON d.RequestUserId = u.Id "
-              + "WHERE d.OwnerUserId = @userId and u.UserName LIKE @predicate";
-
-        var dialogRequests = (await connection.QueryAsync<DialogRequest, User, DialogRequest>(sql,
-            (dialogRequest, user) =>
-            {
-                dialogRequest.RequestUser = user;
-                return dialogRequest;
-            }, queryParams, splitOn: "Id")).ToList();
-
-        return (dialogs, dialogRequests);
+        return result.ToList();
     }
 }

@@ -4,6 +4,7 @@ using Core.DbModels.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Core.DbModels.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20220410011331_Add dialog request in dialog")]
+    partial class Adddialogrequestindialog
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,9 +94,6 @@ namespace Core.DbModels.Migrations
                     b.Property<bool>("IsAccepted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsProcessed")
-                        .HasColumnType("bit");
-
                     b.Property<Guid>("OwnerUserId")
                         .HasColumnType("uniqueidentifier");
 
@@ -126,11 +125,6 @@ namespace Core.DbModels.Migrations
 
                     b.Property<Guid>("DialogId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("IV")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
