@@ -5,5 +5,5 @@ namespace Core.Mapping.Interfaces;
 
 public interface ISearchMapper
 {
-    SearchUserResponse MapSearchUserResponse(List<SearchUserModel> result);
+    SearchUserResponse Map(List<SearchUserModel> result);
 }

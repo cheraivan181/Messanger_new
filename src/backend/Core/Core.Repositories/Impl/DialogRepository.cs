@@ -37,21 +37,25 @@ public class DialogRepository : IDialogRepository
     public async Task<List<Dialog>> GetUserDialogsAsync(Guid userId)
     {
         using var connection = await _connectionFactory.GetDbConnectionAsync();
+        var test = await connection.QuerySingleOrDefaultAsync<Dialog>("SELECT TOP 1 * FROM Dialogs");
         
-        string sql = "SELECT d.Id, u.Id, dr.Id, d.User1Id, d.User2Id, d.DialogRequestId, u.UserName, dr.IsAccepted FROM Dialogs d " 
-                     + "INNER JOIN Users u ON u.Id = d.User1Id OR u.Id = d.User2Id " 
-                     + "INNER JOIN DialogRequestId dr ON dr.Id = d.DialogRequestId "
-                     + "WHERE User1Id = @userId OR User2Id = @userId";
-        var result = await connection.QueryAsync<Dialog, User, DialogRequest, Dialog>(sql,((dialog, user, dialogRequest) =>
-        {
-            dialog.DialogRequest = dialogRequest;
-            if (dialog.User1Id == userId)
-                dialog.User2 = user;
-            else
-                dialog.User1 = user;
-            
-            return dialog;
-        }), new {userId = userId}, splitOn:"Id, Id, Id");
+        string sql =
+            "SELECT * FROM Dialogs d "
+            + "INNER JOIN Users u ON u.Id = d.User1Id OR u.Id = d.User2Id "
+            + "INNER JOIN DialogRequests dr ON dr.Id = d.DialogRequestId "
+            + "WHERE User1Id = @userId OR User2Id = @userId";
+
+        var result = await connection.QueryAsync<Dialog, User, DialogRequest, Dialog>(sql,
+            ((dialog, user, dialogRequest) =>
+            {
+                dialog.DialogRequest = dialogRequest;
+                if (dialog.User1Id == userId)
+                    dialog.User2 = user;
+                else
+                    dialog.User1 = user;
+
+                return dialog;
+            }), new {userId = userId}, splitOn: "Id, Id");
 
         return result.ToList();
     }

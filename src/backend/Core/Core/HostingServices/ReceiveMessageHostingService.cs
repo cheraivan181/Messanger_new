@@ -8,6 +8,10 @@ using Serilog;
 
 namespace Core.HostingServices;
 
+
+/// <summary>
+/// По сути это будет ядро. Подписка на топик событий и процессинг их 
+/// </summary>
 public class ReceiveMessageHostingService : IHostedService
 {
     private readonly IProducerSubscriberProvider _producerSubscriberProvider;
@@ -22,23 +26,8 @@ public class ReceiveMessageHostingService : IHostedService
     
     public Task StartAsync(CancellationToken cancellationToken)
     {
-        var token = new CancellationTokenSource();
-        // Task.Run(async () =>
-        // {
-        //     using var scope = _serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope();
-        //     var p = scope.ServiceProvider.GetRequiredService<IProducerService>();
-        //     int count = 0;
-        //     while (!token.IsCancellationRequested)
-        //     {
-        //         await p.ProduceAsync("s", new {isFisting = true});
-        //         count++;
-        //     }
-        //     Log.Debug($"Publisher sends {count} messages");
-        // });
-        
         var task = Task.Run( async() =>
         {
-            token.Cancel();
             Log.Information($"{nameof(ReceiveMessageHostingService)} was started");
             var consumer = _producerSubscriberProvider.GetConsumer(groupId: "consumer2"); 
             consumer.Subscribe("s"); 
@@ -48,8 +37,7 @@ public class ReceiveMessageHostingService : IHostedService
             {
                 //  var newMessage = newConsumer.Consume(cancellationToken);
                 var message = consumer.Consume(cancellationToken);
-                   
-                Log.Information( $"Received message: {message.Value}"); 
+                Log.Information( $"Received message: {message.Value}");
             }
         }, cancellationToken);
         

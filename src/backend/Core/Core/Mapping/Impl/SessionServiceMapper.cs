@@ -5,7 +5,7 @@ namespace Core.Mapping.Impl;
 
 public class SessionServiceMapper : ISessionServiceMapper
 {
-    public CreateSessionResponse MapSessionResponse(SessionServices.Domain.CreateSessionResponse model)
+    public CreateSessionResponse Map(SessionServices.Domain.CreateSessionResponse model)
     {
         var result = new CreateSessionResponse();
         result.SessionId = model.SessionId;

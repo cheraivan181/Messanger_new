@@ -1,21 +1,23 @@
 ﻿using Blazored.LocalStorage;
 using Front.Clients.Interfaces;
 using Front.Services.Interfaces.Crypt;
+using Front.Services.Interfaces.Sessions;
 
 namespace Front.Services.Implementations.Crypt
 {
     public class RsaService : IRsaService
     {
         private readonly ICryptClient _cryptClient;
-        private readonly ILocalStorageService _localStorageService;
+        private readonly ISessionGetterService _sessionGetterService;
         private readonly ILogger<RsaService> _logger;
 
+
         public RsaService(ICryptClient cryptClient,
-            ILocalStorageService localStoragesService,
+            ISessionGetterService sessionGetterService,
             ILoggerFactory loggerFactory)
         {
-            _localStorageService = localStoragesService;
             _cryptClient = cryptClient;
+            _sessionGetterService = sessionGetterService;
             _logger = loggerFactory.CreateLogger<RsaService>();
         }
 
@@ -29,6 +31,24 @@ namespace Front.Services.Implementations.Crypt
             }
 
             return (result.SucessResponse.Response.PrivateKey, result.SucessResponse.Response.PublicKey);
+        }
+
+
+        public async Task<string> CryptTextAsync(string textToCrypt)
+        {
+            var session = await _sessionGetterService.GetSessionAsync();
+            var result = await _cryptClient.RsaCryptAsync(session.ServerPublicKey, textToCrypt);
+
+            return result.SucessResponse.Response.CryptedText;
+        }
+
+        public async Task<string> DecryptTextAsync(string cryptedText)
+        {
+            var session = await _sessionGetterService.GetSessionAsync();
+
+            var result = await _cryptClient.RsaDecryptAsync(session.ClientPrivateKey, cryptedText);
+
+            return result.SucessResponse.Response.DecrtyptedText;
         }
     }
 }

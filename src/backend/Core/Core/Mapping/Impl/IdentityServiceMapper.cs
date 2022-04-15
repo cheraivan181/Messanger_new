@@ -6,7 +6,7 @@ namespace Core.Mapping.Impl
 {
     public class IdentityServiceMapper : IIdentityServiceMapper
     {
-        public SignUpResponse MapSignUpResponse(SignUpResult model)
+        public SignUpResponse Map(SignUpResult model)
         {
             var result = new SignUpResponse();
             result.AcessToken = model.AcessToken;
@@ -15,7 +15,7 @@ namespace Core.Mapping.Impl
             return result;
         }
 
-        public SignInResponse MapSignInResponse(SignInResult model)
+        public SignInResponse Map(SignInResult model)
         {
             var result = new SignInResponse();
             result.AcessToken = model.AcessToken;

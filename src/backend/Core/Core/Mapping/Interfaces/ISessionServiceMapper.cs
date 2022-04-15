@@ -4,5 +4,5 @@ namespace Core.Mapping.Interfaces;
 
 public interface ISessionServiceMapper
 {
-    CreateSessionResponse MapSessionResponse(SessionServices.Domain.CreateSessionResponse model);
+    CreateSessionResponse Map(SessionServices.Domain.CreateSessionResponse model);
 }

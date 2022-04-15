@@ -18,7 +18,7 @@ public class DialogSecretRepository : IDialogSecretRepository
     {
         using var connection = await _connectionFactory.GetDbConnectionAsync();
         var result = Guid.NewGuid();
-        string sql = "INERT INTO DialogSecrets (Id, DialogId, CypherKey, CreatedAt, IV) " +
+        string sql = "INSERT INTO DialogSecrets (Id, DialogId, CypherKey, CreatedAt, IV) " +
                      "VALUES (@id, @dialogId, @cypherKey, @createdAt, @iv)";
         
         await connection.ExecuteAsync(sql, new
@@ -26,7 +26,8 @@ public class DialogSecretRepository : IDialogSecretRepository
             id = result,
             dialogId = dialogId,
             cypherKey = key,
-            iv = iv
+            iv = iv,
+            createdAt = DateTime.Now
         });
 
         return result;
@@ -40,7 +41,7 @@ public class DialogSecretRepository : IDialogSecretRepository
         var queryResult = await connection.QueryAsync<DialogSecret>(sql, new {dialogIds = dialogIds});
 
         foreach (var dialog in queryResult.AsEnumerable())
-            result.Add(dialog.Id, (key: dialog.CypherKey, iv: dialog.IV));
+            result.Add(dialog.DialogId, (key: dialog.CypherKey, iv: dialog.IV));
         return result;
     }
 }

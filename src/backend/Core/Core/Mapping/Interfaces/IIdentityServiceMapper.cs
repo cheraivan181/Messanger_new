@@ -5,7 +5,7 @@ namespace Core.Mapping.Interfaces
 {
     public interface IIdentityServiceMapper
     {
-        SignUpResponse MapSignUpResponse(SignUpResult result);
-        SignInResponse MapSignInResponse(SignInResult model);
+        SignUpResponse Map(SignUpResult result);
+        SignInResponse Map(SignInResult model);
     }
 }

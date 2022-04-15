@@ -65,7 +65,7 @@ namespace Core.Controllers
                 return BadRequest(errorResponse);
             }
 
-            var mapResult = _identityServiceMapper.MapSignUpResponse(result);
+            var mapResult = _identityServiceMapper.Map(result);
             var response = SucessResponseBuilder.Build(mapResult);
 
             return Ok(response);
@@ -105,7 +105,7 @@ namespace Core.Controllers
                     : BadRequest(errorResponse);
             }
 
-            var mapResult = _identityServiceMapper.MapSignInResponse(result);
+            var mapResult = _identityServiceMapper.Map(result);
             var response = SucessResponseBuilder.Build(mapResult);
             
             return Ok(response);
@@ -145,7 +145,7 @@ namespace Core.Controllers
                     : BadRequest(errorResponse);
             }
 
-            var mapResult = _identityServiceMapper.MapSignInResponse(result);
+            var mapResult = _identityServiceMapper.Map(result);
             var response = SucessResponseBuilder.Build(mapResult);
 
             return Ok(response);

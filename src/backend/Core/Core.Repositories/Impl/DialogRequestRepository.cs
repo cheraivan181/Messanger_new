@@ -27,6 +27,7 @@ public class DialogRequestRepository : IDialogRequestRepository
             id = result,
             ownerUserId = ownerUserId,
             requestUserId = requestUserId,
+            isAccepted = false,
             createdAt = DateTime.Now
         });
         

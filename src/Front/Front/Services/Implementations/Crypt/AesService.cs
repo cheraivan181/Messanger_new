@@ -1,29 +1,37 @@
-﻿using Blazored.LocalStorage;
-using Front.Clients.Interfaces;
+﻿using Front.Clients.Interfaces;
 using Front.Services.Interfaces.Crypt;
+using Front.Services.Interfaces.Dialogs;
 
 namespace Front.Services.Implementations.Crypt
 {
     public class AesService : IAesCryptService
     {
         private readonly ICryptClient _cryptClient;
-        private readonly ILocalStorageService _localStorageService;
+        private readonly IDialogManagerService _dialogService;
 
         public AesService(ICryptClient cryptClient,
-            ILocalStorageService localStorageService)
+            IDialogManagerService dialogService)
         {
             _cryptClient = cryptClient;
-            _localStorageService = localStorageService;
+            _dialogService = dialogService;
         }
 
-        public string CryptText(long dialogId, string textToCrypt)
+        public async Task<string> CryptText(Guid dialogId, string textToCrypt)
         {
-            throw new NotImplementedException();
+            var dialogs = await _dialogService.GetDialogsAsync();
+            var dialog = dialogs.Single(x => x.DialogId == dialogId);
+            var result = await _cryptClient.AesCryptAsync(dialog.CypherKey, dialog.IV, textToCrypt);
+
+            return result.SucessResponse.Response.CryptedText;
         }
 
-        public string DecryptText(long dialogId, string cipherText)
+        public async Task<string> DecryptText(Guid dialogId, string cipherText)
         {
-            throw new NotImplementedException();
+            var dialogs = await _dialogService.GetDialogsAsync();
+            var dialog = dialogs.Single(x => x.DialogId == dialogId);
+            var result = await _cryptClient.AesCryptAsync(dialog.CypherKey, dialog.IV, cipherText);
+
+            return result.SucessResponse.Response.CryptedText;
         }
     }
 }

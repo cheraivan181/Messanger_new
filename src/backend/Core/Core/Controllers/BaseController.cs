@@ -35,6 +35,12 @@ namespace Core.Controllers
             return null;
         }
 
+        [NonAction]
+        public IActionResult CreateResult(object obj)
+        {
+            return StatusCode(201, obj);
+        }
+        
         public string UserName
         {
             get

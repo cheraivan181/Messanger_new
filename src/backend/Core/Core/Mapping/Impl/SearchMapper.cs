@@ -6,7 +6,7 @@ namespace Core.Mapping.Impl;
 
 public class SearchMapper : ISearchMapper
 {
-    public SearchUserResponse MapSearchUserResponse(List<SearchUserModel> result)
+    public SearchUserResponse Map(List<SearchUserModel> result)
     {
         var response = new SearchUserResponse();
         response.SearchUserResults = result;

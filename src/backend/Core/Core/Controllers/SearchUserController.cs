@@ -50,7 +50,7 @@ public class SearchController : BaseController
             return BadRequest(errorResponse);
         }
 
-        var mapResult = _searchMapper.MapSearchUserResponse(searchedUserResult.Result);
+        var mapResult = _searchMapper.Map(searchedUserResult.Result);
         var response = SucessResponseBuilder.Build(mapResult);
         return Ok(response);
     }

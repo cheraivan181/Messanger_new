@@ -11,6 +11,7 @@ namespace Core.Mapping
             serviceCollection.AddSingleton<IIdentityServiceMapper, IdentityServiceMapper>();
             serviceCollection.AddSingleton<ISessionServiceMapper, SessionServiceMapper>();
             serviceCollection.AddSingleton<ISearchMapper, SearchMapper>();
+            serviceCollection.AddSingleton<IDialogMapper, DialogMapper>();
         }
     }
 }

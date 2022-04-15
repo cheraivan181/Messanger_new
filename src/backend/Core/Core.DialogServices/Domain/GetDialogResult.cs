@@ -29,5 +29,5 @@ public class GetDialogResult
         ErrorMessage = "Internal server error. Try later";
     }
     
-    public record Dialog(Guid userId, string userName, string cypherKey, string iv, bool isConfirmDialog);
+    public record Dialog(Guid userId,Guid dialogId, string userName, string cypherKey, string iv, bool isConfirmDialog);
 }

@@ -6,11 +6,13 @@ using Front.Clients.Interfaces;
 using Front.Services.Implementations.Alive;
 using Front.Services.Implementations.Auth;
 using Front.Services.Implementations.Crypt;
+using Front.Services.Implementations.Dialogs;
 using Front.Services.Implementations.Sessions;
 using Front.Services.Implementations.WebSocket;
 using Front.Services.Interfaces.Alive;
 using Front.Services.Interfaces.Auth;
 using Front.Services.Interfaces.Crypt;
+using Front.Services.Interfaces.Dialogs;
 using Front.Services.Interfaces.Sessions;
 using Front.Services.Interfaces.WebSocket;
 using Front.Servives.Implementations;
@@ -41,6 +43,7 @@ builder.Services.AddScoped<IAccountClient, AccountClient>();
 builder.Services.AddScoped<ISessionClient, SessionClient>();
 builder.Services.AddScoped<ICryptClient, CryptClient>();
 builder.Services.AddScoped<ISearchClient, SearchClient>();
+builder.Services.AddScoped<IDialogClient, DialogClient>();
 
 #endregion
 
@@ -71,12 +74,19 @@ builder.Services.AddScoped<IRsaService, RsaService>();
 #region sessionServices
 
 builder.Services.AddScoped<ISessionService, SessionService>();
+builder.Services.AddScoped<ISessionGetterService, SessionGetterService>();
 
 #endregion
 
 #region connectorServices
 
 builder.Services.AddSingleton<IConnectorService, ConnectorService>();
+
+#endregion
+
+#region dialogServices
+
+builder.Services.AddScoped<IDialogManagerService, DialogService>();
 
 #endregion
 

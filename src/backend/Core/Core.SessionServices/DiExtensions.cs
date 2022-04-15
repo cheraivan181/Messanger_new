@@ -13,5 +13,6 @@ public static class DiExtensions
         serviceCollection.AddScoped<ISessionCacheService, SessionCacheService>();
         serviceCollection.AddScoped<IConnectionCollectorCacheService, ConnectionCollectorCacheService>();
         serviceCollection.AddScoped<IConnectionCollectorService, ConnectionCollectorService>();
+        serviceCollection.AddScoped<ISessionCacheInitializerService, SessionCacheInitializerService>();
     }
 }

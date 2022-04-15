@@ -40,6 +40,7 @@ namespace Core
                      options.JsonSerializerOptions.Converters.Add(new IntPtrConverter());
                      options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
                  });
+            services.AddGrpc();
             
             services.AddEndpointsApiExplorer();
 
@@ -83,6 +84,7 @@ namespace Core
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                app.UseDeveloperExceptionPage();
             }
 
             MetricsCollectorStart();

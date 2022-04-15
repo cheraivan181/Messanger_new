@@ -2,7 +2,7 @@
 {
     public interface IAesCryptService
     {
-        string DecryptText(long dialogId, string cipherText);
-        string CryptText(long dialogId, string textToCrypt);
+        Task<string> CryptText(Guid dialogId, string textToCrypt);
+        Task<string> DecryptText(Guid dialogId, string cipherText);
     }
 }

@@ -9,7 +9,7 @@ public class SearchUserResponse
     public bool IsFoundUsers { get; set; }
     [JsonPropertyName("searchUserResults")]
     public List<SearchUserModel> SearchUserResults { get; set; }
-    
+
     [JsonPropertyName("count")]
     public int Count
     {

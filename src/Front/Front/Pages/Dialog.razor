@@ -1,9 +1,67 @@
 ﻿@page "/dialog/{UserName}"
+@using Front.ClientsDomain.Responses.Dialog
+@using Front.Domain.Message
+@using Front.Services.Interfaces.Dialogs
 
-<h1>@UserName</h1>
+@inject IDialogManagerService _dialogManagerService;
+
+<hr />
+
+    <div id="scrollbox">
+        @foreach (var item in Messages)
+        {
+            @if (item.IsImSender)
+            {
+                <div class="alert alert-info">@item.DecryptedText</div>
+            }
+            else
+            {
+                <div class="@item.Css">
+                    <div class="user">@CurrentDialog.UserName</div>
+                    <div class="msg">@item.DecryptedText</div>
+                </div>
+            }
+        }
+        <hr />
+        <textarea class="input-lg" placeholder="enter your comment" @bind="@Message"></textarea>
+        <button class="btn btn-default" @onclick="() => SendAsync(Message)">Send</button>
+    </div>
+
 
 @code {
-    [Parameter]
-    public string UserName{ get; set; }
 
+    [Parameter]
+    public string UserName { get; set; }
+
+    private string Message { get; set; }
+
+    private List<Message> Messages { get; set; }
+
+    private GetDialogResponse.Dialog CurrentDialog { get; set; }
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        var dialogs = await _dialogManagerService.GetDialogsAsync();
+        CurrentDialog = dialogs.FirstOrDefault(x => x.UserName == UserName);
+
+        if (!GlobalStorage.Messages.TryGetValue(CurrentDialog.DialogId, out List<Message> messages))
+        {
+            messages = new List<Message>();
+            GlobalStorage.Messages[CurrentDialog.DialogId] = messages;
+        }
+
+        Messages = messages;
+    }
+
+    public async Task SendAsync(string message)
+    {
+        Messages.Add(new Message()
+        {
+           CreatedAt = DateTime.Now,
+           DecryptedText = message,
+           IsImSender = true
+        });
+    }
 }

@@ -29,7 +29,7 @@ public class UserSearchService : IUserSearchService
 
         foreach (var user in users)
         {
-            searchModels.Add(new SearchUserModel(user.UserName, false));
+            searchModels.Add(new SearchUserModel(user.Id, user.UserName, false));
         }
         
         result.SetSucessResult(searchModels); 

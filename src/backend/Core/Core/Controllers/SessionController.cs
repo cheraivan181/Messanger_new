@@ -57,7 +57,7 @@ namespace Core.Controllers
                 return BadRequest(errorResponse);
             }
 
-            var mapResult = _sessionServiceMapper.MapSessionResponse(result);
+            var mapResult = _sessionServiceMapper.Map(result);
             var response = SucessResponseBuilder.Build(mapResult);
             
             return Ok(response);

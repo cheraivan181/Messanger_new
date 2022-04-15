@@ -15,7 +15,7 @@ namespace Front.Services.Implementations.Sessions
         private readonly ILocalStorageService _localStorageService;
         private readonly ISessionClient _sessionClient;
         private readonly IAuthService _authService;
-        
+
         public SessionService(IRsaService rsaService,
             ILocalStorageService localStorageService,
             ISessionClient sessionClient,

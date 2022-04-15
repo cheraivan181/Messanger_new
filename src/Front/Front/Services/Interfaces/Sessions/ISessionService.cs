@@ -1,4 +1,6 @@
-﻿namespace Front.Services.Interfaces.Sessions
+﻿using Front.Domain.Session;
+
+namespace Front.Services.Interfaces.Sessions
 {
     public interface ISessionService
     {

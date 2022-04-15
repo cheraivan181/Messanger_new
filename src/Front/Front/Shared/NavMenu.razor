@@ -1,8 +1,10 @@
 ﻿@using Front.Clients.Interfaces
+@using Front.ClientsDomain.Responses.Dialog
 @using Front.ClientsDomain.Responses.Search
+@using Front.Services.Interfaces.Dialogs
 
 @inject ISearchClient _searchClient
-
+@inject IDialogManagerService _dialogService
 
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
@@ -24,6 +26,10 @@
                 @foreach (var user in SearchUserResponse.SearchUserResults)
                 {
                     <Front.Components.Contact UserName="@user.UserName"></Front.Components.Contact>
+                }
+                @foreach (var dialog in Dialogs)
+                {
+                     <Front.Components.Contact UserName="@dialog.UserName"></Front.Components.Contact>
                 }
             </Authorized>
             <NotAuthorized>
@@ -49,6 +55,7 @@
     private string SearchedUser { get; set; }
 
     private SearchUserResponse SearchUserResponse = new SearchUserResponse();
+    private List<GetDialogResponse.Dialog> Dialogs = new List<GetDialogResponse.Dialog>();
 
     private async Task SearchChangedAsync()
     {
@@ -58,6 +65,12 @@
         {
             SearchUserResponse = response.SucessResponse.Response;
         }
+    }
+
+    protected async override Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        Dialogs = await _dialogService.GetDialogsAsync();
     }
 
     private void ToggleNavMenu()

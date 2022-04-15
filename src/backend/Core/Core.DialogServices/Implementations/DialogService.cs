@@ -90,7 +90,8 @@ public class DialogService : IDialogService
             return result;
         }
         
-        var dialogIds = dialogs.Select(x => x.Id);
+        var dialogIds = dialogs.Select(x => x.Id)
+            .Distinct();
         var dialogSecrets = await _dialogSecretRepository.GetDialogSecretsAsync(dialogIds);
         var session = await _sessionGetterService.GetSessionAsync(userId, Guid.Parse(sessionId));
         if (session == null)
@@ -105,11 +106,11 @@ public class DialogService : IDialogService
             var cryptedKey = _rsa.Crypt(session.ClientPublicKey, dialogSecret.Value.key);
             var cryptedIV = _rsa.Crypt(session.ClientPublicKey, dialogSecret.Value.iv);
             var dialog = dialogs.FirstOrDefault(x => x.Id == dialogSecret.Key);
-            var userName = dialog.User1Id != userId
-                ? dialog.User1.UserName
-                : dialog.User2.UserName;
+            var user = dialog.User1Id != userId
+                ? dialog.User1
+                : dialog.User2;
             
-            dialogResult.Add(new GetDialogResult.Dialog(dialogSecret.Key, userName, cryptedKey,
+            dialogResult.Add(new GetDialogResult.Dialog(user.Id,dialog.Id, user.UserName, cryptedKey,
                 cryptedIV, dialog.DialogRequest.IsAccepted));
         }
         

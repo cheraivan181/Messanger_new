@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Core.DialogServices\Core.DialogServices.csproj" />
     <ProjectReference Include="..\Core.SearchServices\Core.SearchServices.csproj" />
   </ItemGroup>
 

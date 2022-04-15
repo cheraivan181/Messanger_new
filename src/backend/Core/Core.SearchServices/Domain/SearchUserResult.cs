@@ -23,4 +23,4 @@ public class SearchUserResult
     }
 }
 
-public record SearchUserModel(string UserName, bool isHadDialog);
+public record SearchUserModel(Guid userId, string UserName, bool isHadDialog);
