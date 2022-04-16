@@ -1,4 +1,5 @@
-﻿using Front.Domain.Message;
+﻿using Front.ClientsDomain.Responses.Dialog;
+using Front.Domain.Message;
 
 namespace Front
 {
@@ -9,5 +10,6 @@ namespace Front
         public static bool IsGlobalError { get; set; }
 
         public static Dictionary<Guid, List<Message>> Messages = new Dictionary<Guid, List<Message>>();
+        public static List<GetDialogResponse.Dialog> Dialogs = new List<GetDialogResponse.Dialog>();
     }
 }

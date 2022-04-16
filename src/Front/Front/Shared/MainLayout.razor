@@ -35,9 +35,9 @@
                             <div class="jspContainer" style="width: 339px; height: 550px;">
                                 <div class="jspPane" style="padding: 0px; top: 0px; width: 329px;">
                                     <ul class="ks-items">
-                                    @if (Dialogs != null)
+                                    @if (GlobalStorage.Dialogs != null)
                                     {
-                                        @foreach (var dialog in Dialogs)
+                                        @foreach (var dialog in GlobalStorage.Dialogs)
                                         {
                                             <Front.Components.Contact UserName="@dialog.UserName"></Front.Components.Contact>
                                         }
@@ -68,14 +68,11 @@
         </div>
     </Authorized>
     <NotAuthorized>
-        <div class="container">
-            @Body
-        </div>
+         @Body
     </NotAuthorized>
 </AuthorizeView>
 @code{
 
-    private List<GetDialogResponse.Dialog> Dialogs { get; set; }
     private string SearchedUser { get; set; }
 
     private SearchUserResponse SearchUserResponse = new SearchUserResponse();
@@ -94,14 +91,14 @@
     {
         await base.OnInitializedAsync();
         var user = await _authStateProvider.GetAuthenticationStateAsync();
-        if (user.User.Identity.IsAuthenticated)
-        {
-            Dialogs = await _dialogManagerService.GetDialogsAsync();
+        if (!user.User.Identity.IsAuthenticated)
+        {   
+            _navigationManager.NavigateTo("/signin");
         }
         else
         {
-            _navigationManager.NavigateTo("/signin");
+            if (GlobalStorage.Dialogs == null)
+                GlobalStorage.Dialogs = await _dialogManagerService.GetDialogsAsync();
         }
-     
     }
 }

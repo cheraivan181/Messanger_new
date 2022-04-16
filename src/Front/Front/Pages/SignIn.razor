@@ -6,55 +6,28 @@
 @using Front.Domain.FormModels
 @using Front.Services.Interfaces.Auth
 
-   <div id="content">
-        <div class="container-fluid">
-          <div class="lock-container">
-            <h1>Account Access</h1>
-            <div class="panel panel-default text-center">
-              <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-circle img-login">
-              <div class="panel-body">
-                <input class="form-control" type="text" placeholder="Username" value=" ">
-                <input class="form-control" type="password" placeholder="Enter Password" value="">
-                <a href="#index.html" class="btn btn-success">Login <i class="fa fa-fw fa-unlock-alt"></i></a>
-                <a href="#" class="forgot-password">Forgot password?</a>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
-    <footer class="footer">
-      <div class="container footer-container">
-        <p class="text-muted">Place sticky footer content here.</p>
-      </div>
-    </footer>
 
-@*<EditForm Model="AuthModel" OnValidSubmit="SignUpAsync" class="card card-body bg-light mt-5">
-    <DataAnnotationsValidator />
-    <div class="form-group row">
-        <label for="email" class="col-md-2 col-form-label">UserName:</label>
-        <div class="col-md-10">
-            <InputText id="email" class="form-control" @bind-Value="AuthModel.UserName" />
+<div class="container">
+    <div class="card card-container">
+        <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+        <p id="profile-name" class="profile-name-card"></p>
+        <EditForm Model="AuthModel" OnValidSubmit="SignInAsync" class="form-signin">
+            <DataAnnotationsValidator />
+            <span id="reauth-email" class="reauth-email"></span>
+            <InputText id="email" class="form-control" @bind-Value="AuthModel.UserName"/>
             <ValidationMessage For="@(() => AuthModel.UserName)" />
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="password" class="col-md-2 col-form-label">Password:</label>
-        <div class="col-md-10">
             <InputText type="password" id="password" class="form-control" @bind-Value="AuthModel.Password" />
             <ValidationMessage For="@(() => AuthModel.Password)" />
-            @if (!string.IsNullOrEmpty(AuthError))
-            {
-                <p>@AuthError</p>
-            }
-        </div>
+            <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Login</button>
+        </EditForm>
+        <NavLink href="/signup" Match="NavLinkMatch.All">Register</NavLink>
+        @if (!string.IsNullOrEmpty(AuthError))
+        {
+            <p>@AuthError</p>
+        }
     </div>
-    <div class="row">
-        <div class="col-md-12 text-right">
-            <button type="submit" class="btn btn-success">Login</button>
-        </div>
-    </div>
-</EditForm>
-*@
+</div>
+
 @code {
 
     private AuthModel AuthModel = new AuthModel();

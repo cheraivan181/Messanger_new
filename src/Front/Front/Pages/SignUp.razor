@@ -6,46 +6,31 @@
 @using Front.Domain.FormModels
 @using Front.Services.Interfaces.Auth
 
-<EditForm Model="RegisterModel" OnValidSubmit="SignUpAsync" class="card card-body bg-light mt-5">
-    <DataAnnotationsValidator />
-    <div class="form-group row">
-        <label for="email" class="col-md-2 col-form-label">UserName:</label>
-        <div class="col-md-10">
+<div class="container">
+    <div class="card card-container">
+        <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+        <p id="profile-name" class="profile-name-card"></p>
+
+        <EditForm Model="RegisterModel" OnValidSubmit="SignUpAsync" class="form-signin">
+            <DataAnnotationsValidator />
             <InputText id="email" class="form-control" @bind-Value="RegisterModel.UserName" />
             <ValidationMessage For="@(() => RegisterModel.UserName)" />
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="email" class="col-md-2 col-form-label">Email:</label>
-        <div class="col-md-10">
+            
             <InputText id="email" class="form-control" @bind-Value="RegisterModel.Email" />
             <ValidationMessage For="@(() => RegisterModel.Email)" />
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="email" class="col-md-2 col-form-label">Phone:</label>
-        <div class="col-md-10">
             <InputText id="email" class="form-control" @bind-Value="RegisterModel.Phone" />
             <ValidationMessage For="@(() => RegisterModel.Phone)" />
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="password" class="col-md-2 col-form-label">Password:</label>
-        <div class="col-md-10">
             <InputText type="password" id="password" class="form-control" @bind-Value="RegisterModel.Password" />
             <ValidationMessage For="@(() => RegisterModel.Password)" />
-            @if (!string.IsNullOrEmpty(RegisterError))
-            {
-                <p>@RegisterError</p>
-            }
-        </div>
+            <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Register</button>     
+        </EditForm>
+        <NavLink href="/signin" Match="NavLinkMatch.All">Login</NavLink>
+        @if (!string.IsNullOrEmpty(RegisterError))
+        {
+           <p>@RegisterError</p>
+        }
     </div>
-    <div class="row">
-        <div class="col-md-12 text-right">
-            <button type="submit" class="btn btn-success">Register</button>
-        </div>
-    </div>
-</EditForm>
+</div>
 
 @code {
 

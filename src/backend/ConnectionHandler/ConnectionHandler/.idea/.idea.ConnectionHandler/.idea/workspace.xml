@@ -9,11 +9,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc7ec941-6ead-44a2-b075-d1856d7f9953" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Pages/Dialog.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Pages/Dialog.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Dialog/GetDialogResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Dialog/GetDialogResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/GlobalStorage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/GlobalStorage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Shared/MainLayout.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Shared/MainLayout.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Front/Front/wwwroot/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/wwwroot/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/wwwroot/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/wwwroot/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ConnectionHandler/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ConnectionHandler/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.DialogServices/Domain/GetDialogResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DialogServices/Domain/GetDialogResult.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.DialogServices/Implementations/DialogService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DialogServices/Implementations/DialogService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +130,7 @@
       <workItem from="1649753419972" duration="595000" />
       <workItem from="1649899931169" duration="2034000" />
       <workItem from="1649989637267" duration="1506000" />
-      <workItem from="1650016467527" duration="2483000" />
+      <workItem from="1650016467527" duration="3686000" />
     </task>
     <servers />
   </component>

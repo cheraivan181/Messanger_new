@@ -1,16 +1,21 @@
 ﻿@page "/"
 @using Front.Services.Interfaces.Alive
 @using Front.Services.Interfaces.Auth
+@using Front.Services.Interfaces.Dialogs
 
 @inject IAliveService _aliveService;
 @inject NavigationManager _navigationManager;
 @inject AuthenticationStateProvider _authStateProvider;
 @inject IAuthService _authService;
+@inject IDialogManagerService _dialogManagerService;
+
 
 @if (!IsApiAlive)
 {
     <p>Api is not alive. Try later...</p>
 }
+
+<p>Enter a dialog</p>
 
 @code {
     private bool IsApiAlive = true;
@@ -27,7 +32,13 @@
         if (authState.User.Identity.IsAuthenticated)
         {
             await _authService.UpdateRefreshTokenAsync();
-            _navigationManager.NavigateTo("/messanger");
+            GlobalStorage.Dialogs = await _dialogManagerService.GetDialogsAsync();
+
+            var dialog = GlobalStorage.Dialogs.OrderByDescending(x => x.LastMessageDate)
+                .FirstOrDefault();
+
+            if (dialog != null)
+                _navigationManager.NavigateTo($"/dialog/{dialog.UserName}");
         }
         else
         {
