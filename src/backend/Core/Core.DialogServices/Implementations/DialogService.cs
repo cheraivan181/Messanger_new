@@ -111,7 +111,7 @@ public class DialogService : IDialogService
                 : dialog.User2;
             
             dialogResult.Add(new GetDialogResult.Dialog(user.Id,dialog.Id, user.UserName, cryptedKey,
-                cryptedIV, dialog.DialogRequest.IsAccepted));
+                cryptedIV, dialog.DialogRequest.IsAccepted, user.Email, user.Phone, DateTime.Now));
         }
         
         result.SetSucessResult(dialogResult);

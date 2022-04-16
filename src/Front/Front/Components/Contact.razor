@@ -1,6 +1,19 @@
-﻿<NavLink class="nav-link" href="@GetHref()" Match="NavLinkMatch.All">
-     <MudAvatar Color="Color.Primary">@UserName[0]</MudAvatar> <span aria-hidden="true"></span> @UserName
- </NavLink>
+﻿
+    <li class="ks-item">
+                                    <NavLink href="@GetHref()" Match="NavLinkMatch.All">
+                                        <span class="ks-avatar">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" width="36" height="36">
+                                        </span>
+                                        <div class="ks-body">
+                                            <div class="ks-name">
+                                                @UserName
+                                                <span class="ks-datetime">Activity</span>
+                                            </div>
+                                            <div class="ks-message">Last message</div>
+                                        </div>
+                                    </NavLink>
+                                </li>
+
 
 @code {
     [Parameter]

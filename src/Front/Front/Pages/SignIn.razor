@@ -6,7 +6,29 @@
 @using Front.Domain.FormModels
 @using Front.Services.Interfaces.Auth
 
-<EditForm Model="AuthModel" OnValidSubmit="SignUpAsync" class="card card-body bg-light mt-5">
+   <div id="content">
+        <div class="container-fluid">
+          <div class="lock-container">
+            <h1>Account Access</h1>
+            <div class="panel panel-default text-center">
+              <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-circle img-login">
+              <div class="panel-body">
+                <input class="form-control" type="text" placeholder="Username" value=" ">
+                <input class="form-control" type="password" placeholder="Enter Password" value="">
+                <a href="#index.html" class="btn btn-success">Login <i class="fa fa-fw fa-unlock-alt"></i></a>
+                <a href="#" class="forgot-password">Forgot password?</a>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <footer class="footer">
+      <div class="container footer-container">
+        <p class="text-muted">Place sticky footer content here.</p>
+      </div>
+    </footer>
+
+@*<EditForm Model="AuthModel" OnValidSubmit="SignUpAsync" class="card card-body bg-light mt-5">
     <DataAnnotationsValidator />
     <div class="form-group row">
         <label for="email" class="col-md-2 col-form-label">UserName:</label>
@@ -32,13 +54,13 @@
         </div>
     </div>
 </EditForm>
-
+*@
 @code {
 
     private AuthModel AuthModel = new AuthModel();
     private string AuthError;
 
-    public async Task SignUpAsync()
+    public async Task SignInAsync()
     {
         var authService = await _authService.SignInAsync(AuthModel);
         if (authService.IsSucess)
