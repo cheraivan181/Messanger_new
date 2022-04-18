@@ -8,7 +8,10 @@
 @inject AuthenticationStateProvider _authStateProvider;
 @inject IAuthService _authService;
 @inject IDialogManagerService _dialogManagerService;
+@inject StateContainer _stateContainer;
 
+
+@implements IDisposable;
 
 @if (!IsApiAlive)
 {
@@ -22,6 +25,8 @@
 
     protected async override Task OnInitializedAsync()
     {
+        _stateContainer.OnChange += StateHasChanged;
+
         await base.OnInitializedAsync();
 
         IsApiAlive = await _aliveService.IsApiAliveAsync();
@@ -32,9 +37,11 @@
         if (authState.User.Identity.IsAuthenticated)
         {
             await _authService.UpdateRefreshTokenAsync();
-            var dialogs = await _dialogManagerService.GetDialogsAsync();
 
-            var dialog = dialogs.OrderByDescending(x => x.LastMessageDate)
+            if (_stateContainer.Dialogs.Count == 0)
+                _stateContainer.Dialogs = await _dialogManagerService.GetDialogsAsync();
+
+            var dialog = _stateContainer.Dialogs.OrderByDescending(x => x.LastMessageDate)
                 .FirstOrDefault();
 
             if (dialog != null)
@@ -44,6 +51,11 @@
         {
             _navigationManager.NavigateTo("signin");
         }
+    }
+
+    public void Dispose()
+    {
+        _stateContainer.OnChange -= StateHasChanged;
     }
 }
 

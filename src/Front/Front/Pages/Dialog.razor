@@ -6,9 +6,10 @@
 @using Front.Services.Interfaces.Dialogs
 @using Front.Store.Implementations
 
-@inject IDialogManagerService _dialogManagerService;
-@inject IDialogStoreService _dialogStoreService;
+@implements IDisposable;
+
 @inject ILogger<Dialog> _logger;
+@inject StateContainer _stateContainer;
 
 @if (IsDialogInitialized)
 {
@@ -359,12 +360,11 @@
 
     protected async override Task OnInitializedAsync()
     {
+        _stateContainer.OnChange += StateHasChanged;
+
         var parsedDialogId = Guid.Parse(DialogId);
-        var dialogs = await _dialogManagerService.GetDialogsAsync();
 
-        int dialogCounts = dialogs.Count;
-
-        CurrentDialog = dialogs.FirstOrDefault(x => x.DialogId == parsedDialogId);
+        CurrentDialog = _stateContainer.Dialogs.FirstOrDefault(x => x.DialogId == parsedDialogId);
         IsDialogInitialized = true;
 
         await base.OnInitializedAsync();
@@ -377,5 +377,10 @@
 
         _logger.LogDebug($"Try to send message #({MessageText})");
         MessageText = null;
+    }
+
+    public void Dispose()
+    {
+        _stateContainer.OnChange -= StateHasChanged;
     }
 }

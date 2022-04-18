@@ -11,6 +11,7 @@ public class Dialog
     
     public Guid DialogRequestId { get; set; }
     
+    public bool IsHidden { get; set; }
     public DialogRequest DialogRequest { get; set; }
     
     [NotMapped]

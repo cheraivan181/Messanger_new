@@ -2,8 +2,9 @@
 @using Front.Pages
 @using Front.Services.Interfaces.Dialogs
 
+@implements IDisposable
 @inject IDialogManagerService _dialogManagerService;
-
+@inject StateContainer _stateContainer;
 
 @if (IsInitialized)
 {
@@ -34,9 +35,12 @@
 
     protected async override Task OnInitializedAsync()
     {
-        var dialogs = await _dialogManagerService.GetDialogsAsync();
+        _stateContainer.OnChange += StateHasChanged;
 
-        CurrentDialog = dialogs.FirstOrDefault(x => x.DialogId == DialogId);
+        if (_stateContainer.Dialogs.Count == 0)
+            _stateContainer.Dialogs = await _dialogManagerService.GetDialogsAsync();
+
+        CurrentDialog = _stateContainer.Dialogs.FirstOrDefault(x => x.DialogId == DialogId);
         IsInitialized = true;
 
         await base.OnInitializedAsync();
@@ -45,5 +49,10 @@
     private string GetHref()
     {
         return $"/dialog/{CurrentDialog.DialogId}";
+    }
+
+    public void Dispose()
+    {
+        _stateContainer.OnChange -= StateHasChanged;
     }
 }

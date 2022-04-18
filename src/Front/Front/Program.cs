@@ -39,6 +39,7 @@ builder.Services.AddHttpClient("CoreClient", httpClient =>
 
 #region storeServices
 
+builder.Services.AddSingleton<StateContainer>();
 builder.Services.AddScoped<IGlobalVariablesStoreService, GlobalVariablesStoreService>();
 builder.Services.AddScoped<IDialogStoreService, DialogStoreService>();
 

@@ -11,8 +11,9 @@
 @inject ISearchClient _searchClient;
 @inject AuthenticationStateProvider _authStateProvider;
 @inject NavigationManager _navigationManager;
-@inject IDialogStoreService _dialogStoreService;
+@inject StateContainer _stateContainer;
 
+@implements IDisposable;
 
 <MudThemeProvider/>
 <MudDialogProvider/>
@@ -39,13 +40,12 @@
                             <div class="jspContainer" style="width: 339px; height: 550px;">
                                 <div class="jspPane" style="padding: 0px; top: 0px; width: 329px;">
                                     <ul class="ks-items">
-                                    @if (Dialogs != null)
+                                    
+                                    @foreach (var dialog in _stateContainer.Dialogs)
                                     {
-                                        @foreach (var dialog in Dialogs)
-                                        {
-                                            <Front.Components.Contact DialogId="@dialog.DialogId"></Front.Components.Contact>
-                                        }
+                                       <Front.Components.Contact DialogId="@dialog.DialogId"></Front.Components.Contact>
                                     }
+                                    
                                     @foreach (var user in SearchUserResponse.SearchUserResults)
                                     {
                                       //  <Front.Components.Contact UserName="@user.UserName"></Front.Components.Contact>
@@ -81,8 +81,6 @@
 
     private SearchUserResponse SearchUserResponse = new SearchUserResponse();
 
-    private List<DialogDomainModel> Dialogs { get; set; }
-
     private async Task SearchChangedAsync()
     {
         SearchUserResponse.SearchUserResults = new List<SearchUserModel>();
@@ -95,6 +93,8 @@
 
     protected async override Task OnInitializedAsync()
     {
+        _stateContainer.OnChange += StateHasChanged;
+
         await base.OnInitializedAsync();
         var user = await _authStateProvider.GetAuthenticationStateAsync();
         if (!user.User.Identity.IsAuthenticated)
@@ -103,11 +103,13 @@
         }
         else
         {
-            if (Dialogs == null)
-            {
-                Dialogs = await _dialogManagerService.GetDialogsAsync();
-                await _dialogStoreService.SetDialogsAsync(Dialogs);
-            }
+            if (_stateContainer.Dialogs.Count == 0)
+                _stateContainer.Dialogs = await _dialogManagerService.GetDialogsAsync();
         }
+    }
+
+    public void Dispose()
+    {
+        _stateContainer.OnChange -= StateHasChanged;
     }
 }
