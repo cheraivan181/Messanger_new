@@ -5,7 +5,6 @@ public class CreateDialogRequestResult
     public bool IsSucess { get; set; }
     public Guid DialogRequestId { get; set; }
     public Guid DialogId { get; set; }
-    
     public string Key { get; set; }
     public string IV { get; set; }
     public string ErrorMessage { get; set; }

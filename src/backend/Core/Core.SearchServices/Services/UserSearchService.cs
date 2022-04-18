@@ -25,7 +25,7 @@ public class UserSearchService : IUserSearchService
         var result = new SearchUserResult();
         var searchModels = new List<SearchUserModel>();
         
-        var users = await _userRepository.SearchUsersByUserNameAsync(predicate);
+        var users = await _userRepository.SearchUsersByUserNameAsync(requestUserId, predicate);
 
         foreach (var user in users)
         {

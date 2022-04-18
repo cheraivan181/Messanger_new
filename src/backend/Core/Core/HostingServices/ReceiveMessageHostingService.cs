@@ -29,7 +29,7 @@ public class ReceiveMessageHostingService : IHostedService
         var task = Task.Run( async() =>
         {
             Log.Information($"{nameof(ReceiveMessageHostingService)} was started");
-            var consumer = _producerSubscriberProvider.GetConsumer(groupId: "consumer2"); 
+            var consumer = _producerSubscriberProvider.GetConsumer(groupId: "consumer1"); 
             consumer.Subscribe("s"); 
             //consumer.Subscribe("s");
             int count = 0;

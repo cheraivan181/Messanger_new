@@ -2,6 +2,7 @@
 using Core.ApiResponses.Alive;
 using Core.ApiResponses.Base;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace Core.Controllers
 {
@@ -12,6 +13,7 @@ namespace Core.Controllers
         [HttpGet]
         public IActionResult IsAlive()
         {
+            Log.Debug($"{nameof(IsAlive)} request was started");
             var result = new IsAliveResponse()
             {
                 IsAlive = true, 

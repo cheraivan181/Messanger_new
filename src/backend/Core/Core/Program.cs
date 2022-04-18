@@ -1,7 +1,4 @@
-using System.Threading.Tasks;
 using Core;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
 using Serilog;
 
 public class Program
@@ -10,7 +7,7 @@ public class Program
     {
         var hostBuilder = BuildHost(args);
         var host = hostBuilder.Build();
-        Log.Debug("Application is running...");
+        Log.Information("Application is running...");
         
         await host.RunAsync(); 
     }

@@ -18,6 +18,8 @@ using Front.Services.Interfaces.WebSocket;
 using Front.Servives.Implementations;
 using Front.Servives.Implementations.Auth;
 using Front.Servives.Interfaces.Auth;
+using Front.Store.Implementations;
+using Front.Store.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -34,6 +36,14 @@ builder.Services.AddHttpClient("CoreClient", httpClient =>
 {
     httpClient.BaseAddress = new Uri(baseAdress);
 });
+
+#region storeServices
+
+builder.Services.AddScoped<IGlobalVariablesStoreService, GlobalVariablesStoreService>();
+builder.Services.AddScoped<IDialogStoreService, DialogStoreService>();
+
+
+#endregion
 
 #region httpClients
 

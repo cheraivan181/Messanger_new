@@ -9,12 +9,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc7ec941-6ead-44a2-b075-d1856d7f9953" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.DialogServices/Domain/DialogDomainModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/MessageCacheService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/MessageGetterService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Interfaces/IMessageCacheService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Dialog/GetDialogResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Dialog/GetDialogResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/GlobalStorage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/GlobalStorage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Components/Contact.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Components/Contact.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/GlobalStorage.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Pages/Dialog.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Pages/Dialog.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Pages/Index.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Pages/Index.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Services/Implementations/Alive/AliveService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Services/Implementations/Alive/AliveService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Services/Implementations/Auth/ApiAuthenticationStateProvider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Services/Implementations/Auth/ApiAuthenticationStateProvider.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Services/Implementations/Dialogs/DialogService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Services/Implementations/Dialogs/DialogService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Services/Interfaces/Dialogs/IDialogManagerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Services/Interfaces/Dialogs/IDialogManagerService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Front/Front/Shared/MainLayout.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Shared/MainLayout.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/wwwroot/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/wwwroot/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/wwwroot/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/wwwroot/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ConnectionHandler/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ConnectionHandler/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.ApiResponses/Dialog/GetDialogResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.ApiResponses/Dialog/GetDialogResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DialogServices/Domain/CreateDialogRequestResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DialogServices/Domain/CreateDialogRequestResult.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DialogServices/Domain/CreateDialogResult.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DialogServices/Domain/GetDialogResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DialogServices/Domain/GetDialogResult.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DialogServices/Implementations/DialogService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DialogServices/Implementations/DialogService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/UserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IUserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SearchServices/Services/UserSearchService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SearchServices/Services/UserSearchService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core/Controllers/AliveController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Controllers/AliveController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core/HostingServices/ReceiveMessageHostingService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/HostingServices/ReceiveMessageHostingService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/appsettings.Development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../docker/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../docker/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,6 +156,8 @@
       <workItem from="1649899931169" duration="2034000" />
       <workItem from="1649989637267" duration="1506000" />
       <workItem from="1650016467527" duration="3686000" />
+      <workItem from="1650153930105" duration="1866000" />
+      <workItem from="1650189278041" duration="1693000" />
     </task>
     <servers />
   </component>

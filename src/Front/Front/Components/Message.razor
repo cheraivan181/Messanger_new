@@ -1,0 +1,39 @@
+﻿<li class="@CssClass">
+     <span class="ks-avatar ks-offline">
+         <img src="https://bootdey.com/img/Content/avatar/avatar1.png" width="36" height="36" class="rounded-circle"> 
+     </span>
+     <div class="ks-body">
+         <div class="ks-header">
+             <span class="ks-name">@UserName</span>
+             <span class="ks-datetime">6:46 PM</span>
+         </div>
+         <div class="ks-message">@MessageText</div>
+     </div>
+</li>
+
+@code {
+
+    private bool IsInitialized { get; set; }
+
+    [Parameter]
+    public string UserName { get; set; }
+
+    [Parameter]
+    public DateTime MessageDate { get; set; }
+
+    [Parameter]
+    public string MessageText { get; set; }
+
+    [Parameter]
+    public bool IsSendForMe { get; set; }
+
+    public string CssClass
+    {
+        get
+        {
+            return IsSendForMe
+                ? "ks-item ks-self"
+                : "ks-item ks-from";
+        }
+    }
+}

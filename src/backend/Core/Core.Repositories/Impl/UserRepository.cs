@@ -80,21 +80,19 @@ namespace Core.Repositories.Impl
             return result;
         }
 
-        public async Task<List<User>> SearchUsersByUserNameAsync(string userName, int page = 0)
+        public async Task<List<User>> SearchUsersByUserNameAsync(Guid userId, string userName, int page = 0)
         {
             const int countUsersInPage = 10;
             int skipUsers = page * countUsersInPage;
             
             using var connection = await _connectionFactory.GetDbConnectionAsync();
-            
+
             string sql =
-                $"SELECT TOP({skipUsers + countUsersInPage}) u.Id, u.UserName, COUNT(d.Id) as 'DialogCounts' FROM Users u "
+                $"SELECT TOP ({skipUsers + countUsersInPage}) u.Id, u.UserName, d.User1Id, d.User2Id FROM Users u "
                 + "LEFT JOIN Dialogs d ON d.User1Id = u.Id or d.User2Id = u.Id "
-                + "WHERE UserName LIKE @userName "
-                + "GROUP BY u.Id, u.UserName "
-                + "HAVING COUNT(d.Id) = 0";
+                + "WHERE UserName LIKE @userName and d.Id IS NULL OR (d.User1Id != @userId AND d.User2Id != @userId)";
             
-            var result = (await connection.QueryAsync<User>(sql, new {userName = $"{userName}%"}))
+            var result = (await connection.QueryAsync<User>(sql, new {userId = userId, userName = $"{userName}%"}))
                 .ToList();
             
             return result;

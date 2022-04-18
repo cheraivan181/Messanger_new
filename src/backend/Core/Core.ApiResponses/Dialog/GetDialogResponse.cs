@@ -6,7 +6,7 @@ namespace Core.ApiResponses.Dialog;
 public class GetDialogResponse
 {
     [JsonPropertyName("dialogs")]
-    public List<GetDialogResult.Dialog> Dialogs { get; set; }
+    public List<DialogDomainModel> Dialogs { get; set; }
     [JsonPropertyName("count")]
     public int Count { get; set; }
 }

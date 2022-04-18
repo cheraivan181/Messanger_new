@@ -1,14 +1,18 @@
 ﻿@using Front.Clients.Interfaces
 @using Front.ClientsDomain.Responses.Dialog
 @using Front.ClientsDomain.Responses.Search
+@using Front.Domain.Dialogs
 @using Front.Services.Interfaces.Auth
 @using Front.Services.Interfaces.Dialogs
+@using Front.Store.Implementations
 @inherits LayoutComponentBase
 
 @inject IDialogManagerService _dialogManagerService;
 @inject ISearchClient _searchClient;
 @inject AuthenticationStateProvider _authStateProvider;
 @inject NavigationManager _navigationManager;
+@inject IDialogStoreService _dialogStoreService;
+
 
 <MudThemeProvider/>
 <MudDialogProvider/>
@@ -35,16 +39,16 @@
                             <div class="jspContainer" style="width: 339px; height: 550px;">
                                 <div class="jspPane" style="padding: 0px; top: 0px; width: 329px;">
                                     <ul class="ks-items">
-                                    @if (GlobalStorage.Dialogs != null)
+                                    @if (Dialogs != null)
                                     {
-                                        @foreach (var dialog in GlobalStorage.Dialogs)
+                                        @foreach (var dialog in Dialogs)
                                         {
-                                            <Front.Components.Contact UserName="@dialog.UserName"></Front.Components.Contact>
+                                            <Front.Components.Contact DialogId="@dialog.DialogId"></Front.Components.Contact>
                                         }
                                     }
                                     @foreach (var user in SearchUserResponse.SearchUserResults)
                                     {
-                                        <Front.Components.Contact UserName="@user.UserName"></Front.Components.Contact>
+                                      //  <Front.Components.Contact UserName="@user.UserName"></Front.Components.Contact>
                                     }
                                     </ul>
                                 </div>
@@ -77,6 +81,8 @@
 
     private SearchUserResponse SearchUserResponse = new SearchUserResponse();
 
+    private List<DialogDomainModel> Dialogs { get; set; }
+
     private async Task SearchChangedAsync()
     {
         SearchUserResponse.SearchUserResults = new List<SearchUserModel>();
@@ -97,8 +103,11 @@
         }
         else
         {
-            if (GlobalStorage.Dialogs == null)
-                GlobalStorage.Dialogs = await _dialogManagerService.GetDialogsAsync();
+            if (Dialogs == null)
+            {
+                Dialogs = await _dialogManagerService.GetDialogsAsync();
+                await _dialogStoreService.SetDialogsAsync(Dialogs);
+            }
         }
     }
 }

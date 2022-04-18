@@ -100,7 +100,7 @@ public class DialogService : IDialogService
             return result;
         }
 
-        var dialogResult = new List<GetDialogResult.Dialog>();
+        var dialogResult = new List<DialogDomainModel>();
         foreach (var dialogSecret in dialogSecrets)
         {
             var cryptedKey = _rsa.Crypt(session.ClientPublicKey, dialogSecret.Value.key);
@@ -109,9 +109,12 @@ public class DialogService : IDialogService
             var user = dialog.User1Id != userId
                 ? dialog.User1
                 : dialog.User2;
+
+            var currentDialog = new DialogDomainModel();
+            currentDialog.InitializeDialogResult(user.Id,dialog.Id, user.UserName, cryptedKey,
+                cryptedIV, dialog.DialogRequest.IsAccepted, user.Email, user.Phone, dialog.Created);
             
-            dialogResult.Add(new GetDialogResult.Dialog(user.Id,dialog.Id, user.UserName, cryptedKey,
-                cryptedIV, dialog.DialogRequest.IsAccepted, user.Email, user.Phone, DateTime.Now));
+            dialogResult.Add(currentDialog);
         }
         
         result.SetSucessResult(dialogResult);

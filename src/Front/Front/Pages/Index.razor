@@ -32,13 +32,13 @@
         if (authState.User.Identity.IsAuthenticated)
         {
             await _authService.UpdateRefreshTokenAsync();
-            GlobalStorage.Dialogs = await _dialogManagerService.GetDialogsAsync();
+            var dialogs = await _dialogManagerService.GetDialogsAsync();
 
-            var dialog = GlobalStorage.Dialogs.OrderByDescending(x => x.LastMessageDate)
+            var dialog = dialogs.OrderByDescending(x => x.LastMessageDate)
                 .FirstOrDefault();
 
             if (dialog != null)
-                _navigationManager.NavigateTo($"/dialog/{dialog.UserName}");
+                _navigationManager.NavigateTo($"/dialog/{dialog.DialogId}");
         }
         else
         {

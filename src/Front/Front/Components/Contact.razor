@@ -1,25 +1,49 @@
-﻿<li class="ks-item">
-   <NavLink href="@GetHref()" Match="NavLinkMatch.All">
-       <span class="ks-avatar">
-           <img src="https://bootdey.com/img/Content/avatar/avatar3.png" width="36" height="36">
-       </span>
-       <div class="ks-body">
-           <div class="ks-name">
-               @UserName
-               <span class="ks-datetime">Activity</span>
-           </div>
-           <div class="ks-message">Last message</div>
-       </div>
-   </NavLink>
-</li>
+﻿@using Front.Domain.Dialogs
+@using Front.Pages
+@using Front.Services.Interfaces.Dialogs
 
+@inject IDialogManagerService _dialogManagerService;
+
+
+@if (IsInitialized)
+{
+    <li class="ks-item">
+        <NavLink href="@GetHref()" Match="NavLinkMatch.All">
+            <span class="ks-avatar">
+                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" width="36" height="36">
+            </span>
+            <div class="ks-body">
+                <div class="ks-name">
+                    @CurrentDialog.UserName
+                    <span class="ks-datetime">Activity</span>
+                </div>
+                <div class="ks-message">Last message</div>
+            </div>
+        </NavLink>
+    </li>
+}
 
 @code {
+
     [Parameter]
-    public string UserName{ get; set; }
+    public Guid DialogId{ get; set; }
+
+    private DialogDomainModel CurrentDialog { get; set; }
+
+    private bool IsInitialized { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        var dialogs = await _dialogManagerService.GetDialogsAsync();
+
+        CurrentDialog = dialogs.FirstOrDefault(x => x.DialogId == DialogId);
+        IsInitialized = true;
+
+        await base.OnInitializedAsync();
+    }
 
     private string GetHref()
     {
-        return $"/dialog/{UserName}";
+        return $"/dialog/{CurrentDialog.DialogId}";
     }
 }

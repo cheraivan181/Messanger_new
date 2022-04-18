@@ -1,21 +1,22 @@
 ﻿using System.Net;
 using System.Security.Claims;
-using Blazored.LocalStorage;
-using Blazored.SessionStorage;
 using Front.Clients.Interfaces;
 using Front.ClientsDomain.Responses;
-using Front.Domain.Responses;
+using Front.Store.Implementations;
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace Front.Servives.Implementations;
 
 public class ApiAuthenticationStateProvider : AuthenticationStateProvider
 {
-    private readonly IAccountClient _accountClient; 
+    private readonly IAccountClient _accountClient;
+    private readonly IGlobalVariablesStoreService _globalVariableStoreService;
 
-    public ApiAuthenticationStateProvider(IAccountClient accountClient)
+    public ApiAuthenticationStateProvider(IAccountClient accountClient,
+        IGlobalVariablesStoreService globalVariableStoreService)
     {
         _accountClient = accountClient;
+        _globalVariableStoreService = globalVariableStoreService;
     }
     
     public async override Task<AuthenticationState> GetAuthenticationStateAsync()
@@ -23,7 +24,7 @@ public class ApiAuthenticationStateProvider : AuthenticationStateProvider
         var authInfo = await _accountClient.GetAuthInfoResponseAsync();
         if (!authInfo.IsSucess)
         {
-            GlobalStorage.IsAuthenticated = false;
+            await _globalVariableStoreService.SetIsAuthenticated(false);
             return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
         }
         if (authInfo.StatusCode == HttpStatusCode.Unauthorized)
@@ -32,7 +33,8 @@ public class ApiAuthenticationStateProvider : AuthenticationStateProvider
         var claims = GetClaims(authInfo.SucessResponse.Response);
 
         if (claims.Count > 0)
-            GlobalStorage.IsAuthenticated = true;
+            await _globalVariableStoreService.SetIsAuthenticated(true);
+
 
         var authenticationUser = new ClaimsPrincipal(new ClaimsIdentity(claims, "apiAuth"));
         return new AuthenticationState(authenticationUser);
