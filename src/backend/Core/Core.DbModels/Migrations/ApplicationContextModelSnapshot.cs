@@ -63,6 +63,9 @@ namespace Core.DbModels.Migrations
                     b.Property<Guid>("DialogRequestId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<bool>("IsHidden")
+                        .HasColumnType("bit");
+
                     b.Property<Guid>("User1Id")
                         .HasColumnType("uniqueidentifier");
 
@@ -126,11 +129,6 @@ namespace Core.DbModels.Migrations
 
                     b.Property<Guid>("DialogId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("IV")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -226,6 +224,11 @@ namespace Core.DbModels.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("HmacKey")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
 
                     b.Property<string>("ServerPrivateKey")
                         .IsRequired()

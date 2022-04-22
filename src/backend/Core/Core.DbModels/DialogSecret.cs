@@ -12,8 +12,6 @@ public class DialogSecret
     [MaxLength(300)]
     public string CypherKey { get; set; }
     
-    [MaxLength(100)]
-    public string IV { get; set; }
     public Dialog Dialog { get; set; }
     public DateTime CreatedAt { get; set; }
 

@@ -20,4 +20,4 @@ public class HubCallerContextStore : IHubCallerContextStore
         if (_hubCallerContextStore.ContainsKey(connectionId))
             _hubCallerContextStore.Remove(connectionId);
     }
-}
+} 

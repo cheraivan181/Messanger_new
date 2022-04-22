@@ -62,7 +62,7 @@ public class DialogService : IDialogService
             await _dialogRepository.CreateDialogAsync(ownerUserId, requestUserId, dialogRequestCreateResult);
         
         var aesKeys = _aes.GetAesKeyAndIv();
-        await _dialogSecretRepository.CreateDialogSecretAsync(createDialogResult, aesKeys.key, aesKeys.iv);
+        await _dialogSecretRepository.CreateDialogSecretAsync(createDialogResult, aesKeys.key);
 
         var session = await _sessionGetterService.GetSessionAsync(ownerUserId, Guid.Parse(ownerSessionId));
         if (session == null)
@@ -73,9 +73,8 @@ public class DialogService : IDialogService
         }
 
         var cryptedAes = _rsa.Crypt(session.ClientPublicKey, aesKeys.key);
-        var cryptedIv = _rsa.Crypt(session.ClientPublicKey, aesKeys.iv);
-        
-        result.SetSucessResult(dialogRequestCreateResult, createDialogResult, cryptedAes, cryptedIv);
+
+        result.SetSucessResult(dialogRequestCreateResult, createDialogResult, cryptedAes);
         return result;
     }
 
@@ -103,8 +102,7 @@ public class DialogService : IDialogService
         var dialogResult = new List<DialogDomainModel>();
         foreach (var dialogSecret in dialogSecrets)
         {
-            var cryptedKey = _rsa.Crypt(session.ClientPublicKey, dialogSecret.Value.key);
-            var cryptedIV = _rsa.Crypt(session.ClientPublicKey, dialogSecret.Value.iv);
+            var cryptedKey = _rsa.Crypt(session.ClientPublicKey, dialogSecret.Value);
             var dialog = dialogs.FirstOrDefault(x => x.Id == dialogSecret.Key);
             var user = dialog.User1Id != userId
                 ? dialog.User1
@@ -112,7 +110,7 @@ public class DialogService : IDialogService
 
             var currentDialog = new DialogDomainModel();
             currentDialog.InitializeDialogResult(user.Id,dialog.Id, user.UserName, cryptedKey,
-                cryptedIV, dialog.DialogRequest.IsAccepted, user.Email, user.Phone, dialog.Created);
+                dialog.DialogRequest.IsAccepted, user.Email, user.Phone, dialog.Created);
             
             dialogResult.Add(currentDialog);
         }

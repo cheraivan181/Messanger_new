@@ -14,6 +14,10 @@ public class Session
     public string ServerPublicKey { get; set; }
     [MaxLength(3000)]
     public string ServerPrivateKey { get; set; }
+    
+    [MaxLength(64)]
+    public string HmacKey { get; set; }
+    
     public User User { get; set; }
     public DateTime CreatedAt { get; set; }
 

@@ -3,6 +3,6 @@
     public interface IAesCryptService
     {
         Task<string> CryptText(Guid dialogId, string textToCrypt);
-        Task<string> DecryptText(Guid dialogId, string cipherText);
+        Task<string> DecryptText(Guid dialogId, string iv, string cipherText);
     }
 }

@@ -11,7 +11,8 @@ public class SessionServiceMapper : ISessionServiceMapper
         result.SessionId = model.SessionId;
         result.ServerPublicKey = model.ServerPublicKey;
         result.IsNeedUpdateToken = model.IsNeedUpdateToken;
-
+        result.HmacKey = model.HmacKey;
+        
         return result;
     }
 }

@@ -20,16 +20,17 @@ namespace Front.Services.Implementations.Crypt
         {
             var dialogs = await _dialogService.GetDialogsAsync();
             var dialog = dialogs.Single(x => x.DialogId == dialogId);
-            var result = await _cryptClient.AesCryptAsync(dialog.CypherKey, dialog.IV, textToCrypt);
+            var iv = await _cryptClient.GetAesKetAndIvAsync();
+            var result = await _cryptClient.AesCryptAsync(dialog.CypherKey, iv.SucessResponse.Response.Iv, textToCrypt);
 
             return result.SucessResponse.Response.CryptedText;
         }
 
-        public async Task<string> DecryptText(Guid dialogId, string cipherText)
+        public async Task<string> DecryptText(Guid dialogId,string iv, string cipherText)
         {
             var dialogs = await _dialogService.GetDialogsAsync();
             var dialog = dialogs.Single(x => x.DialogId == dialogId);
-            var result = await _cryptClient.AesCryptAsync(dialog.CypherKey, dialog.IV, cipherText);
+            var result = await _cryptClient.AesCryptAsync(dialog.CypherKey, iv, cipherText);
 
             return result.SucessResponse.Response.CryptedText;
         }

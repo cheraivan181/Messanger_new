@@ -6,15 +6,13 @@ public class CreateDialogRequestResult
     public Guid DialogRequestId { get; set; }
     public Guid DialogId { get; set; }
     public string Key { get; set; }
-    public string IV { get; set; }
     public string ErrorMessage { get; set; }
 
-    public void SetSucessResult(Guid dialogRequestId, Guid dialogId, string key, string iv)
+    public void SetSucessResult(Guid dialogRequestId, Guid dialogId, string key)
     {
         DialogRequestId = dialogRequestId;
         DialogId = dialogId;
         Key = key;
-        IV = iv;
         IsSucess = true;
     }
 

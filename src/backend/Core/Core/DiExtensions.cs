@@ -1,4 +1,5 @@
 ﻿using Core.CacheServices.Domain;
+using Core.CryptProtocol;
 using Core.CryptService;
 using Core.DbModels.Base.Di;
 using Core.DialogServices;
@@ -27,6 +28,7 @@ namespace Core
             serviceCollection.AddSessionServices();
             serviceCollection.AddSearchUserServices();
             serviceCollection.AddDialogServices();
+            serviceCollection.AddProtocolServices();
         } 
     }
 }

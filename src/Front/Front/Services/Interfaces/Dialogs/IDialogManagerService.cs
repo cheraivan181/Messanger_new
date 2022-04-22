@@ -6,6 +6,6 @@ namespace Front.Services.Interfaces.Dialogs
     public interface IDialogManagerService
     {
         ValueTask<List<DialogDomainModel>> GetDialogsAsync();
-        Task<List<DialogDomainModel>> CreateAndGetDialogsAsync(Guid userId, string userName);
+        Task<DialogDomainModel> CreateAndGetDialogAsync(Guid userId, string userName); 
     }
 }

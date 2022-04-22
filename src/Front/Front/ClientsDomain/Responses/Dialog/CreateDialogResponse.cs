@@ -10,7 +10,5 @@ namespace Front.ClientsDomain.Responses.Dialog
         public Guid DialogId { get; set; }
         [JsonPropertyName("key")]
         public string Key { get; set; }
-        [JsonPropertyName("iv")]
-        public string IV { get; set; }
     }
 }

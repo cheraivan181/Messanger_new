@@ -22,19 +22,26 @@ public class MessangerHub : BaseHub
         await base.OnConnectedAsync();
     }
     
-    [HubMethodName("SendMessage")]
+    [HubMethodName("sendMessage")]
     public async Task SendMessageAsync()
     {
     }
-    
-    
-    [HubMethodName("ReadMessage")]
+
+    [HubMethodName("readMessage")]
     public async Task ReadMessageAsync()
     {
     }
     
+   
+    
     [HubMethodName("subscribeToMessageStream")]
     public async IAsyncEnumerable<string> SubscribeToMessageTopic()
+    {
+        yield break;
+    }
+
+    [HubMethodName("getDialogMessagesAsync")]
+    public async IAsyncEnumerable<string> GetDialogMessagesAsync()
     {
         yield break;
     }

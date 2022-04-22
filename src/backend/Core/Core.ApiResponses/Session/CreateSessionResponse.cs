@@ -10,6 +10,9 @@ public class CreateSessionResponse
     [JsonPropertyName("serverPublicKey")]
     public string ServerPublicKey { get; set; }
     
+    [JsonPropertyName("hmacKey")]
+    public string HmacKey { get; set; }
+    
     [JsonPropertyName("isNeedUpdateToken")]
     public bool IsNeedUpdateToken { get; set; }
 }

@@ -4,12 +4,16 @@
 @using Front.Domain.Dialogs
 @using Front.Domain.Message
 @using Front.Services.Interfaces.Dialogs
+@using Front.States
 @using Front.Store.Implementations
 
 @implements IDisposable;
 
 @inject ILogger<Dialog> _logger;
 @inject StateContainer _stateContainer;
+@inject IDialogManagerService _dialogManagerService;
+@inject NavigationManager _navigationManager;
+@inject SearchResultStateContainer _searchResultStateContainer;
 
 @if (IsDialogInitialized)
 {
@@ -57,6 +61,12 @@
             <div class="jspContainer" style="width: 701px; height: 481px;">
                 <div class="jspPane" style="padding: 0px; top: 0px; width: 691px;">
                     <ul class="ks-items">
+                        @foreach (var message in _stateContainer.Messages)
+                        {
+                            <Front.Components.Message IsReaded="@message.IsReaded" IsSendForMe="@message.IsImSender"
+                                MessageDate="@message.CreatedAt" MessageText="@message.DecryptedText" UserName="@CurrentDialog.UserName">
+                            </Front.Components.Message>
+                        }
                         <li class="ks-item ks-self">
                             <span class="ks-avatar ks-offline">
                                 <img src="https://bootdey.com/img/Content/avatar/avatar1.png" width="36" height="36" class="rounded-circle">
@@ -352,11 +362,23 @@
     [Parameter]
     public string DialogId { get; set; }
 
+    public bool IsRequestByUserName
+    {
+        get
+        {
+            if (Guid.TryParse(DialogId, out var _))
+                return false;
+            return true;
+        }
+    }
+
     private bool IsDialogInitialized = false;
 
     private DialogDomainModel CurrentDialog { get; set; }
 
     private string MessageText { get; set; }
+
+    private bool IsSendForMe{ get; set; }
 
     protected async override Task OnInitializedAsync()
     {
@@ -375,7 +397,32 @@
         if (string.IsNullOrEmpty(MessageText))
             return;
 
+        if (IsRequestByUserName)
+        {
+            var userId = _searchResultStateContainer.SearchUserResponses.Where(x => x.UserName == DialogId)
+                .Select(x => x.UserId)
+                .First();
+            var createdDialog = await _dialogManagerService.CreateAndGetDialogAsync(userId, DialogId);
+            _stateContainer.AddDialog(createdDialog);
+
+            _navigationManager.NavigateTo($"/dialog/{createdDialog.DialogId}");
+        }
+
         _logger.LogDebug($"Try to send message #({MessageText})");
+
+        _stateContainer.AddMessage(new Message()
+        {
+            DecryptedText = MessageText,
+            IsDelivery = true,
+            IsReaded = true,
+            IsImSender = IsSendForMe,
+            CreatedAt = DateTime.Now,
+            DialogId = CurrentDialog.DialogId
+        });
+
+        _stateContainer.AddLastMessage(CurrentDialog.DialogId, MessageText);
+
+        IsSendForMe = !IsSendForMe;
         MessageText = null;
     }
 

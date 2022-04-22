@@ -16,9 +16,6 @@ public class DialogDomainModel
         [JsonPropertyName("cypherKey")]
         public string CypherKey { get; set; }
         
-        [JsonPropertyName("iv")]
-        public string IV { get; set; }
-        
         [JsonPropertyName("isConfirmDialog")]
         public bool IsConfirmDialog { get; set; }
         
@@ -47,7 +44,7 @@ public class DialogDomainModel
         public bool IsSuperChat { get; set; }
         
         public void InitializeDialogResult(Guid userId, Guid dialogId,
-            string userName, string cypherKey, string iv,
+            string userName, string cypherKey, 
             bool isConfirmDialog, string email, string phoneNumber,
             DateTime dialogCreateResult)
         {
@@ -55,7 +52,6 @@ public class DialogDomainModel
             DialogId = dialogId;
             UserName = userName;
             CypherKey = cypherKey;
-            IV = iv;
             IsConfirmDialog = isConfirmDialog;
             
             if (isConfirmDialog)

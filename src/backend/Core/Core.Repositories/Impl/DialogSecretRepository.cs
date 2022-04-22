@@ -14,34 +14,34 @@ public class DialogSecretRepository : IDialogSecretRepository
         _connectionFactory = connectionFactory;
     }
 
-    public async Task<Guid> CreateDialogSecretAsync(Guid dialogId, string key, string iv)
+    public async Task<Guid> CreateDialogSecretAsync(Guid dialogId, string key)
     {
         using var connection = await _connectionFactory.GetDbConnectionAsync();
         var result = Guid.NewGuid();
-        string sql = "INSERT INTO DialogSecrets (Id, DialogId, CypherKey, CreatedAt, IV) " +
-                     "VALUES (@id, @dialogId, @cypherKey, @createdAt, @iv)";
+        string sql = "INSERT INTO DialogSecrets (Id, DialogId, CypherKey, CreatedAt) " +
+                     "VALUES (@id, @dialogId, @cypherKey, @createdAt)";
         
         await connection.ExecuteAsync(sql, new
         {
             id = result,
             dialogId = dialogId,
             cypherKey = key,
-            iv = iv,
             createdAt = DateTime.Now
         });
 
         return result;
     }
 
-    public async Task<Dictionary<Guid, (string key, string iv)>> GetDialogSecretsAsync(IEnumerable<Guid> dialogIds)
+    public async Task<Dictionary<Guid, string>> GetDialogSecretsAsync(IEnumerable<Guid> dialogIds)
     {
-        var result = new Dictionary<Guid, (string key, string iv)>();
+        var result = new Dictionary<Guid, string>();
         using var connection = await _connectionFactory.GetDbConnectionAsync();
         string sql = "SELECT * FROM DialogSecrets WHERE DialogId IN @dialogIds";
         var queryResult = await connection.QueryAsync<DialogSecret>(sql, new {dialogIds = dialogIds});
 
         foreach (var dialog in queryResult.AsEnumerable())
-            result.Add(dialog.DialogId, (key: dialog.CypherKey, iv: dialog.IV));
+            result.Add(dialog.Id, dialog.CypherKey);
+        
         return result;
     }
 }

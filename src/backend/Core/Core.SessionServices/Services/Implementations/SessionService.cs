@@ -55,20 +55,14 @@ public class SessionService : ISessionService
         }
  
         var serverKeys = _rsaCypher.GenerateKeys();
-        var session = new Session()
-        {
-            UserId = userId,
-            ServerPrivateKey = serverKeys.privateKey,
-            ServerPublicKey = serverKeys.publicKey,
-            ClientPublicKey = clientPublicKey
-        };
-
+        var hmacKey = CryptoRandomizer.GetRandomString(16);
+        
         Guid createdSessionId;
 
         try
         {
             createdSessionId = await _sessionRepository.CreateSessionAsync(userId, serverKeys.privateKey,
-                serverKeys.publicKey, clientPublicKey);
+                serverKeys.publicKey, clientPublicKey, hmacKey);
         }
         catch (Exception ex)
         {
@@ -84,7 +78,7 @@ public class SessionService : ISessionService
         
         Log.Debug($"Session #({createdSessionId}) was added to cache");
         
-        result.SetSucessResult(serverKeys.publicKey, createdSessionId, isNeedUpdateToken);
+        result.SetSucessResult(serverKeys.publicKey, createdSessionId,hmacKey, isNeedUpdateToken);
         return result;
     }
 

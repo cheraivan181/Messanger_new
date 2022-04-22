@@ -16,9 +16,6 @@ namespace Front.Domain.Dialogs
         [JsonPropertyName("cypherKey")]
         public string CypherKey { get; set; }
 
-        [JsonPropertyName("iv")]
-        public string IV { get; set; }
-
         [JsonPropertyName("isConfirmDialog")]
         public bool IsConfirmDialog { get; set; }
 
@@ -47,14 +44,13 @@ namespace Front.Domain.Dialogs
         public bool IsSuperChat { get; set; }
 
         public void SetDialogDetails(Guid userId, Guid dialogId, string userName,
-            string key, string iv, bool isDialogConfirm, string email, string phone,
+            string key, bool isDialogConfirm, string email, string phone,
             DateTime? dialogCreated, DateTime? lastActivity)
         {
             UserId = userId;
             DialogId = dialogId;
             UserName = userName;
             CypherKey = key;
-            IV = iv;
             IsConfirmDialog = isDialogConfirm;
             Email = email;
             PhoneNumber = phone;
@@ -64,13 +60,12 @@ namespace Front.Domain.Dialogs
 
 
         public void SetDialogRequestDetails(Guid userId, Guid dialogId, string userName,
-            string key, string iv, bool isDialogConfirm)
+            string key, bool isDialogConfirm)
         {
             UserId = userId;
             DialogId = dialogId;
             UserName = userName;
             CypherKey = key;
-            IV = iv;
             IsConfirmDialog = isDialogConfirm;
         }
     }

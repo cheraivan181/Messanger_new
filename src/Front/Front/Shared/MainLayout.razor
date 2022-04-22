@@ -4,7 +4,9 @@
 @using Front.Domain.Dialogs
 @using Front.Services.Interfaces.Auth
 @using Front.Services.Interfaces.Dialogs
+@using Front.States
 @using Front.Store.Implementations
+
 @inherits LayoutComponentBase
 
 @inject IDialogManagerService _dialogManagerService;
@@ -12,6 +14,7 @@
 @inject AuthenticationStateProvider _authStateProvider;
 @inject NavigationManager _navigationManager;
 @inject StateContainer _stateContainer;
+@inject SearchResultStateContainer _searchResultStateContainer;
 
 @implements IDisposable;
 
@@ -48,7 +51,7 @@
                                     
                                     @foreach (var user in SearchUserResponse.SearchUserResults)
                                     {
-                                      //  <Front.Components.Contact UserName="@user.UserName"></Front.Components.Contact>
+                                       <Front.Components.Contact UserName="@user.UserName"></Front.Components.Contact>
                                     }
                                     </ul>
                                 </div>
@@ -88,6 +91,11 @@
         if (response.IsSucess)
         {
             SearchUserResponse = response.SucessResponse.Response;
+            foreach (var searchUserResponse in response.SucessResponse.Response.SearchUserResults)
+            {
+                if (!_searchResultStateContainer.SearchUserResponses.Any(x => x.UserId == searchUserResponse.UserId))
+                    _searchResultStateContainer.AddResponse(searchUserResponse);
+            }
         }
     }
 

@@ -44,10 +44,9 @@ namespace Front.Services.Implementations.Dialogs
             foreach (var dialog in response.SucessResponse.Response.Dialogs)
             {
                 var cypherKey = await _rsaService.DecryptTextAsync(dialog.CypherKey);
-                var iv = await _rsaService.DecryptTextAsync(dialog.IV);
                 var currentDialog = new DialogDomainModel();
                 currentDialog.SetDialogDetails(dialog.UserId, dialog.DialogId, dialog.UserName,
-                    cypherKey, iv, dialog.IsConfirmDialog,
+                    cypherKey, dialog.IsConfirmDialog,
                     dialog.Email, dialog.PhoneNumber, dialog.DialogCreateDate,
                     dialog.LastActivity);
 
@@ -57,28 +56,27 @@ namespace Front.Services.Implementations.Dialogs
             return savedDialogs;
         }
 
-        public async Task<List<DialogDomainModel>> CreateAndGetDialogsAsync(Guid userId, string userName)
+        public async Task<DialogDomainModel> CreateAndGetDialogAsync(Guid userId, string userName)
         {
             var response = await _dialogClient.CreateDialogAsync(userId);
-            var savedDialogs = await _dialogStoreService.GetDialogsAsync();
+
             if (!response.IsSucess)
             {
                 await _globalVariablesStoreService.SetIsGlobalError(true);
-                return savedDialogs;
+                return null;
             }
 
             var dialog = response.SucessResponse.Response;
 
             var key = await _rsaService.DecryptTextAsync(dialog.Key);
-            var iv = await _rsaService.DecryptTextAsync(dialog.IV);
             var newDialog = new DialogDomainModel();
 
             newDialog.SetDialogRequestDetails(userId, dialog.DialogId, userName, 
-                key, iv, false);
+                key, false);
 
-            savedDialogs = await _dialogStoreService.AddAndGetDialogsAsync(newDialog);
+            await _dialogStoreService.AddAndGetDialogsAsync(newDialog);
 
-            return savedDialogs;
+            return newDialog;
         }
     }
 }

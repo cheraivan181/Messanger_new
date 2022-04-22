@@ -13,5 +13,7 @@ namespace Front.ClientsDomain.Responses.Session
 
         [JsonPropertyName("isNeedUpdateToken")]
         public bool IsNeedUpdateToken { get; set; }
+        [JsonPropertyName("hmacKey")]
+        public string HmacKey { get; set; }
     }
 }

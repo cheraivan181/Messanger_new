@@ -15,12 +15,12 @@ public class SessionRepository : ISessionRepository
     }
 
     public async Task<Guid> CreateSessionAsync(Guid userId, string serverPrivateKey, 
-        string serverPublicKey, string clientPublicKey)
+        string serverPublicKey, string clientPublicKey, string hmacKey)
     {
         using var connection = await _connectionFactory.GetDbConnectionAsync();
         var result = Guid.NewGuid();
-        string sql = "INSERT INTO Sessions (Id, UserId, ClientPublicKey, ServerPublicKey, ServerPrivateKey, CreatedAt) "
-                     + "VALUES (@id, @userId, @clientPublicKey, @serverPublicKey, @serverPrivateKey, @createdAt);";
+        string sql = "INSERT INTO Sessions (Id, UserId, ClientPublicKey, ServerPublicKey, ServerPrivateKey, HmacKey, CreatedAt) "
+                     + "VALUES (@id, @userId, @clientPublicKey, @serverPublicKey, @serverPrivateKey, @hmacKey, @createdAt);";
         
         await connection.ExecuteAsync(sql, new
         {
@@ -29,6 +29,7 @@ public class SessionRepository : ISessionRepository
             clientPublicKey = clientPublicKey,
             serverPublicKey = serverPublicKey,
             serverPrivateKey = serverPrivateKey,
+            hmacKey = hmacKey,
             createdAt = DateTime.Now
         });
 

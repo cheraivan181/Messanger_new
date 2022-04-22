@@ -2,14 +2,13 @@
 @using Front.Pages
 @using Front.Services.Interfaces.Dialogs
 
-@implements IDisposable
 @inject IDialogManagerService _dialogManagerService;
 @inject StateContainer _stateContainer;
 
-@if (IsInitialized)
+@if (IsInitialized && IsDialog)
 {
     <li class="ks-item">
-        <NavLink href="@GetHref()" Match="NavLinkMatch.All">
+        <NavLink href="@GetHrefByDialogId()" Match="NavLinkMatch.All">
             <span class="ks-avatar">
                 <img src="https://bootdey.com/img/Content/avatar/avatar3.png" width="36" height="36">
             </span>
@@ -18,7 +17,26 @@
                     @CurrentDialog.UserName
                     <span class="ks-datetime">Activity</span>
                 </div>
-                <div class="ks-message">Last message</div>
+                @if (_stateContainer.LastMessages.TryGetValue(DialogId, out string lastMessage))
+                {
+                    <div class="ks-message">@lastMessage</div>
+                }
+            </div>
+        </NavLink>
+    </li>
+}
+else
+{
+     <li class="ks-item">
+        <NavLink href="@GetHrefByUserName()" Match="NavLinkMatch.All">
+            <span class="ks-avatar">
+                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" width="36" height="36">
+            </span>
+            <div class="ks-body">
+                <div class="ks-name">
+                    @UserName
+                    <span class="ks-datetime">Activity</span>
+                </div>
             </div>
         </NavLink>
     </li>
@@ -29,9 +47,16 @@
     [Parameter]
     public Guid DialogId{ get; set; }
 
+    [Parameter]
+    public string UserName { get; set; }
+
+    private bool IsDialog => string.IsNullOrEmpty(UserName);
+
     private DialogDomainModel CurrentDialog { get; set; }
 
     private bool IsInitialized { get; set; }
+
+    private string LastMessage { get; set; }
 
     protected async override Task OnInitializedAsync()
     {
@@ -46,13 +71,13 @@
         await base.OnInitializedAsync();
     }
 
-    private string GetHref()
+    private string GetHrefByDialogId()
     {
         return $"/dialog/{CurrentDialog.DialogId}";
     }
 
-    public void Dispose()
+    private string GetHrefByUserName()
     {
-        _stateContainer.OnChange -= StateHasChanged;
+        return $"/dialog/{UserName}";
     }
 }

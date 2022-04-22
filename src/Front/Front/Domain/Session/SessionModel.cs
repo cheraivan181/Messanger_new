@@ -6,5 +6,6 @@
         public string ServerPublicKey { get; set; }
         public string ClientPublicKey { get; set; }
         public string ClientPrivateKey { get; set; }
+        public string SignKey { get; set; }
     }
 }

@@ -1,8 +1,10 @@
 using Blazored.LocalStorage;
 using Blazored.SessionStorage;
+using Core.BinarySerializer;
 using Front;
 using Front.Clients.Implementations;
 using Front.Clients.Interfaces;
+using Front.Domain.RealTime;
 using Front.Services.Implementations.Alive;
 using Front.Services.Implementations.Auth;
 using Front.Services.Implementations.Crypt;
@@ -18,6 +20,7 @@ using Front.Services.Interfaces.WebSocket;
 using Front.Servives.Implementations;
 using Front.Servives.Implementations.Auth;
 using Front.Servives.Interfaces.Auth;
+using Front.States;
 using Front.Store.Implementations;
 using Front.Store.Services;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -27,6 +30,17 @@ using MudBlazor.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.Configuration.AddInMemoryCollection(Configuration.Configurations);
+
+var messageRequest = new GetMessageRequest()
+{
+    DateWichNeedSendMessage = DateTime.Now,
+    DialogId = Guid.NewGuid(),
+    UserName = "asdfasdf"
+};
+
+var serializedMessage = MessangerBinarySerializer.ToBinaryMessage(messageRequest);
+var deserializedMessage = MessangerBinarySerializer.FromBinaryMessage<GetMessageRequest>(serializedMessage);
+
 
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
@@ -40,6 +54,11 @@ builder.Services.AddHttpClient("CoreClient", httpClient =>
 #region storeServices
 
 builder.Services.AddSingleton<StateContainer>();
+builder.Services.AddSingleton<MessageStateContainer>();
+builder.Services.AddSingleton<DialogStateContainer>();
+builder.Services.AddSingleton<SearchResultStateContainer>();
+
+
 builder.Services.AddScoped<IGlobalVariablesStoreService, GlobalVariablesStoreService>();
 builder.Services.AddScoped<IDialogStoreService, DialogStoreService>();
 

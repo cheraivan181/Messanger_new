@@ -11,6 +11,7 @@ namespace Core.CryptService
             serviceCollection.AddSingleton<IHashService, HashService>();
             serviceCollection.AddSingleton<IAesCypher, AesCypher>();
             serviceCollection.AddSingleton<IRsaCypher, RsaCypher>();
+            serviceCollection.AddSingleton<IHmacService, HmacService>();
         }
     }
 }

@@ -10,7 +10,6 @@ public class DialogMapper : IDialogMapper
     {
         var result = new CreateDialogResponse();
         result.Key = createDialogResult.Key;
-        result.IV = createDialogResult.IV;
         result.DialogId = createDialogResult.DialogId;
         result.DialogRequestId = createDialogResult.DialogRequestId;
 

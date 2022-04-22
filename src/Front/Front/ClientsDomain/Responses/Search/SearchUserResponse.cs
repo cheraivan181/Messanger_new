@@ -14,6 +14,8 @@ namespace Front.ClientsDomain.Responses.Search
     }
     public class SearchUserModel
     {
+        [JsonPropertyName("userId")]
+        public Guid UserId { get; set; }
         [JsonPropertyName("userName")]
         public string UserName { get; set; }
 
