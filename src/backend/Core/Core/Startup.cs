@@ -11,6 +11,7 @@ using Serilog;
 using Serilog.Events;
 using System.Text.Json.Serialization;
 using Core.DbModels.Base;
+using Core.GRPC;
 using Core.HostingServices;
 using Microsoft.EntityFrameworkCore;
 using Prometheus;
@@ -114,6 +115,7 @@ namespace Core
                 endpoints.MapControllers();
                 
                 endpoints.MapHangfireDashboard();
+                endpoints.MapGrpcService<ConnectionGrpcService>();
             });
 
         }

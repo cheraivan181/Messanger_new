@@ -1,6 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using ConnectionHandler.Auth;
 using ConnectionHandler.Hubs;
+using ConnectionHandler.Options;
 using ConnectionHandler.Services.Implementations;
 using ConnectionHandler.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -36,6 +37,12 @@ public class Startup
                 options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
             });
 
+        #region options
+
+        services.Configure<UrlOptions>(Configuration.GetSection("Urls"));
+
+        #endregion
+        
         services.AddEndpointsApiExplorer();
 
         services.AddAntiforgery(options => { options.HeaderName = "x-xsrf-token"; });
@@ -60,6 +67,12 @@ public class Startup
         AddConfigureAuthenticationAndAuthorization(services, Configuration);
         AddConfigureLogging();
         AddSwaggerServices(services);
+
+        #region services
+
+        services.AddSingleton<IClientConnectionService, ClientConnectionService>();
+
+        #endregion
     }
 
     public void Configure(IApplicationBuilder app,

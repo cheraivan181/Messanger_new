@@ -11,24 +11,28 @@ public class Response : ISerializableMessage
     public string IV { get; set; }
     
     [JsonPropertyName("responseType")]
-    public ResponseType ResponseType { get; set; }
+    public ResponseAction ResponseAction { get; set; }
     
     [JsonPropertyName("sign")]
     public string Sign { get; set; }
+    
+    public int NotificationOffset { get; set; }
 
     public void Serialize(BinaryMessangerSerializer serializer)
     {
         serializer.Write(PayLoad);
         serializer.Write(IV);
-        serializer.Write((int)ResponseType);
+        serializer.Write((int)ResponseAction);
         serializer.Write(Sign);
+        serializer.Write(NotificationOffset);
     }
 
     public void Deserialize(BinaryMessangerDeserializer deserializer)
     {
         PayLoad = deserializer.ReadString();
         IV = deserializer.ReadString();
-        ResponseType = (ResponseType)deserializer.ReadInt32();
+        ResponseAction = (ResponseAction)deserializer.ReadInt32();
         Sign = deserializer.ReadString();
+        NotificationOffset = deserializer.ReadInt32();
     }
 }

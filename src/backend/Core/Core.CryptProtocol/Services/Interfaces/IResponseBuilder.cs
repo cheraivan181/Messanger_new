@@ -6,6 +6,6 @@ namespace Core.CryptProtocol.Services.Interfaces;
 public interface IResponseBuilder
 {
     string BuildMessage<T>(T responseModel, ResponseCode statusCode,
-        ResponseType responseType, string aesKey, string hmacSignKey,
-        string errorMessage = null) where T : class, ISerializableMessage;
+        ResponseAction responseAction, string aesKey, string hmacSignKey,
+        int notificationOffset) where T : class, ISerializableMessage;
 }

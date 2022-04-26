@@ -13,6 +13,7 @@ namespace Core.Kafka
         {
             serviceCollection.Configure<KafkaOptions>(configuration.GetSection("kafka"));
             serviceCollection.AddSingleton<IProducerSubscriberProvider, ProducerSubscriberSubscriberProvider>();
+            serviceCollection.AddSingleton<IKafkaAdminClient, AdminClient>();
             serviceCollection.AddScoped<IProducerService, ProducerService>();
         }
     }

@@ -32,10 +32,10 @@ public class SessionGetterService : ISessionGetterService
 
             Log.Debug($"Set session #({sessionId}) in cache");
             await _sessionCacheService.AddSessionInCacheAsync(userId, sessionId, sessionFromDb.ServerPrivateKey,
-                sessionFromDb.ServerPublicKey, sessionFromDb.ClientPublicKey);
+                sessionFromDb.ServerPublicKey, sessionFromDb.ClientPublicKey, sessionFromDb.HmacKey);
             
             sessionsFromCache = new SessionModel(sessionId, sessionFromDb.ServerPrivateKey,
-                sessionFromDb.ServerPublicKey, sessionFromDb.ClientPublicKey);
+                sessionFromDb.ServerPublicKey, sessionFromDb.ClientPublicKey, sessionFromDb.HmacKey);
             
             return sessionsFromCache;
         }
@@ -43,7 +43,7 @@ public class SessionGetterService : ISessionGetterService
         return sessionsFromCache;
     }
 
-    public async Task<List<SessionModel>> GetSessionsModelAsync(Guid userId)
+    public async Task<List<SessionModel>> GetSessionsAsync(Guid userId)
     {
         var sessionsFromCache = await _sessionCacheService.GetSessionsAsync(userId);
         return sessionsFromCache;

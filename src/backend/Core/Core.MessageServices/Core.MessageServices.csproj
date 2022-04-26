@@ -7,7 +7,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Domain" />
+      <ProjectReference Include="..\Core.CacheServices\Core.Redis.csproj" />
+      <ProjectReference Include="..\Core.CryptProtocol\Core.CryptProtocol.csproj" />
+      <ProjectReference Include="..\Core.SenderServices\Core.SenderServices.csproj" />
+      <ProjectReference Include="..\Core.SessionServices\Core.SessionServices.csproj" />
     </ItemGroup>
 
 </Project>

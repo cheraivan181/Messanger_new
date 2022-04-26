@@ -13,13 +13,9 @@
 
   <ItemGroup>
     <PackageReference Include="FluentMigrator.Runner" Version="3.3.2" />
-    <PackageReference Include="Google.Protobuf" Version="3.19.4" />
-    <PackageReference Include="Grpc.AspNetCore" Version="2.44.0" />
-    <PackageReference Include="Grpc.Net.Client" Version="2.44.0" />
-    <PackageReference Include="Grpc.Tools" Version="2.45.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="Google.Protobuf" Version="3.20.0" />
+    <PackageReference Include="Grpc.AspNetCore.Server" Version="2.45.0" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.45.0" />
     <PackageReference Include="Hangfire" Version="1.7.28" />
     <PackageReference Include="Hangfire.SqlServer" Version="1.7.28" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.2" />
@@ -50,10 +46,13 @@
     <ProjectReference Include="..\Core.CryptProtocol\Core.CryptProtocol.csproj" />
     <ProjectReference Include="..\Core.DbModels\Core.DbModels.csproj" />
     <ProjectReference Include="..\Core.DialogServices\Core.DialogServices.csproj" />
+    <ProjectReference Include="..\Core.Grpc\Core.Grpc.csproj" />
     <ProjectReference Include="..\Core.IdentityService\Core.IdentityService.csproj" />
     <ProjectReference Include="..\Core.Kafka\Core.Kafka.csproj" />
+    <ProjectReference Include="..\Core.MessageServices\Core.MessageServices.csproj" />
     <ProjectReference Include="..\Core.Repositories\Core.Repositories.csproj" />
     <ProjectReference Include="..\Core.SearchServices\Core.SearchServices.csproj" />
+    <ProjectReference Include="..\Core.SenderServices\Core.SenderServices.csproj" />
     <ProjectReference Include="..\Core.SessionServices\Core.SessionServices.csproj" />
     <ProjectReference Include="..\Core.Utils\Core.Utils.csproj" />
   </ItemGroup>

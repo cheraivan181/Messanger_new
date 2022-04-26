@@ -9,16 +9,21 @@ namespace ConnectionHandler.Hubs;
 public class MessangerHub : BaseHub
 {
     private readonly IHubCallerContextStore _hubCallerContextStore;
-
-    public MessangerHub(IHubCallerContextStore hubCallerContextStore)
+    private readonly IClientConnectionService _clientConnectionService;
+    
+    public MessangerHub(IHubCallerContextStore hubCallerContextStore,
+        IClientConnectionService clientConnectionService)
     {
         _hubCallerContextStore = hubCallerContextStore;
+        _clientConnectionService = clientConnectionService;
     }
     
     public async override Task OnConnectedAsync()
     {
         Log.Debug($"{Context.User.Identity.Name} was connected");
         _hubCallerContextStore.AddHubCallerContext(Context.ConnectionId, Context);
+        await _clientConnectionService.ConnectAsync(Context.ConnectionId);
+        
         await base.OnConnectedAsync();
     }
     
@@ -46,9 +51,11 @@ public class MessangerHub : BaseHub
         yield break;
     }
 
-    public override Task OnDisconnectedAsync(Exception? exception)
+    public async override Task OnDisconnectedAsync(Exception? exception)
     {
         _hubCallerContextStore.RemoveCallerContext(Context.ConnectionId);
-        return base.OnDisconnectedAsync(exception);
+        
+        await _clientConnectionService.DisconnectAsync(Context.ConnectionId);
+        await base.OnDisconnectedAsync(exception);
     }
 }

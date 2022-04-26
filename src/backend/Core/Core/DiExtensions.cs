@@ -6,8 +6,10 @@ using Core.DialogServices;
 using Core.IdentityService;
 using Core.Kafka;
 using Core.Mapping;
+using Core.MessageServices;
 using Core.Repositories;
 using Core.SearchServices;
+using Core.SenderServices;
 using Core.SessionServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +31,8 @@ namespace Core
             serviceCollection.AddSearchUserServices();
             serviceCollection.AddDialogServices();
             serviceCollection.AddProtocolServices();
+            serviceCollection.AddMessageServices();
+            serviceCollection.AddSenderServices();
         } 
     }
 }

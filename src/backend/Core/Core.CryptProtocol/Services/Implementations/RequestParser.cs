@@ -20,8 +20,7 @@ public class RequestParser : IRequestParser
         _aes = aes;
     }
     
-    public ParsedResult<T> ParseRequest<T>(string hmacKey,string aesKey, 
-        string iv, string message) where T:class, ISerializableMessage, new()
+    public ParsedResult<T> ParseRequest<T>(string hmacKey,string aesKey, string message) where T:class, ISerializableMessage, new()
     {
         var result = new ParsedResult<T>();
         
@@ -51,7 +50,7 @@ public class RequestParser : IRequestParser
 
         try
         {
-            decryptedPayload = _aes.Decrypt(messageModel.Payload, aesKey, iv);
+            decryptedPayload = _aes.Decrypt(messageModel.Payload, aesKey, messageModel.IV);
         }
         catch (Exception ex)
         {

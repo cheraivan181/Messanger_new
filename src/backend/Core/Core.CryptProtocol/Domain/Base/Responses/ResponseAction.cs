@@ -1,6 +1,6 @@
 ﻿namespace Core.CryptProtocol.Domain.Base.Responses;
 
-public enum ResponseType
+public enum ResponseAction
 {
     ReceiveMessage = 0,
     ReadMessage = 1,

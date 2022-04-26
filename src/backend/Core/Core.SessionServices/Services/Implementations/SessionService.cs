@@ -74,31 +74,11 @@ public class SessionService : ISessionService
         Log.Debug($"Session was created for user #({userId})");
         
         await _sessionCacheService.AddSessionInCacheAsync(userId, createdSessionId, serverKeys.publicKey,
-            serverKeys.privateKey, clientPublicKey);
+            serverKeys.privateKey, clientPublicKey, hmacKey);
         
         Log.Debug($"Session #({createdSessionId}) was added to cache");
         
         result.SetSucessResult(serverKeys.publicKey, createdSessionId,hmacKey, isNeedUpdateToken);
         return result;
-    }
-
-    public async Task AddSessionInCacheAsync(Guid userId, Guid sessionId)
-    {
-        var sessionFromCache = await _sessionCacheService.GetSessionAsync(userId, sessionId);
-        if (sessionFromCache != null)
-        {
-            Log.Warning($"Try to add #({sessionId}) in cache, but it is in cache alredy");
-            return;
-        }
-
-        var sessionFromDb = await _sessionRepository.GetSessionAsync(sessionId);
-        if (sessionFromDb == null)
-        {
-            Log.Error($"Error! Cannot get session from database #({sessionId})");
-            return;
-        }
-
-        await _sessionCacheService.AddSessionInCacheAsync(userId, sessionId, sessionFromDb.ServerPublicKey,
-            sessionFromDb.ServerPrivateKey, sessionFromDb.ClientPublicKey);
     }
 }

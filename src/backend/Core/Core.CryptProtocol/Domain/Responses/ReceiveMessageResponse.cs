@@ -1,5 +1,7 @@
-﻿namespace Core.CryptProtocol.Domain.Responses;
+﻿using Core.CryptProtocol.Domain.Base.Responses;
 
-public class ReceiveMessageResponse
+namespace Core.CryptProtocol.Domain.Responses;
+
+public class ReceiveMessageResponse : BaseResponsePayload
 {
 }

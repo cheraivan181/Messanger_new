@@ -1,4 +1,5 @@
 ﻿using Core.Repositories.Interfaces;
+using Core.SessionServices.Domain;
 using Core.SessionServices.Services.Interfaces;
 
 namespace Core.SessionServices.Services.Implementations;
@@ -26,4 +27,7 @@ public class ConnectionCollectorService : IConnectionCollectorService
         await _connectionRepository.RemoveConnectionAsync(connectionId);
         await _connectionCollectorCacheService.RemoveConnectionsFromCacheAsync(userId, connectionId);
     }
+
+    public Task<ConnectionStoreModel> GetConnectionsAsync(Guid userId) 
+        => _connectionCollectorCacheService.GetConnectionsFromCacheAsync(userId);
 }

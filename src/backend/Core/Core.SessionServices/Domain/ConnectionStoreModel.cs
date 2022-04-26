@@ -2,5 +2,5 @@
 
 public class ConnectionStoreModel
 {
-    public List<StoreModel> Connections { get; set; }
+    public List<ConnectionInCacheModel> Connections { get; set; }
 }

@@ -36,15 +36,15 @@ public class ConnectionCollectorCacheService : IConnectionCollectorCacheService
         if (isKeyExist)
         {
             var dataFromCache = await GetConnectionsFromCacheAsync(userId);
-            dataFromCache.Connections.Add(new StoreModel(sessionId, connectionId));
+            dataFromCache.Connections.Add(new ConnectionInCacheModel(sessionId, connectionId));
             await database.StringSetAsync(cacheKey, new RedisValue(dataFromCache.ToJson()));
         }
         else
         {
             var connections = new ConnectionStoreModel();
-            connections.Connections = new List<StoreModel>()
+            connections.Connections = new List<ConnectionInCacheModel>()
             {
-                new StoreModel(sessionId, connectionId)
+                new ConnectionInCacheModel(sessionId, connectionId)
             };
 
             await database.StringSetAsync(cacheKey, new RedisValue(connections.ToJson()));
@@ -65,7 +65,7 @@ public class ConnectionCollectorCacheService : IConnectionCollectorCacheService
 
         var dataFromCache = (await database.StringGetAsync(cacheKey))
             .FromJson<ConnectionStoreModel>();
-        var connections = dataFromCache.Connections.Where(x => x.connectionId != connectionId)
+        var connections = dataFromCache.Connections.Where(x => x.ConnectionId != connectionId)
             .ToList();
         dataFromCache.Connections = connections;
 

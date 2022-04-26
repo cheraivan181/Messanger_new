@@ -50,7 +50,8 @@ public class ApplicationContext : DbContext
         modelBuilder.Entity<DialogRequest>().HasIndex(x => new {x.OwnerUserId, x.RequestUserId});
 
         modelBuilder.Entity<Message>().HasIndex(x => x.AnswerMessageId);
-        
+        modelBuilder.Entity<Message>().HasIndex(x => x.DialogId);
+
         modelBuilder.Entity<DialogSecret>()
             .HasOne(x => x.Dialog);
         modelBuilder.Entity<RefreshToken>()

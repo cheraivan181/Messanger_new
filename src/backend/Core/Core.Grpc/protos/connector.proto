@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option csharp_namespace = "Connector";
+
+package connector;
+
+service Connector{
+  rpc ConnectUser(UserConnectRequest) returns (ConnectorResponse);
+  rpc DisconnectUser(UserDisconnectRequest) returns (ConnectorResponse);
+}
+
+
+message UserConnectRequest{
+  string connectionId = 1;
+  string sessionId = 2;
+  string userId = 3;
+}
+
+message UserDisconnectRequest{
+  string connectionId = 1;
+  string sessionId = 2;
+  string userId = 3;
+}
+
+message ConnectorResponse{
+  bool sucessHandled = 1;
+}

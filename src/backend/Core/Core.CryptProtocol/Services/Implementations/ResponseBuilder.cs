@@ -18,8 +18,8 @@ public class ResponseBuilder : IResponseBuilder
     }
     
     public string BuildMessage<T>(T responseModel, ResponseCode statusCode,
-        ResponseType responseType,string aesKey, string hmacSignKey, 
-        string errorMessage = null) where T:class, ISerializableMessage
+        ResponseAction responseAction,string aesKey, string hmacSignKey, 
+        int notificationOffset) where T:class, ISerializableMessage
     {
         var response = new Response();
         var iv = _aes.GetAesKeyAndIv().iv;
@@ -31,7 +31,8 @@ public class ResponseBuilder : IResponseBuilder
         response.Sign = sign;
         response.IV = iv;
         response.PayLoad = cryptedMessage;
-        response.ResponseType = responseType;
+        response.ResponseAction = responseAction;
+        response.NotificationOffset = notificationOffset;
 
         var binaryResponse = response.ToBinaryMessage();
         return binaryResponse;

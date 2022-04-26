@@ -1,0 +1,17 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Connector";
+
+package messages;
+
+service SenderMessages{
+  rpc SendMessageToDirectuser(SendMessageRequest) returns(SendMessageResponse);
+}
+
+message SendMessageRequest{
+  string message = 1;
+}
+
+message SendMessageResponse{
+  bool sucess = 1;
+} 

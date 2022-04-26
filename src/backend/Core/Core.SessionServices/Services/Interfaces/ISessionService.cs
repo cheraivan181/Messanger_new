@@ -6,6 +6,4 @@ public interface ISessionService
 {
     Task<CreateSessionResponse> CreateSessionAsync(Guid userId,
         string clientPublicKey);
-
-    Task AddSessionInCacheAsync(Guid userId, Guid sessionId);
 }

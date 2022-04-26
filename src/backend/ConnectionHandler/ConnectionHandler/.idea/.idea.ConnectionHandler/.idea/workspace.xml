@@ -9,80 +9,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc7ec941-6ead-44a2-b075-d1856d7f9953" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.BinarySerializer/MessangerBinarySerializer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.BinarySerializer/SerializatorImplementations/BinaryBase.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.BinarySerializer/SerializatorImplementations/BinaryMessangerDeserializer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.BinarySerializer/SerializatorImplementations/BinaryMessangerSerializer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.BinarySerializer/SerializatorImplementations/Buffer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.BinarySerializer/SerializatorImplementations/DateTimeExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.BinarySerializer/SerializatorImplementations/ISerializableMessage.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/DiExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Interfaces/IRequestProtocolValidator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Request/Message.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Request/RequestPayload.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Responses/BaseResponsePayload.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Responses/Response.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Responses/ResponseCode.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Responses/ResponseType.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/ParsedResult.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Requests/GetMessageRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Responses/ReceiveMessageResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Services/Implementations/RequestParser.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Services/Implementations/ResponseBuilder.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Services/Interfaces/IRequestParser.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Services/Interfaces/IResponseBuilder.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptService/Impl/HmacService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptService/Interfaces/IHmacService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.Serializers.Tests/AutoMockDataAttribute.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.Serializers.Tests/DeserializerTest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.Serializers.Tests/SerializeAndDeserializeModelsTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Dialog/CreateDialogResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Dialog/CreateDialogResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Search/SearchUserResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Search/SearchUserResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Session/CreateSessionResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Session/CreateSessionResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Components/Contact.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Components/Contact.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Components/Message.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Components/Message.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Domain/Dialogs/DialogDomainModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Domain/Dialogs/DialogDomainModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Domain/Message/Message.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Domain/Message/Message.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Domain/Session/SessionModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Domain/Session/SessionModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Front.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Front.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Pages/Dialog.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Pages/Dialog.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Services/Implementations/Crypt/AesService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Services/Implementations/Crypt/AesService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Services/Implementations/Dialogs/DialogService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Services/Implementations/Dialogs/DialogService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Services/Interfaces/Crypt/IAesCryptService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Services/Interfaces/Crypt/IAesCryptService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Services/Interfaces/Dialogs/IDialogManagerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Services/Interfaces/Dialogs/IDialogManagerService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Shared/MainLayout.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Shared/MainLayout.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/StateContainer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Front/Front/wwwroot/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/wwwroot/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ConnectionHandler.GRPC/Services/Implementations/ConnectorGrpcClient.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ConnectionHandler/Options/UrlOptions.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ConnectionHandler/Services/Implementations/ClientConnectionService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ConnectionHandler/Services/Interfaces/IClientConnectionService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ConnectionHandler/protos/connector.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.Kafka/Domain/Models/SubscribeToTopicMessage.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/MessageComposerService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Interfaces/IMessageComposerService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core/GRPC/ConnectionGrpcHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ConnectionHandler/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ConnectionHandler/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConnectionHandler/ConnectionHandler.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler/ConnectionHandler.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ConnectionHandler/Hubs/MessangerHub.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler/Hubs/MessangerHub.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConnectionHandler/Services/Implementations/HubCallerContextStore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler/Services/Implementations/HubCallerContextStore.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.ApiResponses/Dialog/CreateDialogResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.ApiResponses/Dialog/CreateDialogResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.ApiResponses/Session/CreateSessionResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.ApiResponses/Session/CreateSessionResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.CryptService/DiExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.CryptService/DiExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/DialogSecret.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/DialogSecret.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/Migrations/ApplicationContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/Migrations/ApplicationContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/Session.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/Session.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.DialogServices/Domain/CreateDialogRequestResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DialogServices/Domain/CreateDialogRequestResult.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.DialogServices/Domain/DialogDomainModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DialogServices/Domain/DialogDomainModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.DialogServices/Implementations/DialogService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DialogServices/Implementations/DialogService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.IdentityService.UnitTests/Core.IdentityService.UnitTests.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.IdentityService.UnitTests/IdentityServiceTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.IdentityService.UnitTests/Models/SignInTestData.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.IdentityService.UnitTests/Models/SignUpTestData.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.IdentityService.UnitTests/Models/UpdateRefreshTokenTestData.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.IdentityService.UnitTests/TestCases.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/DialogSecretRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/DialogSecretRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/SessionRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/SessionRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IDialogSecretRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IDialogSecretRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/ISessionRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/ISessionRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Domain/CreateSessionResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Domain/CreateSessionResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/SessionService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/SessionService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConnectionHandler/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConnectionHandler/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConnectionHandler/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler/appsettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.sln" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core/Core.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Core.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/DiExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/DiExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/Mapping/Impl/DialogMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Mapping/Impl/DialogMapper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core/Mapping/Impl/SessionServiceMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Mapping/Impl/SessionServiceMapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core/GRPC/ConnectionGrpcController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Startup.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,29 +44,38 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/60d5452edc88414d9b1ea63cefac05829e68/60/354eb6a0/JwtBearerOptions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/68ed554772d74a2ca6a7d1bf2d50325e5a8d8e80225314c34888eaa794895/JwtSecurityTokenHandler.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/601c3d2f1bfa958c0388e8435dc1543366d3c8c7f6abf4493861219f944812a/AuthorizeAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/be423d85679b2858c931031f36f4d779e7cfc1bfca1d62787ecbbae4e32383/DefaultHttpContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6c54d7ee60af38a1f27d8e0f5cfe5e42d2e4ed4d17f54195097fbb9a377af/JwtBearerOptions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b34cdea969917836c37b6dc15e916d3e5954856c12dd1caf3926e4a2a3a0dfe2/AuthorizationAppBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/fb987222d73f13e4330b571dd4d1c8cdae4de48d5c310d7efe1e7c5cc471/ReadOnlyCollection.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/974fa14c57bab8fe29f1bddd39b1a6548b9cc8cf9e0ef5e670c2407a56d9/String.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/349e8b63c56af6f2e1dca857ef9de8d486c6b88afceb8717373ad33115a37fb/TokenValidationParameters.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/dfdce6acf6dfde6b2ae6f5cf4119997fc625d64cc6cc419bed1aaf5df2cae14/AuthenticationHandler.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/84f28e9b56c06474b877ee255eefbbee29aef25d998edfc9d4e85b33e1edf882/AuthorizationMiddleware.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c6ad457575d35dcbff26c9a5e3fb1d92f1d3c55f25ef6ebf475367b5d8/List.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c2259c13b82db263f8996b177c5be7e6aadd7ec85f36b2ae8c6ce5aa7af1/LoggingExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/de7cca8bbad440a84863dc9a66814897f9b51cd9916dcdce4857992d5d492c/HashSet.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a6a4fb7ae62557b1ddbba529662b57eb8a9f3208f98f0edd87517fe9cb4d6a/AuthAppBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3b113fb47d5fe36ed688b56c465cfe2738fca0ea3df9ed5a9683d7b49836b7/SwaggerUIMiddleware.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1af51483c9bf18871cce649b9f966dd7be686536f998c33bba3c5fc4adea4a0/Task.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ConnectionHandler.GRPC/Services/Implementations/ConnectorGrpcClient.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ConnectionHandler/Services/Implementations/ClientConnectionService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ConnectionHandler/appsettings.Development.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9555881785da8918c1fdc22b936cf1b76ae8dc9ab1ad51819915b85840fc5978/AuthenticationMiddleware.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/605c9e19d7f544679b7c68670aea2c2d60870/53/81206afb/Hub.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d544212193a962adb397358cd8328d4592454093d56a5cbe5b6dd9a372ea59/JwtBearerEvents.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f4708639776589f5ac2739f6fcbfc67343b1f9dac51cc1dbfdb003eef77cc1c/Monitor.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ConnectionHandler/Options/UrlOptions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ConnectionHandler/Startup.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ConnectionHandler/Services/Interfaces/IClientConnectionService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ConnectionHandler/appsettings.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/415db55c964d12e8b675eaf1ab2d9229d4069b1f9482075a4d48a5d1e46ce28/JwtBearerHandler.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9c69831818ac26b45d0c37669db11a14f3dc1c5903a964c3f68b7b64b86c3d/PolicyEvaluator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/68ed554772d74a2ca6a7d1bf2d50325e5a8d8e80225314c34888eaa794895/JwtSecurityTokenHandler.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/be423d85679b2858c931031f36f4d779e7cfc1bfca1d62787ecbbae4e32383/DefaultHttpContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/fb987222d73f13e4330b571dd4d1c8cdae4de48d5c310d7efe1e7c5cc471/ReadOnlyCollection.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/974fa14c57bab8fe29f1bddd39b1a6548b9cc8cf9e0ef5e670c2407a56d9/String.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c6ad457575d35dcbff26c9a5e3fb1d92f1d3c55f25ef6ebf475367b5d8/List.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c2259c13b82db263f8996b177c5be7e6aadd7ec85f36b2ae8c6ce5aa7af1/LoggingExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f7922bd567e7e4a44fc306414889c8a66ac058c874ceee5efe556cef59af/GrpcChannelOptions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3b113fb47d5fe36ed688b56c465cfe2738fca0ea3df9ed5a9683d7b49836b7/SwaggerUIMiddleware.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/605c9e19d7f544679b7c68670aea2c2d60870/53/81206afb/Hub.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ConnectionHandler/Services/Implementations/HubCallerContextStore.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f4708639776589f5ac2739f6fcbfc67343b1f9dac51cc1dbfdb003eef77cc1c/Monitor.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -203,7 +157,7 @@
       <workItem from="1650189278041" duration="2290000" />
       <workItem from="1650273892464" duration="3956000" />
       <workItem from="1650528661655" duration="1999000" />
-      <workItem from="1650614082064" duration="1029000" />
+      <workItem from="1650614082064" duration="7240000" />
     </task>
     <servers />
   </component>

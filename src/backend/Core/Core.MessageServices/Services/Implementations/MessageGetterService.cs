@@ -1,6 +1,8 @@
-﻿namespace Core.MessageServices.Services.Implementations;
+﻿using Core.MessageServices.Services.Interfaces;
 
-public class MessageGetterService
+namespace Core.MessageServices.Services.Implementations;
+
+public class MessageGetterService : IMessageGetterService
 {
     
 }

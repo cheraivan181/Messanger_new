@@ -2,5 +2,6 @@
 
 public interface ISessionCacheInitializerService
 {
-    
+    Task SetSessionInCacheAsync(Guid sessionId,
+        Guid userId);
 }

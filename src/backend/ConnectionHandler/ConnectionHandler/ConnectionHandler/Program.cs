@@ -1,4 +1,5 @@
 using ConnectionHandler;
+using ConnectionHandler.Services.Interfaces;
 using Serilog;
 
 public class Program
