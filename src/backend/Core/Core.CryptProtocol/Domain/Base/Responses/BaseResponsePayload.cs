@@ -8,18 +8,15 @@ public class BaseResponsePayload : ISerializableMessage
     
     public string ErrorMessage { get; set; }
     
-    public ResponseAction ResponseAction { get; set; }
-    public void Serialize(BinaryMessangerSerializer serializer)
+    public virtual void Serialize(BinaryMessangerSerializer serializer)
     {
         serializer.Write((int) StatusCode);
         serializer.WriteString(ErrorMessage);
-        serializer.Write((int) ResponseAction);
     }
     
-    public void Deserialize(BinaryMessangerDeserializer deserializer)
+    public virtual void Deserialize(BinaryMessangerDeserializer deserializer)
     {
         StatusCode = (ResponseCode)deserializer.ReadInt32();
         ErrorMessage = deserializer.ReadString();
-        ResponseAction = (ResponseAction) deserializer.ReadInt32();
     }
 }

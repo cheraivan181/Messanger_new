@@ -28,7 +28,6 @@ public class SerializeAndDeserializeModelsTest
         
         request.DialogId.Should().Be(deserializedModel.DialogId);
         request.UserName.Should().Be(deserializedModel.UserName);
-        request.DateWichNeedSendMessage.ToString().Should().Be(deserializedModel.DateWichNeedSendMessage.ToString());
     }
 
     [Theory]
@@ -40,6 +39,5 @@ public class SerializeAndDeserializeModelsTest
         
         request.DialogId.Should().Be(deserializedModel.DialogId);
         request.UserName.Should().Be(deserializedModel.UserName);
-        request.DateWichNeedSendMessage.ToString().Should().Be(deserializedModel.DateWichNeedSendMessage.ToString());
     }
 }

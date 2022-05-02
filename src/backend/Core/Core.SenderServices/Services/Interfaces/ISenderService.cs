@@ -4,5 +4,5 @@ namespace Core.MessageServices.Services.Interfaces;
 
 public interface ISenderService
 {
-    Task SendMessageToUser(MessageToSendInNetwork messageToSend);
+    Task SendMessageToUserAsync(MessageToSendInNetwork messageToSend, bool isSendMessageToSpecialChannel = false);
 }

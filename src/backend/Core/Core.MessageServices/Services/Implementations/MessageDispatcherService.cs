@@ -1,6 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using Core.CryptProtocol.Domain;
+using Core.CryptProtocol.Domain.Base;
 using Core.CryptProtocol.Services.Implementations;
 using Core.CryptProtocol.Services.Interfaces;
 using Core.MessageServices.Domain;
@@ -15,53 +16,54 @@ public class MessageDispatcherService : IMessageDispatcherService
 {
     private readonly IDirectMessageHandler _directMessageHandler;
     private readonly ISessionGetterService _sessionGetterService;
+    private readonly IErrorMessageHandler _errorMessageHandler;
 
-    private ConcurrentDictionary<MessageType, Func<string, string, string, ParsedResult<object>>>
+    private ConcurrentDictionary<RequestType, Func<string, string, string, ParsedResult<object>>>
         _convertersFuncs;
 
-    private ConcurrentDictionary<MessageType, Type> _messageTypes;
+    private ConcurrentDictionary<RequestType, Type> _messageTypes;
     private readonly Type _parseRequestType;
 
     public MessageDispatcherService(IDirectMessageHandler directMessageHandler,
-        ISessionGetterService sessionGetterService)
+        ISessionGetterService sessionGetterService,
+        IErrorMessageHandler errorMessageHandler)
     {
         _directMessageHandler = directMessageHandler;
         _sessionGetterService = sessionGetterService;
+        _errorMessageHandler = errorMessageHandler;
         _convertersFuncs =
-            new ConcurrentDictionary<MessageType, Func<string, string, string, ParsedResult<object>>>();
-        _convertersFuncs = new ConcurrentDictionary<MessageType, Func<string, string, string, ParsedResult<object>>>();
+            new ConcurrentDictionary<RequestType, Func<string, string, string, ParsedResult<object>>>();
+        _convertersFuncs = new ConcurrentDictionary<RequestType, Func<string, string, string, ParsedResult<object>>>();
     }
     
-    public async Task DispatchMessage(Guid userId, 
-        Guid sessionId,
-        string message,
-        MessageType messageType)
+    public async Task DispatchMessage(DispatchMessageRequest request)
     {
-        var session = await _sessionGetterService.GetSessionAsync(userId, sessionId);
-        var parsedRequestFunc = GetParsedRequestFunc(messageType);
+        var session = await _sessionGetterService.GetSessionAsync(request.UserId, request.SessionId);
+        var parsedRequestFunc = GetParsedRequestFunc(request.RequestType);
         
-        var parsedResult = parsedRequestFunc(session.HmacKey, session.AesKey, message);
+        var parsedResult = parsedRequestFunc(session.HmacKey, session.AesKey, request.Message);
 
-        switch (messageType)
+        switch (request.RequestType)
         {
-            case MessageType.DirectMessage:
-                parsedResult.RequestModel = parsedResult.RequestModel as SendDirectMessageRequest;
+            case RequestType.DirectMessage:
+                await _directMessageHandler.HandleAsync(parsedResult.RequestModel as SendDirectMessageRequest);
                 break;
         }
 
         if (!parsedResult.IsSucess)
         {
-            //use error handler
+            await _errorMessageHandler.HandleAsync(request.UserId, Guid.Empty, request.ConnectionId,
+                "Cannot parse model");
         }
     }
     
-    private Func<string, string, string, ParsedResult<object>> GetParsedRequestFunc(MessageType messageType)
+    private Func<string, string, string, ParsedResult<object>> GetParsedRequestFunc(RequestType requestType)
     {
-        if (_convertersFuncs.TryGetValue(messageType, out var res))
+        if (_convertersFuncs.TryGetValue(requestType, out var res))
             return res;
         
         var requestParserType = typeof(RequestParser);
-        var type = GetTypeByMessageType(messageType);   
+        var type = GetTypeByMessageType(requestType);   
         var parseRequestMethodInfo = requestParserType.GetMethod(nameof(RequestParser.ParseRequest))
             .MakeGenericMethod(type);
 
@@ -78,22 +80,22 @@ public class MessageDispatcherService : IMessageDispatcherService
             (call, hmacKeyParameter, aesKeyParameter, message);
 
         res = lambda.Compile();
-        _convertersFuncs.TryAdd(messageType, res);
+        _convertersFuncs.TryAdd(requestType, res);
         
         return res;
     }
 
-    private Type GetTypeByMessageType(MessageType messageType)
+    private Type GetTypeByMessageType(RequestType requestType)
     {
-        if (_messageTypes.TryGetValue(messageType, out var result))
+        if (_messageTypes.TryGetValue(requestType, out var result))
             return result;
         
-        switch (messageType)
+        switch (requestType)
         {
-            case MessageType.DirectMessage:
+            case RequestType.DirectMessage:
             {
                 result = typeof(SendDirectMessageRequest);
-                _messageTypes.TryAdd(messageType, result);
+                _messageTypes.TryAdd(requestType, result);
                 break;
             }
             default:

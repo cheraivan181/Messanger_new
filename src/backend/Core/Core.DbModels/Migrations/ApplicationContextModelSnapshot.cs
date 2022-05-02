@@ -157,15 +157,20 @@ namespace Core.DbModels.Migrations
                     b.Property<Guid>("DialogId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("IsDelivery")
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsReaded")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AnswerMessageId");
+
+                    b.HasIndex("DialogId");
 
                     b.ToTable("Messages");
                 });

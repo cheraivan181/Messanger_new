@@ -95,7 +95,9 @@ namespace Core.Repositories.Impl
             var result = (await connection.QueryAsync<User>(sql, new {userId = userId, userName = $"{userName}%"}))
                 .ToList();
             
-            return result;
+            return result.Skip(countUsersInPage * page)
+                .Take(countUsersInPage)
+                .ToList();
         }
     }
 }

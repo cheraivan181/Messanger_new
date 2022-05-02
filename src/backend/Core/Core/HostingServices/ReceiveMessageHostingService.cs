@@ -2,7 +2,10 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Confluent.Kafka;
+using Core.BinarySerializer;
+using Core.CryptProtocol.Domain;
 using Core.Kafka.Services.Interfaces;
+using Core.MessageServices.Services.Interfaces;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
@@ -15,13 +18,13 @@ namespace Core.HostingServices;
 public class ReceiveMessageHostingService : IHostedService
 {
     private readonly IProducerSubscriberProvider _producerSubscriberProvider;
-    private readonly IServiceProvider _serviceProvider;
-
+    private readonly IMessageDispatcherService _messageDispatcherService;
+    
     public ReceiveMessageHostingService(IProducerSubscriberProvider producerSubscriberProvider,
-        IServiceProvider serviceProvider)
+        IMessageDispatcherService messageDispatcherService)
     {
         _producerSubscriberProvider = producerSubscriberProvider;
-        _serviceProvider = serviceProvider;
+        _messageDispatcherService = messageDispatcherService;
     }
     
     public Task StartAsync(CancellationToken cancellationToken)
@@ -30,14 +33,13 @@ public class ReceiveMessageHostingService : IHostedService
         {
             Log.Information($"{nameof(ReceiveMessageHostingService)} was started");
             var consumer = _producerSubscriberProvider.GetConsumer(groupId: "consumer1"); 
-            consumer.Subscribe("s"); 
-            //consumer.Subscribe("s");
-            int count = 0;
+            consumer.Subscribe("messages");
+            
             while (!cancellationToken.IsCancellationRequested)
             {
-                //  var newMessage = newConsumer.Consume(cancellationToken);
                 var message = consumer.Consume(cancellationToken);
-                Log.Information( $"Received message: {message.Value}");
+                var deserializedMessage = message.Message.Value.FromBinaryMessage<DispatchMessageRequest>();
+                _messageDispatcherService.DispatchMessage(deserializedMessage);
             }
         }, cancellationToken);
         

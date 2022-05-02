@@ -4,6 +4,7 @@ using ConnectionHandler.Hubs;
 using ConnectionHandler.Options;
 using ConnectionHandler.Services.Implementations;
 using ConnectionHandler.Services.Interfaces;
+using Core.Kafka;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -71,8 +72,12 @@ public class Startup
         #region services
 
         services.AddSingleton<IClientConnectionService, ClientConnectionService>();
+        services.AddSingleton<IConnectionChanelsStorage, ConnectionChanelsStorage>();
+        services.AddScoped<IRedisBusService, RedisBusService>();
 
         #endregion
+
+        services.AddKafkaServices(Configuration);
     }
 
     public void Configure(IApplicationBuilder app,

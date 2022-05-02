@@ -58,8 +58,6 @@ public class PrepereMessagesToSendService : IPrepereMessagesToSendService
         var currentConnection = connections.Connections.Single(x => x.ConnectionId == connectionId);
         var session = await _sessionGetterService.GetSessionAsync(userId, currentConnection.SessionId);
         
-        //TODO: проследить установку хмак ключа в кеш
-        
         var messsage = _responseBuilder.BuildMessage<T>(responseModel, responseCode, responseAction,
             session.AesKey, session.HmacKey, currentNotificationOffset.Value);
         

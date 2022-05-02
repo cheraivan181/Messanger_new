@@ -6,10 +6,8 @@ namespace Core.CryptProtocol.Domain;
 // Это так сказать БАЗА. Вот это гоняется по протоколу
 public class Message : ISerializableMessage
 {
-    [JsonPropertyName("payload")]
     public string Payload { get; set; } // зашифрованная полезная нагрузка сообщения
     
-    [JsonPropertyName("sign")]
     public string Sign { get; set; } // цифровая подпись
     
     public string IV { get; set; } // вектор инициализации

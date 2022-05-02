@@ -2,7 +2,10 @@
 
 public enum ResponseAction
 {
-    ReceiveMessage = 0,
+    DirectMessage = 0,
     ReadMessage = 1,
-    CreateDialog = 2
+    CreateDialog = 2,
+    UpdateMessage = 3,
+    GetDialogMessages = 4,
+    Error = 5
 }

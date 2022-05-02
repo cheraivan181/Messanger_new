@@ -8,8 +8,8 @@ public static class DiExtensions
 {
     public static void AddSenderServices(this IServiceCollection serviceCollection)
     {
-        serviceCollection.AddSingleton<ISenderService, SenderService>();
-        serviceCollection.AddSingleton<IPrepereMessagesToSendService, PrepereMessagesToSendService>();
-        serviceCollection.AddSingleton<IMessageOffsetService, MessageOffsetService>();
+        serviceCollection.AddScoped<ISenderService, SenderService>();
+        serviceCollection.AddScoped<IPrepereMessagesToSendService, PrepereMessagesToSendService>();
+        serviceCollection.AddScoped<IMessageOffsetService, MessageOffsetService>();
     }
 }

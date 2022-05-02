@@ -59,4 +59,12 @@ public class DialogRepository : IDialogRepository
 
         return result.ToList();
     }
+
+    public async Task<Dialog> GetDialogAsync(Guid dialogId)
+    {
+        using var db = await _connectionFactory.GetDbConnectionAsync();
+        var result = await db.QueryFirstOrDefaultAsync<Dialog>("SELECT * FROM Dialogs WHERE Id = @id",
+            new {id = dialogId});
+        return result;
+    }
 }

@@ -23,6 +23,5 @@ public class Message
     
     public Message()
     {
-        CreatedAt = DateTime.Now;
     }
 }

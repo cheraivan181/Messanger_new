@@ -250,7 +250,7 @@ public class BinaryMessangerDeserializer : BinaryBase, IDisposable
     public unsafe Guid ReadGuid()
     {
         var lenght = _binaryReader.ReadInt32();
-        if (lenght == EmptyArrayHeader)
+        if (lenght == 0)
             return default;
 
         const int guidSize = 16;
@@ -260,6 +260,37 @@ public class BinaryMessangerDeserializer : BinaryBase, IDisposable
         return result;
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public unsafe Guid? ReadNullableGuid()
+    {
+        var lenght = _binaryReader.ReadInt32();
+        if (lenght == EmptyArrayHeader)
+            return null;
+
+        const int guidSize = 16;
+        Span<byte> buffer = _binaryReader.ReadBytes(guidSize);
+        
+        var result = new Guid(buffer);
+        return result;
+    }
+
+    public T Deserialzie<T>() where T : class, ISerializableMessage, new()
+    {
+        if (_binaryReader.BaseStream.Position != 0)
+        {
+            var objStatus = TryReadEnum<ObjectStatus>();
+            if (objStatus == null)
+            {
+                return null;
+            }
+        }
+
+        var o = new T();
+        o.Deserialize(this);
+        return o;
+    }
+    
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private TEnum TryReadEnum<TEnum>() where TEnum : struct, Enum
     {
         var status = ReadInt32();

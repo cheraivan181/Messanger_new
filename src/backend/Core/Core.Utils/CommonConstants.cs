@@ -19,5 +19,12 @@
         public const string ReceiveMessages = "receiveMessageTopic";
 
         #endregion
+
+        #region CacheSettings
+
+        public const int CacheDialogMessages = 20;
+        public const int CountMessagesInPage = 100;
+
+        #endregion
     }
 }

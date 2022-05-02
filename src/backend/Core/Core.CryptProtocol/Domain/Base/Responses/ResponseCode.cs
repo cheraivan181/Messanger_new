@@ -6,5 +6,6 @@ public enum ResponseCode
     InvalidModel = 400,
     CannotDeserializeRequestMessage = 401,
     InvalidSign = 500,
-    InvalidCryptText = 501
+    InvalidCryptText = 501,
+    GlobalError = 1000
 }

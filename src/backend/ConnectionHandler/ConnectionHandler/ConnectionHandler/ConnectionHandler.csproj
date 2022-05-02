@@ -25,10 +25,14 @@
 
     <ItemGroup>
       <Folder Include="GRPCHandlers" />
+      <Folder Include="Models\Responses" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\Core\Core.Grpc\Core.Grpc.csproj" />
+      <ProjectReference Include="..\ConnectionHandler.Kafka\ConnectionHandler.Kafka.csproj" />
+      <ProjectReference Include="..\ConnectionHandler.Redis\ConnectionHandler.Redis.csproj" />
+      <ProjectReference Include="..\ConnectionHandler.Serializer\ConnectionHandler.Serializer.csproj" />
     </ItemGroup>
 
     <ItemGroup>

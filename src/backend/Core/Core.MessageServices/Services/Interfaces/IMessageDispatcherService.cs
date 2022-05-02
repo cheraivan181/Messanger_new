@@ -1,11 +1,9 @@
-﻿using Core.MessageServices.Domain;
+﻿using Core.CryptProtocol.Domain;
+using Core.MessageServices.Domain;
 
 namespace Core.MessageServices.Services.Interfaces;
 
 public interface IMessageDispatcherService
 {
-    Task DispatchMessage(Guid userId,
-        Guid sessionId,
-        string message,
-        MessageType messageType);
+    Task DispatchMessage(DispatchMessageRequest request);
 }

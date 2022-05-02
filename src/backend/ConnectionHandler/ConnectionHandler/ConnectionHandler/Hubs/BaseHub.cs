@@ -13,13 +13,15 @@ public class BaseHub : Hub
         }
     }
     
-    public string UserId
+    public Guid UserId
     {
         get
         {
-            return Context.User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier)
+            var userId = Context.User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier)
                 .Select(x => x.Value)
                 .FirstOrDefault();
+
+            return new Guid(userId);
         }
     }
     
