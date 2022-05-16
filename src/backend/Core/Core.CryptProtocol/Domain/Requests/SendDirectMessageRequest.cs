@@ -2,7 +2,7 @@
 
 namespace Core.CryptProtocol.Domain;
 
-public class SendDirectMessageRequest : BasePayload, ISerializableMessage
+public class SendDirectMessageRequest : BaseRequestPayload, ISerializableMessage
 {
     public Guid MessageId { get; set; }
     public Guid FromId { get; set; }

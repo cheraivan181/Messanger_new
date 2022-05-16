@@ -21,6 +21,13 @@ namespace Core.Repositories.Impl
                 await conn.QueryFirstOrDefaultAsync<User>("SELECT * FROM Users WHERE Id = @userId", new { userId = userId });
         }
 
+        public async Task<User> GetUserByUserNameAsync(string userName)
+        {
+            using var conn = await _connectionFactory.GetDbConnectionAsync();
+            return 
+                await conn.QueryFirstOrDefaultAsync<User>("SELECT * FROM Users WHERE UserName = @userName", new { userName = userName });
+        }
+
         public async Task<User> GetUserByUserNameAndPassword(string userName, string hashPassword)
         {
             using (var conn = await _connectionFactory.GetDbConnectionAsync())
@@ -90,7 +97,7 @@ namespace Core.Repositories.Impl
             string sql =
                 $"SELECT TOP ({skipUsers + countUsersInPage}) u.Id, u.UserName, d.User1Id, d.User2Id FROM Users u "
                 + "LEFT JOIN Dialogs d ON d.User1Id = u.Id or d.User2Id = u.Id "
-                + "WHERE UserName LIKE @userName and d.Id IS NULL OR (d.User1Id != @userId AND d.User2Id != @userId)";
+                + "WHERE u.UserName LIKE @userName and (d.Id IS NULL OR (d.User1Id != @userId AND d.User2Id != @userId))";
             
             var result = (await connection.QueryAsync<User>(sql, new {userId = userId, userName = $"{userName}%"}))
                 .ToList();

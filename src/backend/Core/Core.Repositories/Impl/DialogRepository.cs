@@ -19,7 +19,7 @@ public class DialogRepository : IDialogRepository
         using var connection = await _connectionFactory.GetDbConnectionAsync();
         var result = Guid.NewGuid();
 
-        string sql = "INSERT INTO Dialogs (Id, User1Id, User2Id, Created, DialogRequestId) " +
+        string sql = "INSERT INTO Dialogs (Id, User1Id, User2Id, CreatedAt, DialogRequestId) " +
                      "VALUES (@id, @user1id, @user2id, @created, @dialogRequestId)";
 
         await connection.ExecuteAsync(sql, new

@@ -24,28 +24,32 @@ public class ClientConnectionService : IClientConnectionService
         _urlOptions = urlOptions;
     }
 
-    public async Task<ConnectorResponse> ConnectAsync(string connectionId)
+    public async Task<ConnectorResponse> ConnectAsync(string connectionId, string userId, string sessionId)
     {
         var channel = GetChannel();
         Connector.Connector.ConnectorClient client = new(channel);
 
         var userConnectRequest = new UserConnectRequest()
         {
-            ConnectionId = connectionId
+            ConnectionId = connectionId,
+            UserId = userId,
+            SessionId = sessionId
         };
         
         var response = await client.ConnectUserAsync(userConnectRequest);
         return response;
     }
 
-    public async Task<ConnectorResponse> DisconnectAsync(string connectionId)
+    public async Task<ConnectorResponse> DisconnectAsync(string connectionId, string userId, string sessionId)
     {
         var channel = GetChannel();
         Connector.Connector.ConnectorClient client = new(channel);
 
         var userConnectRequest = new UserConnectRequest()
         {
-            ConnectionId = connectionId
+            ConnectionId = connectionId,
+            UserId = userId,
+            SessionId = sessionId
         };
         
         var response = await client.ConnectUserAsync(userConnectRequest);

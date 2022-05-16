@@ -16,10 +16,9 @@ namespace Core.Kafka.Services.Implementations
             _kafkaOptions = kafkaOptions;
         }
 
-        public async Task<bool> ProduceAsync<T>(string topicName, T objectToProduct, int partition = 0) where T:class, ISerializableMessage
+        public async Task<bool> ProduceAsync(string topicName, string message, int partition = 0) 
         {
             var msgId = DateTime.Now.Ticks;
-            var message = objectToProduct.ToBinaryMessage();
             
             var config = new ProducerConfig()
             {

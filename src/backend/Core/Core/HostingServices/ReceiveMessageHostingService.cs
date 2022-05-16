@@ -1,45 +1,45 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Confluent.Kafka;
-using Core.BinarySerializer;
+﻿using Core.BinarySerializer;
 using Core.CryptProtocol.Domain;
 using Core.Kafka.Services.Interfaces;
 using Core.MessageServices.Services.Interfaces;
-using Microsoft.Extensions.Hosting;
+using Core.Utils;
 using Serilog;
 
 namespace Core.HostingServices;
-
 
 /// <summary>
 /// По сути это будет ядро. Подписка на топик событий и процессинг их 
 /// </summary>
 public class ReceiveMessageHostingService : IHostedService
 {
-    private readonly IProducerSubscriberProvider _producerSubscriberProvider;
-    private readonly IMessageDispatcherService _messageDispatcherService;
+    private readonly IServiceProvider _serviceProvider;
+    private readonly IConfiguration _configuration;
     
-    public ReceiveMessageHostingService(IProducerSubscriberProvider producerSubscriberProvider,
-        IMessageDispatcherService messageDispatcherService)
+    public ReceiveMessageHostingService(IServiceProvider serviceProvider,
+        IConfiguration configuration)
     {
-        _producerSubscriberProvider = producerSubscriberProvider;
-        _messageDispatcherService = messageDispatcherService;
+        _serviceProvider = serviceProvider;
+        _configuration = configuration;
     }
     
     public Task StartAsync(CancellationToken cancellationToken)
     {
         var task = Task.Run( async() =>
         {
+            using var scope = _serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope();
+            var producerSubscriberProvider = scope.ServiceProvider.GetRequiredService<IProducerSubscriberProvider>();
+            var messageDispatcherService = scope.ServiceProvider.GetRequiredService<IMessageRouterService>();
+             
             Log.Information($"{nameof(ReceiveMessageHostingService)} was started");
-            var consumer = _producerSubscriberProvider.GetConsumer(groupId: "consumer1"); 
-            consumer.Subscribe("messages");
+            
+            var consumer = producerSubscriberProvider.GetConsumer(groupId: "consumer1"); //TODO:: while sharding task
+            consumer.Subscribe(CommonConstants.MessagesTopic); 
             
             while (!cancellationToken.IsCancellationRequested)
             {
                 var message = consumer.Consume(cancellationToken);
                 var deserializedMessage = message.Message.Value.FromBinaryMessage<DispatchMessageRequest>();
-                _messageDispatcherService.DispatchMessage(deserializedMessage);
+                messageDispatcherService.DispatchMessageAsync(deserializedMessage);
             }
         }, cancellationToken);
         

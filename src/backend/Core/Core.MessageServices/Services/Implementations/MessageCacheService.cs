@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.Concurrent;
+using System.Text;
 using Core.BinarySerializer;
 using Core.CacheServices.Interfaces.Base;
 using Core.DbModels;
@@ -26,6 +27,17 @@ public class MessageCacheService : IMessageCacheService
     {
         var database = _databaseProvider.GetDatabase();
         var cacheKey = GetCacheKey(dialogId);
+
+        if (await database.SetContainsAsync(CommonConstants.MessageCacheInitializerKey, cacheKey))
+        {
+            return;
+        }
+        
+        //todo:: run lua script
+        
+        database.KeyExpire(cacheKey, TimeSpan.FromMinutes(CommonConstants.MinutesStoreDialogMessages), 
+            CommandFlags.FireAndForget);
+        
         var lenght = await database.ListLengthAsync(cacheKey);
         var mapResult = _messageMapper.Map(message).ToBinaryMessage();
         
@@ -42,11 +54,16 @@ public class MessageCacheService : IMessageCacheService
         var database = _databaseProvider.GetDatabase();
         var cacheKey = GetCacheKey(dialogId);
 
-        var list = await database.ListRangeAsync(cacheKey, 0, CommonConstants.CacheDialogMessages);
+        var list = await database.ListRangeAsync(cacheKey, 0, -1);
         int index = 0;
         for (int i = 0; i < CommonConstants.CacheDialogMessages; i++)
+        {
             if (list[i].ToString().FromBinaryMessage<MessageModel>().MessageId == message.Id)
+            {
                 index = i;
+                break;
+            }
+        }
 
         var mapResult = _messageMapper.Map(message).ToBinaryMessage();
         await database.ListSetByIndexAsync(cacheKey, index, mapResult);
@@ -57,7 +74,7 @@ public class MessageCacheService : IMessageCacheService
         var database = _databaseProvider.GetDatabase();
         var cacheKey = GetCacheKey(dialogId);
 
-        var result = await database.ListRangeAsync(cacheKey, 0, CommonConstants.CacheDialogMessages);
+        var result = await database.ListRangeAsync(cacheKey, 0, -1);
         return result.Select(x => x.ToString())
             .ToList();
     }
@@ -67,6 +84,8 @@ public class MessageCacheService : IMessageCacheService
 
     private string GetScript(string cacheKey)
     {
+        //TODO:: Implement lua script for redis 
+        
         var sb = new StringBuilder();
         sb.AppendLine("require 'rubygems'");
         sb.AppendLine("require 'redis'");

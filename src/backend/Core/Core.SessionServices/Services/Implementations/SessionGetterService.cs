@@ -8,12 +8,15 @@ namespace Core.SessionServices.Services.Implementations;
 public class SessionGetterService : ISessionGetterService
 {
     private readonly ISessionRepository _sessionRepository;
+    private readonly IUserCypherKeyRepository _userCypherKeyRepository;
     private readonly ISessionCacheService _sessionCacheService;
 
     public SessionGetterService(ISessionRepository sessionRepository,
+        IUserCypherKeyRepository userCypherKeyRepository,
         ISessionCacheService sessionCacheService)
     {
         _sessionRepository = sessionRepository;
+        _userCypherKeyRepository = userCypherKeyRepository;
         _sessionCacheService = sessionCacheService;
     }
 
@@ -30,12 +33,15 @@ public class SessionGetterService : ISessionGetterService
                 return null;
             }
 
+            var cypher = await _userCypherKeyRepository.GetCypherKeyBySessionIdAsync(sessionId);
+            
             Log.Debug($"Set session #({sessionId}) in cache");
             await _sessionCacheService.AddSessionInCacheAsync(userId, sessionId, sessionFromDb.ServerPrivateKey,
-                sessionFromDb.ServerPublicKey, sessionFromDb.ClientPublicKey, sessionFromDb.HmacKey);
+                sessionFromDb.ServerPublicKey, sessionFromDb.ClientPublicKey, cypher.CryptedKey, 
+                sessionFromDb.HmacKey);
             
             sessionsFromCache = new SessionModel(sessionId, sessionFromDb.ServerPrivateKey,
-                sessionFromDb.ServerPublicKey, sessionFromDb.ClientPublicKey, sessionFromDb.HmacKey);
+                sessionFromDb.ServerPublicKey, sessionFromDb.ClientPublicKey, cypher.CryptedKey, sessionFromDb.HmacKey);
             
             return sessionsFromCache;
         }

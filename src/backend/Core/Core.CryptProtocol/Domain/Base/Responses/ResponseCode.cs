@@ -3,9 +3,8 @@
 public enum ResponseCode
 {
     Sucess = 100,
-    InvalidModel = 400,
-    CannotDeserializeRequestMessage = 401,
-    InvalidSign = 500,
-    InvalidCryptText = 501,
+    IncorrectSign = 501,
+    IncorrectCryptedText = 502,
+    NotAvailableDialog = 503,
     GlobalError = 1000
 }

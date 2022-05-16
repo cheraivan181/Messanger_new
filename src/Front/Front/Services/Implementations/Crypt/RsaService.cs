@@ -45,9 +45,14 @@ namespace Front.Services.Implementations.Crypt
         public async Task<string> DecryptTextAsync(string cryptedText)
         {
             var session = await _sessionGetterService.GetSessionAsync();
-
             var result = await _cryptClient.RsaDecryptAsync(session.ClientPrivateKey, cryptedText);
 
+            return result.SucessResponse.Response.DecrtyptedText;
+        }
+
+        public async Task<string> DecryptTextAsync(string privateKey, string cryptedText)
+        {
+            var result = await _cryptClient.RsaDecryptAsync(privateKey, cryptedText);
             return result.SucessResponse.Response.DecrtyptedText;
         }
     }

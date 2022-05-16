@@ -18,23 +18,20 @@ public class SenderService : ISenderService
     }
     
 
-    public async Task SendMessageToUserAsync(MessageToSendInNetwork messageToSend,
-        bool isSendMessageToSpecialChannel = false)
+    public async Task SendMessageToUserAsync(MessageToSendInNetwork messageToSend)
     {
         var subscriber = _databaseProvider.GetSubscribers();
-        await _messageOffsetService.IncrementNotificationOffsetAsync(messageToSend.UserId);
+        _messageOffsetService.IncrementNotificationOffset(messageToSend.UserId);
         foreach (var message in messageToSend.Messages)
         {
-            var channelName = GetChannelName(messageToSend.UserId, message.ConnectionId, isSendMessageToSpecialChannel);
+            var channelName = GetChannelName(messageToSend.UserId, message.ConnectionId);
             subscriber.Publish(new RedisChannel(channelName, RedisChannel.PatternMode.Auto),
                 message.Message, CommandFlags.FireAndForget);
         }
     }
     
-    private string GetChannelName(Guid userId, string connectionId, bool isSpecial)
+    private string GetChannelName(Guid userId, string connectionId)
     {
-        if (!isSpecial)
-            return $"{userId}-{connectionId}";
-        return $"{userId}-{connectionId}-special";
+        return $"{userId}-{connectionId}";
     }
 }

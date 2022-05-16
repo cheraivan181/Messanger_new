@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\Shared\BinarySerializer\BinarySerializer.csproj" />
       <ProjectReference Include="..\Core.BinarySerializer\Core.BinarySerializer.csproj" />
       <ProjectReference Include="..\Core.CryptService\Core.CryptService.csproj" />
     </ItemGroup>

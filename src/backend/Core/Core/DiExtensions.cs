@@ -3,10 +3,12 @@ using Core.CryptProtocol;
 using Core.CryptService;
 using Core.DbModels.Base.Di;
 using Core.DialogServices;
+using Core.HandlerActions;
 using Core.IdentityService;
 using Core.Kafka;
 using Core.Mapping;
 using Core.MessageServices;
+using Core.MessageServices.Services.Implementations;
 using Core.Repositories;
 using Core.SearchServices;
 using Core.SenderServices;
@@ -33,6 +35,8 @@ namespace Core
             serviceCollection.AddProtocolServices();
             serviceCollection.AddMessageServices();
             serviceCollection.AddSenderServices();
+            serviceCollection.AddRouterServices();
+            serviceCollection.AddHandlerActionsServices();
         } 
     }
 }

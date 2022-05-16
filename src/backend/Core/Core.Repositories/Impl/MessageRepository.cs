@@ -38,7 +38,7 @@ public class MessageRepository : IMessageRepository
         string sql = "SELECT * FROM Dialogs d "
                      + "CROSS APPLY (SELECT TOP 1 * FROM Messages m WHERE m.DialogId = d.Id ORDER BY m.CreatedAt DESC) "
                      + "WHERE d.User1Id = @userId OR d.User2Id = @userId "
-                     + "ORDER BY d.Created DESC";
+                     + "ORDER BY d.CreatedAt DESC";
 
         var messages = await db.QueryAsync<Message>(sql, new {userId = userId});
         return messages.ToList();
@@ -66,7 +66,7 @@ public class MessageRepository : IMessageRepository
     {
         using var db = await _connectionFactory.GetDbConnectionAsync();
         string sql = "SELECT * FROM Dialogs d "
-                     + $"CROSS APPLY (SELECT TOP {CountMessagesInCache}  * FROM Messages m WHERE m.DialogId = d.DialogId ORDER BY m.Created DESC) "
+                     + $"CROSS APPLY (SELECT TOP {CountMessagesInCache} * FROM Messages m WHERE m.DialogId = d.Id ORDER BY m.CreatedAt DESC) m "
                      + "WHERE d.User1Id = @userId OR d.User2Id = @userId "
                      + "ORDER BY d.CreatedAt DESC";
         

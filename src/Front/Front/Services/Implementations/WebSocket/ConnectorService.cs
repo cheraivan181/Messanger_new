@@ -21,25 +21,32 @@ namespace Front.Services.Implementations.WebSocket
 
         public async Task InitConnectionAsync()
         {
-            var url = _configuration.GetValue<string>("ConnectorUrl");
-            using var scope = _serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope();
-            _localStorageService = scope.ServiceProvider.GetRequiredService<ILocalStorageService>();
-
-            _hubConnection = new HubConnectionBuilder()
-                .WithUrl($"{url}/messanger", options =>
-                {
-                    options.AccessTokenProvider = async () => 
+            if (_hubConnection == null)
+            {
+                var url = _configuration.GetValue<string>("ConnectorUrl");
+                using var scope = _serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope();
+                _localStorageService = scope.ServiceProvider.GetRequiredService<ILocalStorageService>();
+                _hubConnection = new HubConnectionBuilder()
+                    .WithUrl($"{url}/messanger", options =>
                     {
-                        var acessToken = await _localStorageService.GetItemAsStringAsync(Constants.AcessTokenName);
-                        return acessToken;
-                    };
-                })
-                .AddMessagePackProtocol()
-                .WithAutomaticReconnect()
-                .Build();
+                        options.AccessTokenProvider = async () =>
+                        {
+                            var acessToken = await _localStorageService.GetItemAsStringAsync(Constants.AcessTokenName);
+                            return acessToken;
+                        };
+                    })
+                    .AddMessagePackProtocol()
+                    .WithAutomaticReconnect()
+                    .Build();
 
-            _hubConnection.On("test", () => { });
-            await _hubConnection.StartAsync();
+                _hubConnection.On("test", () => { });
+                await _hubConnection.StartAsync();
+            }
+        }
+
+        public Task SendDirectMessage(string message)
+        {
+            return _hubConnection.SendAsync("sendDirectMessage", message);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Core.CacheServices.Interfaces.Base;
+﻿using Core.BinarySerializer;
+using Core.CacheServices.Interfaces.Base;
 using Core.SessionServices.Domain;
 using Core.SessionServices.Services.Interfaces;
 using Core.Utils;
@@ -16,29 +17,38 @@ public sealed class SessionCacheService : ISessionCacheService
     }
     
     public async Task AddSessionInCacheAsync(Guid userId, Guid sessionId, string serverPublicKey,
-        string serverPrivateKey, string clientPublicKey, string hmacKey)
+        string serverPrivateKey, string clientPublicKey, string aes, string hmacKey)
     {
         var database = _databaseProvider.GetDatabase();
         var cacheKey = GetSessionCacheKey(userId);
-        var cacheModel = new SessionModel(sessionId, serverPrivateKey, serverPublicKey, clientPublicKey, hmacKey)
-            .ToJson();
+
+        if (!await database.KeyExistsAsync(cacheKey))
+        {
+            database.KeyExpire(cacheKey, TimeSpan.FromMinutes(CommonConstants.MinutesSessionInCache), 
+                CommandFlags.FireAndForget);
+        } 
+        //todo:: lua
+        
+        var cacheModel = new SessionModel(sessionId, serverPrivateKey, serverPublicKey, clientPublicKey, aes, hmacKey)
+            .ToBinaryMessage();
         
         await database.ListRightPushAsync(new RedisKey(cacheKey), new RedisValue(cacheModel));
     }
 
-    public async Task RemoveSessonFromCacheAsync(Guid userId, Guid sessionId)
+    public async Task RemoveSessionFromCacheAsync(Guid userId, Guid sessionId)
     {
         var database = _databaseProvider.GetDatabase();
         var cacheKey = GetSessionCacheKey(userId);
 
         var lstLength = await database.ListLengthAsync(cacheKey);
+        
         if (lstLength == 1)
         {
-            await database.KeyDeleteAsync(cacheKey);
+            database.KeyDelete(cacheKey, CommandFlags.FireAndForget);
             return;
         }
-
-        var sessions = await database.ListRangeAsync(cacheKey, 0, lstLength - 1);
+        
+        var sessions = await database.ListRangeAsync(cacheKey, 0, -1);
         for (int i = 0; i < sessions.Length; i++)
         {
             if (sessions[i].FromJson<SessionModel>().SessionId == sessionId)
@@ -53,12 +63,9 @@ public sealed class SessionCacheService : ISessionCacheService
     { 
         var database = _databaseProvider.GetDatabase();
         var cacheKey = GetSessionCacheKey(userId);
-        var lenght = await database.ListLengthAsync(new RedisKey(cacheKey));
-        if (lenght == 0)
-            return new List<SessionModel>();
 
-        var list = await database.ListRangeAsync(new RedisKey(cacheKey), 0, lenght - 1);
-        var result = list.Select(x => x.FromJson<SessionModel>())
+        var list = await database.ListRangeAsync(new RedisKey(cacheKey), 0, -1);
+        var result = list.Select(x => x.ToString().FromBinaryMessage<SessionModel>())
             .ToList();
         
         return result;

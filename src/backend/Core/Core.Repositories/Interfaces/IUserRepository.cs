@@ -13,5 +13,6 @@ namespace Core.Repositories.Interfaces
         Task<User> GetUserByIdAsync(Guid userId);
         Task<User> GetUserByRefreshTokenAsync(string refreshToken);
         Task<List<User>> SearchUsersByUserNameAsync(Guid userId, string userName, int page = 0);
+        Task<User> GetUserByUserNameAsync(string userName);
     }
 }

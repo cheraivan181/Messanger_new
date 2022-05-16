@@ -53,8 +53,7 @@ builder.Services.AddHttpClient("CoreClient", httpClient =>
 
 #region storeServices
 
-builder.Services.AddSingleton<StateContainer>();
-builder.Services.AddSingleton<MessageStateContainer>();
+builder.Services.AddSingleton<MessageDialogStateContainer>();
 builder.Services.AddSingleton<DialogStateContainer>();
 builder.Services.AddSingleton<SearchResultStateContainer>();
 

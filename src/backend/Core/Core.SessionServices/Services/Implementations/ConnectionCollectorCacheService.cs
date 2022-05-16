@@ -1,4 +1,5 @@
-﻿using Core.CacheServices.Interfaces.Base;
+﻿using Core.BinarySerializer;
+using Core.CacheServices.Interfaces.Base;
 using Core.SessionServices.Domain;
 using Core.SessionServices.Services.Interfaces;
 using Core.Utils;
@@ -37,7 +38,7 @@ public class ConnectionCollectorCacheService : IConnectionCollectorCacheService
         {
             var dataFromCache = await GetConnectionsFromCacheAsync(userId);
             dataFromCache.Connections.Add(new ConnectionInCacheModel(sessionId, connectionId));
-            await database.StringSetAsync(cacheKey, new RedisValue(dataFromCache.ToJson()));
+            await database.StringSetAsync(cacheKey, new RedisValue(dataFromCache.ToBinaryMessage()), TimeSpan.FromMinutes(CommonConstants.MinutesConnectionsInCache));
         }
         else
         {
@@ -47,7 +48,7 @@ public class ConnectionCollectorCacheService : IConnectionCollectorCacheService
                 new ConnectionInCacheModel(sessionId, connectionId)
             };
 
-            await database.StringSetAsync(cacheKey, new RedisValue(connections.ToJson()));
+            await database.StringSetAsync(cacheKey, new RedisValue(connections.ToJson()), TimeSpan.FromMinutes(CommonConstants.MinutesConnectionsInCache));
         }
     }
 
@@ -57,7 +58,7 @@ public class ConnectionCollectorCacheService : IConnectionCollectorCacheService
         var cacheKey = new RedisKey(GetCacheKey(userId));
         var isDataExist = await database.KeyExistsAsync(cacheKey);
 
-        if (!isDataExist)
+        if (!isDataExist)  
         {
             Log.Error($"Cannot find connection #({connectionId}), cacheKey: #({cacheKey})");
             return;
@@ -67,6 +68,13 @@ public class ConnectionCollectorCacheService : IConnectionCollectorCacheService
             .FromJson<ConnectionStoreModel>();
         var connections = dataFromCache.Connections.Where(x => x.ConnectionId != connectionId)
             .ToList();
+
+        if (connections.Count == 0)
+        {
+            database.KeyDelete(cacheKey, CommandFlags.FireAndForget);
+            return;
+        }
+        
         dataFromCache.Connections = connections;
 
         await database.StringSetAsync(cacheKey, new RedisValue(dataFromCache.ToJson()));

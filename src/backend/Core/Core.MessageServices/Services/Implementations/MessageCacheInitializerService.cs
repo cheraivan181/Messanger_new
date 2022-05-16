@@ -4,6 +4,7 @@ using Core.MessageServices.Services.Interfaces;
 using Core.Repositories.Interfaces;
 using Core.SessionServices.Services.Interfaces;
 using Core.Utils;
+using StackExchange.Redis;
 
 namespace Core.MessageServices.Services.Implementations;
 
@@ -31,23 +32,29 @@ public class MessageCacheInitializerService : IMessageCacheInitializerService
     public async Task InitializeMessageCacheAsync(Guid userId)
     {
         var database = _databaseProvider.GetDatabase();
-        var initializeCacheKey = GetInitializedCacheKey(userId);
-        
-        if (await database.KeyExistsAsync(initializeCacheKey))
-            return;
-        
         var messageLists = await _messageRepository.GetMessageListsAsync(userId);
+
+        if (await database.SetContainsAsync(CommonConstants.MessageCacheInitializerKey, new RedisValue(userId.ToString())))
+        {
+            return;
+        }
         
         var batch = database.CreateBatch();
-           
+
         foreach (var messageList in messageLists)
         {
             var cacheKey = GetCacheKey(messageList.Key);
+            KeysCache.Cache.TryAdd(userId, cacheKey);
+            
+            batch.KeyExpireAsync(cacheKey.ToRedisKey(), TimeSpan.FromMinutes(CommonConstants.MinutesStoreDialogMessages)); // Нужны наблюдения. Метрики, например 
+            
             foreach (var message in messageList.Value)
             {
                 var mapMessage = _messageMapper.Map(message).ToBinaryMessage();
                 batch.ListRightPushAsync(cacheKey.ToRedisKey(), mapMessage);
             }
+
+            batch.SetAddAsync(CommonConstants.MessageCacheInitializerKey, cacheKey);
         }
         
         batch.Execute();
@@ -75,6 +82,7 @@ public class MessageCacheInitializerService : IMessageCacheInitializerService
 
             var cacheKey = GetCacheKey(dialog.Id);
             batch.KeyDeleteAsync(cacheKey);
+            batch.SetRemoveAsync(CommonConstants.MessageCacheInitializerKey, cacheKey);
         }
         
         batch.Execute();
@@ -82,7 +90,4 @@ public class MessageCacheInitializerService : IMessageCacheInitializerService
 
     private string GetCacheKey(Guid dialogId) =>
         $"{dialogId}-messageCache";
-
-    private string GetInitializedCacheKey(Guid userId) =>
-        $"{userId}-messageCacheInitialized";
 }

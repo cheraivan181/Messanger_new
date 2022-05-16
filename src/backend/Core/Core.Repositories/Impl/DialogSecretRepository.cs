@@ -40,7 +40,7 @@ public class DialogSecretRepository : IDialogSecretRepository
         var queryResult = await connection.QueryAsync<DialogSecret>(sql, new {dialogIds = dialogIds});
 
         foreach (var dialog in queryResult.AsEnumerable())
-            result.Add(dialog.Id, dialog.CypherKey);
+            result.Add(dialog.DialogId, dialog.CypherKey);
         
         return result;
     }

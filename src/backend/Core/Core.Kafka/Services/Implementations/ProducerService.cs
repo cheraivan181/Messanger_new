@@ -18,7 +18,7 @@ namespace Core.Kafka.Services.Implementations
             _kafkaOptions = kafkaOptions;
         }
 
-        public async Task<bool> ProduceAsync(string topicName, object objectToProduct, int partition = 0)
+        public async Task<bool> ProduceAsync(string topicName, object objectToProduct, int partition = 0) 
         {
             var msgId = DateTime.Now.Ticks;
             var message = objectToProduct.ToJson();

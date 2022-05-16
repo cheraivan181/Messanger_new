@@ -13,14 +13,14 @@
 
         <EditForm Model="RegisterModel" OnValidSubmit="SignUpAsync" class="form-signin">
             <DataAnnotationsValidator />
-            <InputText id="email" class="form-control" @bind-Value="RegisterModel.UserName" />
+            <InputText id="email" class="form-control" @bind-Value="RegisterModel.UserName" placeholder="username"/>
             <ValidationMessage For="@(() => RegisterModel.UserName)" />
             
-            <InputText id="email" class="form-control" @bind-Value="RegisterModel.Email" />
+            <InputText id="email" class="form-control" @bind-Value="RegisterModel.Email" placeholder="email"/>
             <ValidationMessage For="@(() => RegisterModel.Email)" />
-            <InputText id="email" class="form-control" @bind-Value="RegisterModel.Phone" />
+            <InputText id="email" class="form-control" @bind-Value="RegisterModel.Phone" placeholder="phone"/>
             <ValidationMessage For="@(() => RegisterModel.Phone)" />
-            <InputText type="password" id="password" class="form-control" @bind-Value="RegisterModel.Password" />
+            <InputText type="password" id="password" class="form-control" @bind-Value="RegisterModel.Password" placeholder="password"/>
             <ValidationMessage For="@(() => RegisterModel.Password)" />
             <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Register</button>     
         </EditForm>

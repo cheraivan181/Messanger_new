@@ -25,6 +25,7 @@
 
     <ItemGroup>
       <Folder Include="GRPCHandlers" />
+      <Folder Include="HostedService" />
       <Folder Include="Models\Responses" />
     </ItemGroup>
 

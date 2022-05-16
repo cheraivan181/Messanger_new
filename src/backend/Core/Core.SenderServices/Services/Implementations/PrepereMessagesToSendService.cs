@@ -26,14 +26,16 @@ public class PrepereMessagesToSendService : IPrepereMessagesToSendService
     }
     
     public async Task<MessageToSendInNetwork> BuildMessageToSendResponseAsync<T>(T responseModel,
-        Guid userId, ResponseAction responseAction, ResponseCode code = ResponseCode.Sucess) where T:class, ISerializableMessage
+        Guid userId, ResponseAction responseAction, ResponseCode code = ResponseCode.Sucess,
+        string skippedConnectionId = null) where T:class, ISerializableMessage
     {
         var sessions = await _sessionGetterService.GetSessionsAsync(userId);
         var connections = await _connectionCollectorService.GetConnectionsAsync(userId);
-        var notificationOffsets = await _messageOffsetService.GetNotificationOffsetsAsync(userId);
+        var notificationOffsets = _messageOffsetService.GetNotificationOffsets(userId);
         
         var result = new MessageToSendInNetwork();
-        foreach (var connection in connections.Connections)
+        
+        foreach (var connection in connections.Connections.Where(x => x.ConnectionId != skippedConnectionId))
         {
             var currentSession = sessions.Single(x => x.SessionId == connection.SessionId);
             var currentOffset = notificationOffsets.Single(x => x.Key == connection.ConnectionId);
@@ -52,7 +54,7 @@ public class PrepereMessagesToSendService : IPrepereMessagesToSendService
     {
         var result = new MessageToSendInNetwork();
         var connections = await _connectionCollectorService.GetConnectionsAsync(userId);
-        var notificationsOffset = await _messageOffsetService.GetNotificationOffsetsAsync(userId);
+        var notificationsOffset =  _messageOffsetService.GetNotificationOffsets(userId);
         var currentNotificationOffset = notificationsOffset.Single(x => x.Key == connectionId);
 
         var currentConnection = connections.Connections.Single(x => x.ConnectionId == connectionId);

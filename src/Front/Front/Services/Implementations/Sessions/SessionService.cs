@@ -5,7 +5,7 @@ using Front.Json;
 using Front.Services.Interfaces.Auth;
 using Front.Services.Interfaces.Crypt;
 using Front.Services.Interfaces.Sessions;
-using System.Text.Json;
+
 
 namespace Front.Services.Implementations.Sessions
 {
@@ -34,12 +34,16 @@ namespace Front.Services.Implementations.Sessions
             if (!createSessionResponse.IsSucess)
                 return false;
 
+            var decryptedAes = await _rsaService.DecryptTextAsync(rsaKeys.privateKey, createSessionResponse.SucessResponse.Response.Aes);
+
             var session = new SessionModel()
             {
                 ClientPublicKey = rsaKeys.publicKey,
                 ClientPrivateKey = rsaKeys.privateKey,
                 ServerPublicKey = createSessionResponse.SucessResponse.Response.ServerPublicKey,
-                SessionId = createSessionResponse.SucessResponse.Response.SessionId
+                SessionId = createSessionResponse.SucessResponse.Response.SessionId,
+                Aes = decryptedAes,
+                SignKey = createSessionResponse.SucessResponse.Response.HmacKey
             };
 
             await _localStorageService.SetItemAsStringAsync(Constants.SessionName, session.ToJson());

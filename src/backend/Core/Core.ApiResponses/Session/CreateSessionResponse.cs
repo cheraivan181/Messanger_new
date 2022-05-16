@@ -15,4 +15,7 @@ public class CreateSessionResponse
     
     [JsonPropertyName("isNeedUpdateToken")]
     public bool IsNeedUpdateToken { get; set; }
+    
+    [JsonPropertyName("aes")]
+    public string Aes { get; set; }
 }

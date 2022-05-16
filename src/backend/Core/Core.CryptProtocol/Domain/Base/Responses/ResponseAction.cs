@@ -7,5 +7,6 @@ public enum ResponseAction
     CreateDialog = 2,
     UpdateMessage = 3,
     GetDialogMessages = 4,
-    Error = 5
+    DeliveryMessage = 5,
+    Error = 6
 }

@@ -9,10 +9,12 @@ namespace Core.DialogServices.Implementations;
 
 public class DialogService : IDialogService
 {
-   private readonly ISessionGetterService _sessionGetterService;
+    private readonly ISessionGetterService _sessionGetterService;
+    private readonly IDialogCacheService _dialogCacheService; 
+        
     private readonly IAesCypher _aes;
     private readonly IRsaCypher _rsa;
-    
+                        
     private readonly IDialogRequestRepository _dialogReqeuestRepository;
     private readonly IDialogSecretRepository _dialogSecretRepository;
     private readonly IDialogRepository _dialogRepository;
@@ -20,6 +22,7 @@ public class DialogService : IDialogService
     private readonly IUserRepository _userRepository;
 
     public DialogService(ISessionGetterService sessionGetterService,
+        IDialogCacheService dialogCacheService,
         IRsaCypher rsa,
         IAesCypher aes,
         IDialogRequestRepository dialogRequestRepository,
@@ -28,6 +31,7 @@ public class DialogService : IDialogService
         IUserRepository userRepository)
     {
         _sessionGetterService = sessionGetterService;
+        _dialogCacheService = dialogCacheService;
         _rsa = rsa;
         _aes = aes;
         _dialogReqeuestRepository = dialogRequestRepository;
@@ -42,6 +46,7 @@ public class DialogService : IDialogService
         string ownerSessionId)
     {
         var result = new CreateDialogRequestResult();
+        
         var savedDialogRequest = await _dialogReqeuestRepository.GetDialogRequestAsync(ownerUserId, requestUserId);
         if (savedDialogRequest != null)
         {
@@ -60,6 +65,7 @@ public class DialogService : IDialogService
         var dialogRequestCreateResult = await _dialogReqeuestRepository.CreateDialogRequestAsync(ownerUserId, requestUserId);
         var createDialogResult =
             await _dialogRepository.CreateDialogAsync(ownerUserId, requestUserId, dialogRequestCreateResult);
+        await _dialogCacheService.AddDialogInCacheAsync(ownerUserId, requestUserId, createDialogResult);
         
         var aesKeys = _aes.GetAesKeyAndIv();
         await _dialogSecretRepository.CreateDialogSecretAsync(createDialogResult, aesKeys.key);
@@ -110,7 +116,7 @@ public class DialogService : IDialogService
 
             var currentDialog = new DialogDomainModel();
             currentDialog.InitializeDialogResult(user.Id,dialog.Id, user.UserName, cryptedKey,
-                dialog.DialogRequest.IsAccepted, user.Email, user.Phone, dialog.Created);
+                dialog.DialogRequest.IsAccepted, user.Email, user.Phone, dialog.CreatedAt);
             
             dialogResult.Add(currentDialog);
         }

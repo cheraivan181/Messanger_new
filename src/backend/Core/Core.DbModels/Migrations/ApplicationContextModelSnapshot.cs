@@ -57,7 +57,7 @@ namespace Core.DbModels.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("Created")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("DialogRequestId")
@@ -287,6 +287,31 @@ namespace Core.DbModels.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Core.DbModels.UserCypherKey", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CryptedKey")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("SessionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SessionId");
+
+                    SqlServerIndexBuilderExtensions.IncludeProperties(b.HasIndex("SessionId"), new[] { "CryptedKey" });
+
+                    b.ToTable("UserCypherKeys");
                 });
 
             modelBuilder.Entity("Core.DbModels.UserRoles", b =>

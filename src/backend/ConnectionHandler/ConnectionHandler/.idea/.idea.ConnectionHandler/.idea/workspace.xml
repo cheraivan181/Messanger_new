@@ -9,73 +9,148 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc7ec941-6ead-44a2-b075-d1856d7f9953" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ConnectionHandler/Models/Requests/RequestMessage.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ConnectionHandler/Services/Implementations/ConnectionChanelsStorage.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ConnectionHandler/Services/Implementations/RedisBusService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ConnectionHandler/Services/Interfaces/IConnectionChanelsStorage.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ConnectionHandler/Services/Interfaces/IRedisBusService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Request/DispatchMessageRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/s.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Requests/UpdateMessageResquest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Responses/ErrorResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Responses/SendDirectMessageResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Responses/UpdateMessageResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Domain/MessageModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Domain/MessageModels.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/Handlers/Implementations/ErrorMessageHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/Handlers/Implementations/GetDialogMessagesHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/Handlers/Implementations/UpdateMessageHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/Handlers/Interfaces/IErrorMessageHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/Handlers/Interfaces/IGetDialogMessageHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/Handlers/Interfaces/IUpdateMessageHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Core.Utils/FreeLockSetterr.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Shared/BinarySerializer/.idea/.idea.BinarySerializer.dir/.idea/indexLayout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Shared/BinarySerializer/.idea/.idea.BinarySerializer.dir/.idea/projectSettingsUpdater.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Shared/BinarySerializer/.idea/.idea.BinarySerializer.dir/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Shared/BinarySerializer/.idea/.idea.BinarySerializer.dir/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Shared/Kafka.Contract/.idea/.idea.Kafka.Contract.dir/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Shared/Kafka.Contract/.idea/.idea.Kafka.Contract.dir/.idea/indexLayout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Shared/Kafka.Contract/.idea/.idea.Kafka.Contract.dir/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ConnectionHandler/Models/Requests/DispatchMessageRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ConnectionHandler/Models/Requests/RequestType.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Interfaces/IRequestProtocolMessage.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Interfaces/IResponseProtocolMessage.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/ParsedMessage.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/ParsedMessageModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Responses/DeliveryResponse.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/UserCypherKey.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.DialogServices/Domain/DialogCacheModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.DialogServices/Implementations/DialogCacheService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.DialogServices/Implementations/DialogGetterService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.DialogServices/Interfaces/IDialogCacheService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.DialogServices/Interfaces/IDialogGetterService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.HandlerActions/DiExtensions.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.HandlerActions/Handlers/Interfaces/IHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.HandlerActions/Senders/Implementations/DeliveryMessageSender.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.HandlerActions/Senders/Implementations/ErrorMessageSender.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.HandlerActions/Senders/Interfaces/ISender.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Domain/MemoryCache.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/UserCypherKeyRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IUserCypherKeyRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.Router/DiExtensions.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Core/Core.Router/MessageRouterService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Session/CreateSessionResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/ClientsDomain/Responses/Session/CreateSessionResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Components/Contact.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Components/Contact.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Domain/Session/SessionModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Domain/Session/SessionModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Pages/Dialog.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Pages/Dialog.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Pages/Index.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Pages/Index.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Pages/SignIn.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Pages/SignIn.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Pages/SignUp.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Pages/SignUp.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Services/Implementations/Crypt/RsaService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Services/Implementations/Crypt/RsaService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Services/Implementations/Dialogs/DialogService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Services/Implementations/Dialogs/DialogService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Services/Implementations/Sessions/SessionService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Services/Implementations/Sessions/SessionService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Services/Implementations/WebSocket/ConnectorService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Services/Implementations/WebSocket/ConnectorService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Services/Interfaces/Crypt/IRsaService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Services/Interfaces/Crypt/IRsaService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/Shared/MainLayout.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Front/Front/Shared/MainLayout.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/States/MessageStateContainer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Front/Front/States/StateContainer.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ConnectionHandler/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ConnectionHandler/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConnectionHandler.Kafka/ConnectionHandler.Kafka.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler.Kafka/ConnectionHandler.Kafka.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConnectionHandler.Redis/ConnectionHandler.Redis.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler.Redis/ConnectionHandler.Redis.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConnectionHandler.sln" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConnectionHandler.Kafka/Services/Implementations/ProducerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler.Kafka/Services/Implementations/ProducerService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConnectionHandler.Kafka/Services/Interfaces/IProducerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler.Kafka/Services/Interfaces/IProducerService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ConnectionHandler/ConnectionHandler.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler/ConnectionHandler.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConnectionHandler/Hubs/BaseHub.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler/Hubs/BaseHub.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ConnectionHandler/Hubs/MessangerHub.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler/Hubs/MessangerHub.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConnectionHandler/Models/Requests/RequestMessage.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConnectionHandler/Services/Implementations/ClientConnectionService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler/Services/Implementations/ClientConnectionService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConnectionHandler/Services/Implementations/ConnectionChanelsStorage.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConnectionHandler/Services/Implementations/RedisBusService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler/Services/Implementations/RedisBusService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConnectionHandler/Services/Interfaces/IClientConnectionService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler/Services/Interfaces/IClientConnectionService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConnectionHandler/Services/Interfaces/IConnectionChanelsStorage.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConnectionHandler/Services/Interfaces/IRedisBusService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler/Services/Interfaces/IRedisBusService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ConnectionHandler/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.BinarySerializer/SerializatorImplementations/BinaryMessangerDeserializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.BinarySerializer/SerializatorImplementations/BinaryMessangerDeserializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.BinarySerializer/SerializatorImplementations/BinaryMessangerSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.BinarySerializer/SerializatorImplementations/BinaryMessangerSerializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Request/Message.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Request/Message.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Request/RequestPayload.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Request/RequestPayload.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConnectionHandler/protos/connector.proto" beforeDir="false" afterPath="$PROJECT_DIR$/ConnectionHandler/protos/connector.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.ApiRequests/Dialog/CreateDialogRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.ApiRequests/Dialog/CreateDialogRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.ApiResponses/Session/CreateSessionResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.ApiResponses/Session/CreateSessionResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.BinarySerializer/Core.BinarySerializer.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.BinarySerializer/MessangerBinarySerializer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.BinarySerializer/SerializatorImplementations/BinaryBase.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.BinarySerializer/SerializatorImplementations/BinaryMessangerDeserializer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.BinarySerializer/SerializatorImplementations/BinaryMessangerSerializer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.BinarySerializer/SerializatorImplementations/Buffer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.BinarySerializer/SerializatorImplementations/DateTimeExtensions.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.BinarySerializer/SerializatorImplementations/ISerializableMessage.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Core.CryptProtocol.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Core.CryptProtocol.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Request/DispatchMessageRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Request/DispatchMessageRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Request/Message.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Request/RequestProtocolMessage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Request/RequestPayload.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Request/BaseRequestPayload.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Responses/BaseResponsePayload.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Responses/BaseResponsePayload.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Responses/Response.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Responses/ResponseProtocolMessage.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Responses/ResponseAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Responses/ResponseAction.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Responses/ResponseCode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/Responses/ResponseCode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/s.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Base/RequestType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/ParsedResult.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Requests/GetMessageRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Requests/GetMessageRequest.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Requests/SendDirectMessageRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Requests/SendDirectMessageRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Responses/ReceiveMessageResponse.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/Message.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/Message.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Requests/UpdateMessageResquest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Requests/UpdateMessageResquest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Responses/ErrorResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Domain/Responses/ErrorResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Services/Implementations/RequestParser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Services/Implementations/RequestParser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Services/Implementations/ResponseBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Services/Implementations/ResponseBuilder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Services/Interfaces/IRequestParser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.CryptProtocol/Services/Interfaces/IRequestParser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/Base/ApplicationContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/Base/ApplicationContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/Dialog.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/Dialog.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.DbModels/Migrations/ApplicationContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DbModels/Migrations/ApplicationContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DialogServices/Core.DialogServices.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DialogServices/Core.DialogServices.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DialogServices/DiExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DialogServices/DiExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DialogServices/Domain/DialogDomainModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DialogServices/Domain/DialogDomainModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.DialogServices/Implementations/DialogService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.DialogServices/Implementations/DialogService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.Kafka/Services/Implementations/ProducerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Kafka/Services/Implementations/ProducerService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/Core.MessageServices.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Core.MessageServices.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/DiExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/DiExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/Domain/MessageType.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/Handlers/Implementations/DirectMessageHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/Handlers/Implementations/DirectMessageHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/Handlers/Interfaces/IMessageHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/Handlers/Interfaces/IMessageHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/Handlers/Implementations/DirectMessageHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.HandlerActions/Handlers/Implementations/DirectMessageHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/Handlers/Implementations/ErrorMessageHandler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/Handlers/Implementations/GetDialogMessagesHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.HandlerActions/Handlers/Implementations/GetDialogMessagesHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/Handlers/Implementations/UpdateMessageHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.HandlerActions/Handlers/Implementations/UpdateMessageHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/Handlers/Interfaces/IErrorMessageHandler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/Handlers/Interfaces/IGetDialogMessageHandler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/Handlers/Interfaces/IMessageHandler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/Handlers/Interfaces/IUpdateMessageHandler.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/MessageCacheInitializerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/MessageCacheInitializerService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/MessageCacheService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/MessageCacheService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/MessageDispatcherService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/MessageDispatcherService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/MessageGetterService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/MessageGetterService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/ResponseService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/MessageMapper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Interfaces/IMessageCacheService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Interfaces/IMessageCacheService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Interfaces/IMessageDispatcherService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Interfaces/IMessageDispatcherService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Interfaces/IMessageGetterService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Interfaces/IMessageGetterService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Interfaces/IResponseService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Interfaces/IMessageMapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Implementations/MessageDispatcherService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.MessageServices/Services/Interfaces/IMessageDispatcherService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Router/Interfaces/IMessageRouterService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/DiExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/DiExtensions.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/DialogRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/DialogRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/DialogSecretRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/DialogSecretRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/MessageRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/MessageRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Impl/UserRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IDialogRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IDialogRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IMessageRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IMessageRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.SenderServices/DiExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SenderServices/DiExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.SenderServices/Domain/MessageToSendInNetwork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SenderServices/Domain/MessageToSendInNetwork.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Repositories/Interfaces/IUserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SenderServices/Core.SenderServices.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SenderServices/Core.SenderServices.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SenderServices/Services/Implementations/MessageOffsetService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SenderServices/Services/Implementations/MessageOffsetService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.SenderServices/Services/Implementations/PrepereMessagesToSendService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SenderServices/Services/Implementations/PrepereMessagesToSendService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.SenderServices/Services/Implementations/SenderService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SenderServices/Services/Implementations/SenderService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SenderServices/Services/Interfaces/IMessageOffsetService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SenderServices/Services/Interfaces/IMessageOffsetService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SenderServices/Services/Interfaces/IPrepereMessagesToSendService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SenderServices/Services/Interfaces/IPrepereMessagesToSendService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.SenderServices/Services/Interfaces/ISenderService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SenderServices/Services/Interfaces/ISenderService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.Serializers.Tests/SerializeAndDeserializeModelsTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Serializers.Tests/SerializeAndDeserializeModelsTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Core.SessionServices.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Core.SessionServices.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Domain/ConnectionInCacheModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Domain/ConnectionInCacheModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Domain/ConnectionStoreModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Domain/ConnectionStoreModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Domain/CreateSessionResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Domain/CreateSessionResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Domain/SessionModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Domain/SessionModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/ConnectionCollectorCacheService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/ConnectionCollectorCacheService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/SessionCacheInitializerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/SessionCacheInitializerService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/SessionCacheService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/SessionCacheService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/SessionGetterService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/SessionGetterService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/SessionService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Implementations/SessionService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Interfaces/ISessionCacheService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.SessionServices/Services/Interfaces/ISessionCacheService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core.Utils/CommonConstants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Utils/CommonConstants.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Core.Utils/CommonMethods.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.Utils/CommonMethods.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core/Core.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Core.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core/DiExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/DiExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core/GRPC/ConnectionGrpcHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/GRPC/ConnectionGrpcHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core/GRPC/MessageGrpcHandler.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Core/HostingServices/ReceiveMessageHostingService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/HostingServices/ReceiveMessageHostingService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core/Mapping/Impl/SessionServiceMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/Mapping/Impl/SessionServiceMapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Core/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Core/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,21 +168,16 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/60d5452edc88414d9b1ea63cefac05829e68/60/354eb6a0/JwtBearerOptions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/601c3d2f1bfa958c0388e8435dc1543366d3c8c7f6abf4493861219f944812a/AuthorizeAttribute.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6c54d7ee60af38a1f27d8e0f5cfe5e42d2e4ed4d17f54195097fbb9a377af/JwtBearerOptions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b34cdea969917836c37b6dc15e916d3e5954856c12dd1caf3926e4a2a3a0dfe2/AuthorizationAppBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Victus/Desktop/work/Messanger_new/src/backend/ConnectionHandler/ConnectionHandler/ConnectionHandler/Hubs/MessangerHub.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Victus/Desktop/work/Messanger_new/src/backend/ConnectionHandler/ConnectionHandler/ConnectionHandler/Hubs/BaseHub.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/349e8b63c56af6f2e1dca857ef9de8d486c6b88afceb8717373ad33115a37fb/TokenValidationParameters.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/dfdce6acf6dfde6b2ae6f5cf4119997fc625d64cc6cc419bed1aaf5df2cae14/AuthenticationHandler.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Victus/Desktop/work/Messanger_new/src/backend/ConnectionHandler/ConnectionHandler/ConnectionHandler/Hubs/MessangerHub.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/84f28e9b56c06474b877ee255eefbbee29aef25d998edfc9d4e85b33e1edf882/AuthorizationMiddleware.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Victus/Desktop/work/Messanger_new/src/backend/ConnectionHandler/ConnectionHandler/ConnectionHandler/Hubs/MessangerHub.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2da72ded98674ed79c3e065c1b63225010080/0b/84d4eb29/ConnectionHandler.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/fc56fbbd1b7e58976b1e159d71c2bdb3013c52e48d558e96d2842eff41cf39/DefaultHubCallerContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/de7cca8bbad440a84863dc9a66814897f9b51cd9916dcdce4857992d5d492c/HashSet.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Victus/Desktop/work/Messanger_new/src/backend/ConnectionHandler/ConnectionHandler/ConnectionHandler/Hubs/MessangerHub.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Victus/Desktop/work/Messanger_new/src/backend/ConnectionHandler/ConnectionHandler/ConnectionHandler/Hubs/MessangerHub.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a6a4fb7ae62557b1ddbba529662b57eb8a9f3208f98f0edd87517fe9cb4d6a/AuthAppBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Victus/Desktop/work/Messanger_new/src/backend/ConnectionHandler/ConnectionHandler/ConnectionHandler/Hubs/MessangerHub.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1af51483c9bf18871cce649b9f966dd7be686536f998c33bba3c5fc4adea4a0/Task.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ConnectionHandler.GRPC/Services/Implementations/ConnectorGrpcClient.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ConnectionHandler/Services/Implementations/ClientConnectionService.cs" root0="FORCE_HIGHLIGHTING" />
@@ -124,20 +194,14 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/be423d85679b2858c931031f36f4d779e7cfc1bfca1d62787ecbbae4e32383/DefaultHttpContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/fb987222d73f13e4330b571dd4d1c8cdae4de48d5c310d7efe1e7c5cc471/ReadOnlyCollection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/974fa14c57bab8fe29f1bddd39b1a6548b9cc8cf9e0ef5e670c2407a56d9/String.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Victus/Desktop/work/Messanger_new/src/backend/ConnectionHandler/ConnectionHandler/ConnectionHandler/Hubs/MessangerHub.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c6ad457575d35dcbff26c9a5e3fb1d92f1d3c55f25ef6ebf475367b5d8/List.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c2259c13b82db263f8996b177c5be7e6aadd7ec85f36b2ae8c6ce5aa7af1/LoggingExtensions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Victus/Desktop/work/Messanger_new/src/backend/ConnectionHandler/ConnectionHandler/ConnectionHandler/Hubs/MessangerHub.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f7922bd567e7e4a44fc306414889c8a66ac058c874ceee5efe556cef59af/GrpcChannelOptions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Victus/Desktop/work/Messanger_new/src/backend/ConnectionHandler/ConnectionHandler/ConnectionHandler/Hubs/MessangerHub.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Victus/Desktop/work/Messanger_new/src/backend/ConnectionHandler/ConnectionHandler/ConnectionHandler/Hubs/MessangerHub.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6c5e5de47df76f67c18c1cf6306189b6be899233964c7a0476444fd53d8fd8d/RedisChannel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3b113fb47d5fe36ed688b56c465cfe2738fca0ea3df9ed5a9683d7b49836b7/SwaggerUIMiddleware.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Victus/Desktop/work/Messanger_new/src/backend/ConnectionHandler/ConnectionHandler/ConnectionHandler/Hubs/MessangerHub.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/605c9e19d7f544679b7c68670aea2c2d60870/53/81206afb/Hub.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ConnectionHandler/Services/Implementations/HubCallerContextStore.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f4708639776589f5ac2739f6fcbfc67343b1f9dac51cc1dbfdb003eef77cc1c/Monitor.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Victus/Desktop/work/Messanger_new/src/backend/ConnectionHandler/ConnectionHandler/ConnectionHandler/Hubs/MessangerHub.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -223,6 +287,12 @@
       <workItem from="1651223249408" duration="5582000" />
       <workItem from="1651457984059" duration="5350000" />
       <workItem from="1651487169364" duration="1110000" />
+      <workItem from="1651652666534" duration="4058000" />
+      <workItem from="1652063717816" duration="1838000" />
+      <workItem from="1652067757003" duration="9116000" />
+      <workItem from="1652431060389" duration="4005000" />
+      <workItem from="1652581113389" duration="2092000" />
+      <workItem from="1652670925226" duration="2128000" />
     </task>
     <servers />
   </component>

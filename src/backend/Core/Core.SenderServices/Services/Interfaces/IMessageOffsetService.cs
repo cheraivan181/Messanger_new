@@ -2,8 +2,9 @@
 
 public interface IMessageOffsetService
 {
-    Task<Dictionary<string, int>> GetNotificationOffsetsAsync(Guid userId);
-    Task RegisterOffsetAsync(Guid userId, string connectionId);
-    Task IncrementNotificationOffsetAsync(Guid userId);
-    Task RemoveConnectionFromNotificationOffsetAsync(Guid userId, string connectionId);
+    Dictionary<string, int> GetNotificationOffsets(Guid userId);
+    void RegisterOffset(Guid userId, string connectionId);
+    void IncrementNotificationOffset(Guid userId);
+    void RemoveConnectionFromNotificationOffset(Guid userId, string connectionId);
+    int GetNotificationOffset(Guid userId, string connectionId);
 }

@@ -33,7 +33,7 @@ public class ConnectionGrpcService : Connector.Connector.ConnectorBase
         
         await _sessionCacheInitializerService.SetSessionInCacheAsync(parsedSessionId, parsedUserId);
         
-        await _messageOffsetService.RegisterOffsetAsync(parsedUserId, request.ConnectionId);
+        _messageOffsetService.RegisterOffset(parsedUserId, request.ConnectionId);
         await _messageCacheInitializerService.InitializeMessageCacheAsync(parsedUserId);
         await _connectionCollectorService.AddConnectionAsync(parsedUserId, parsedSessionId, request.ConnectionId);
         
@@ -50,11 +50,12 @@ public class ConnectionGrpcService : Connector.Connector.ConnectorBase
     {
         var parsedUserId = Guid.Parse(request.UserId);
         
-        await _sessionCacheService.RemoveSessonFromCacheAsync(parsedUserId, Guid.Parse(request.SessionId));
-        await _messageOffsetService.RemoveConnectionFromNotificationOffsetAsync(parsedUserId, request.ConnectionId);
+        await _sessionCacheService.RemoveSessionFromCacheAsync(parsedUserId, Guid.Parse(request.SessionId)); 
         await _messageCacheInitializerService.RemoveMessagesFromCacheAsync(parsedUserId);
         await _connectionCollectorService.RemoveConnectionAsync(parsedUserId, request.ConnectionId);
         
+        _messageOffsetService.RemoveConnectionFromNotificationOffset(parsedUserId, request.ConnectionId);
+    
         var connectorResponse = new ConnectorResponse()
         {
             SucessHandled = true

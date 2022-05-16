@@ -1,70 +1,71 @@
-﻿using Core.CacheServices.Interfaces.Base;
+﻿using System.Collections.Concurrent;
 using Core.MessageServices.Services.Interfaces;
-using Core.Utils;
-using StackExchange.Redis;
-
 namespace Core.MessageServices.Services.Implementations;
-
 
 public class MessageOffsetService : IMessageOffsetService
 {
-    private readonly IDatabaseProvider _databaseProvider;
-
-    public MessageOffsetService(IDatabaseProvider databaseProvider)
+    private static readonly ConcurrentDictionary<Guid, Dictionary<string, int>> _cache =
+        new ConcurrentDictionary<Guid, Dictionary<string, int>>();
+    
+    public void RegisterOffset(Guid userId, string connectionId)
     {
-        _databaseProvider = databaseProvider;
-    }
-
-    public async Task RegisterOffsetAsync(Guid userId, string connectionId)
-    {
-        var database = _databaseProvider.GetDatabase();
-        var key = GetCacheKey(userId);
-        await database.HashSetAsync(key, new HashEntry[]
+        _cache.TryAdd(userId, new Dictionary<string, int>()
         {
-            new HashEntry(connectionId, 1)
+            {connectionId, 1}
         });
     }
 
-    public async Task IncrementNotificationOffsetAsync(Guid userId)
+    public void IncrementNotificationOffset(Guid userId)
     {
-        var database = _databaseProvider.GetDatabase();
-        var key = GetCacheKey(userId);
-        
-        var connectionIds = await database.HashKeysAsync(key);
-        var batch = database.CreateBatch();
-
-        foreach (var currentConnectionId in connectionIds)
+        if (!_cache.TryGetValue(userId, out var offsets))
         {
-            batch.HashIncrementAsync(key.ToRedisKey(), currentConnectionId);
+            throw new Exception("Cannot find offset");
+        }
+
+        foreach (var offset in offsets)
+        {
+            offsets[offset.Key] = offset.Value + 1;
         }
         
-        batch.Execute();
-    }
-
-    public async Task RemoveConnectionFromNotificationOffsetAsync(Guid userId, string connectionId)
-    {
-        var database = _databaseProvider.GetDatabase();
-        var key = GetCacheKey(userId);
-
-        await database.HashDeleteAsync(key, connectionId);
-        var lenght = await database.HashLengthAsync(key);
-        if (lenght == 0)
-            await database.KeyDeleteAsync(key);
-    }
-
-    public async Task<Dictionary<string, int>> GetNotificationOffsetsAsync(Guid userId)
-    {
-        var result = new Dictionary<string, int>();
-        var database = _databaseProvider.GetDatabase();
-        var key = GetCacheKey(userId);
-
-        var hash = await database.HashGetAllAsync(key);
-        foreach (var item in hash)
-            result.Add(item.Key.ToString(), (int)item.Value);
         
-        return result;
+        _cache[userId] = offsets;
     }
     
-    private string GetCacheKey(Guid userId) =>
-        $"offset-{userId}";
+    
+    public void RemoveConnectionFromNotificationOffset(Guid userId, string connectionId)
+    {
+        if (!_cache.TryGetValue(userId, out var offsets))
+        {
+            throw new Exception("Cannot find notification offset");
+        }
+
+        offsets.Remove(connectionId);
+        _cache[userId] = offsets;
+    }
+    
+    
+    public Dictionary<string, int> GetNotificationOffsets(Guid userId)
+    {
+        if (!_cache.TryGetValue(userId, out var result))
+        {
+            throw new Exception("Cannot find notification offset");
+        }
+
+        return result;
+    }
+
+    public int GetNotificationOffset(Guid userId, string connectionId)
+    {
+        if (!_cache.TryGetValue(userId, out var result))
+        {
+            throw new Exception("Cannot find notification offset");
+        }
+
+        if (!result.TryGetValue(connectionId, out var offset))
+        {
+            throw new Exception("Cannot find notification offset");
+        }
+
+        return offset;
+    }
 }

@@ -19,49 +19,65 @@ public class RequestParser : IRequestParser
         _hmacService = hmacService;
         _aes = aes;
     }
-    
-    public ParsedResult<T> ParseRequest<T>(string hmacKey,string aesKey, string message) where T:class, ISerializableMessage, new()
+
+    public ParsedMessage ParseMessage(string hmacKey, string message)
     {
-        var result = new ParsedResult<T>();
-        
-        Message messageModel;
+        var result = new ParsedMessage();
+        RequestProtocolMessage requestProtocolMessageModel;
         try
         {
-            messageModel = message.FromBinaryMessage<Message>();
+            requestProtocolMessageModel = message.FromBinaryMessage<RequestProtocolMessage>();
         }
         catch (Exception ex)
         {
-            result.ResponseCode = ResponseCode.CannotDeserializeRequestMessage;
             Log.Error($"Cannot deserialize message #({message})", ex);
-        
             return result;
         }
         
-        var sign = _hmacService.GetSignature(hmacKey, messageModel.Payload);
-        if (sign != messageModel.Sign)
+        var sign = _hmacService.GetSignature(hmacKey, requestProtocolMessageModel.Payload);
+        if (sign != requestProtocolMessageModel.Sign)
         {
             Log.Warning($"Warning!!! Try to hack protocol!!! #({message})");
-            result.ResponseCode = ResponseCode.InvalidSign;
-
             return result;
         }
 
-        string decryptedPayload;
-
+        result.IsSucess = true;
+        return result;
+    }
+    
+    public ParsedMessageModel ParseRequest(string hmacKey,string aesKey, string message)
+    {
+        var result = new ParsedMessageModel();
+        
+        RequestProtocolMessage requestProtocolMessageModel;
         try
         {
-            decryptedPayload = _aes.Decrypt(messageModel.Payload, aesKey, messageModel.IV);
+            requestProtocolMessageModel = message.FromBinaryMessage<RequestProtocolMessage>();
         }
         catch (Exception ex)
         {
-            Log.Error($"Cannot decrypt message #({messageModel.Payload})", ex);
-            result.ResponseCode = ResponseCode.InvalidCryptText;
+            Log.Error($"Cannot deserialize message #({message})", ex);
             return result;
         }
-
-        var requestModel = decryptedPayload.FromBinaryMessage<T>();
-        result.ResponseCode = ResponseCode.Sucess;
-
+        
+        var sign = _hmacService.GetSignature(hmacKey, requestProtocolMessageModel.Payload);
+        if (sign != requestProtocolMessageModel.Sign)
+        {
+            Log.Warning($"Warning!!! Try to hack protocol!!! #({message})");
+            return result;
+        }
+        
+        try
+        {
+            result.DecryptedText = _aes.Decrypt(requestProtocolMessageModel.Payload, aesKey, requestProtocolMessageModel.IV);
+            result.IsSucess = true;
+        }
+        catch (Exception ex)
+        {
+            Log.Error($"Cannot decrypt message #({requestProtocolMessageModel.Payload})", ex);
+            return result;
+        }
+        
         return result;
     }
 }

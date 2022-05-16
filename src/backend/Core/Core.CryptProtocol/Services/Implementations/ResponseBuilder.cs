@@ -21,18 +21,19 @@ public class ResponseBuilder : IResponseBuilder
         ResponseAction responseAction,string aesKey, string hmacSignKey, 
         int notificationOffset) where T:class, ISerializableMessage
     {
-        var response = new Response();
+        var response = new ResponseProtocolMessage();
         var iv = _aes.GetAesKeyAndIv().iv;
 
         var binaryResponseModel = responseModel.ToBinaryMessage();
-        var sign = _hmac.GetSignature(hmacSignKey, binaryResponseModel);
         var cryptedMessage = _aes.Crypt(aesKey, iv, binaryResponseModel);
+        var sign = _hmac.GetSignature(hmacSignKey, cryptedMessage);
 
         response.Sign = sign;
         response.IV = iv;
         response.PayLoad = cryptedMessage;
         response.ResponseAction = responseAction;
         response.NotificationOffset = notificationOffset;
+        response.ResponseCode = statusCode;
 
         var binaryResponse = response.ToBinaryMessage();
         return binaryResponse;

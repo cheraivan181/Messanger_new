@@ -19,10 +19,10 @@ public class Dialog
     
     [NotMapped]
     public User User2 { get; set; }
-    public DateTime Created { get; set; }
+    public DateTime CreatedAt { get; set; }
 
     public Dialog()
     {
-        Created = DateTime.Now;
+        CreatedAt = DateTime.Now;
     }
 }

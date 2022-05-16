@@ -1,8 +1,9 @@
 ﻿using System.Text.Json.Serialization;
+using Core.BinarySerializer;
 
 namespace Core.DialogServices.Domain;
 
-public class DialogDomainModel
+public class DialogDomainModel : ISerializableMessage
 {
         [JsonPropertyName("userId")]
         public Guid UserId { get; set; }
@@ -70,5 +71,15 @@ public class DialogDomainModel
             LastMessage = lastMessage;
             CountUnReadedMessages = unreadedMessagesCount;
             LastMessageDate = lastMessageDate;
+        }
+
+        public void Serialize(BinaryMessangerSerializer serializer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Deserialize(BinaryMessangerDeserializer deserializer)
+        {
+            throw new NotImplementedException();
         }
 }

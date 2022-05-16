@@ -41,16 +41,19 @@ namespace Front.Services.Implementations.Dialogs
                 return savedDialogs;
             }
 
-            foreach (var dialog in response.SucessResponse.Response.Dialogs)
+            if (response.SucessResponse.Response.Dialogs != null)
             {
-                var cypherKey = await _rsaService.DecryptTextAsync(dialog.CypherKey);
-                var currentDialog = new DialogDomainModel();
-                currentDialog.SetDialogDetails(dialog.UserId, dialog.DialogId, dialog.UserName,
-                    cypherKey, dialog.IsConfirmDialog,
-                    dialog.Email, dialog.PhoneNumber, dialog.DialogCreateDate,
-                    dialog.LastActivity);
+                foreach (var dialog in response.SucessResponse.Response.Dialogs)
+                {
+                    var cypherKey = await _rsaService.DecryptTextAsync(dialog.CypherKey);
+                    var currentDialog = new DialogDomainModel();
+                    currentDialog.SetDialogDetails(dialog.UserId, dialog.DialogId, dialog.UserName,
+                        cypherKey, dialog.IsConfirmDialog,
+                        dialog.Email, dialog.PhoneNumber, dialog.DialogCreateDate,
+                        dialog.LastActivity);
 
-                savedDialogs = await _dialogStoreService.AddAndGetDialogsAsync(currentDialog);
+                    savedDialogs = await _dialogStoreService.AddAndGetDialogsAsync(currentDialog);
+                }
             }
 
             return savedDialogs;

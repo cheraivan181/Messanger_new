@@ -11,7 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Core.BinarySerializer\Core.BinarySerializer.csproj" />
+      <ProjectReference Include="..\..\..\Shared\BinarySerializer\BinarySerializer.csproj" />
       <ProjectReference Include="..\Core.CacheServices\Core.Redis.csproj" />
       <ProjectReference Include="..\Core.CryptProtocol\Core.CryptProtocol.csproj" />
       <ProjectReference Include="..\Core.SessionServices\Core.SessionServices.csproj" />

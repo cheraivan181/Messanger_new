@@ -2,6 +2,7 @@
 using ConnectionHandler.Auth;
 using ConnectionHandler.Hubs;
 using ConnectionHandler.Options;
+using ConnectionHandler.Redis.Domain;
 using ConnectionHandler.Services.Implementations;
 using ConnectionHandler.Services.Interfaces;
 using Core.Kafka;
@@ -72,12 +73,12 @@ public class Startup
         #region services
 
         services.AddSingleton<IClientConnectionService, ClientConnectionService>();
-        services.AddSingleton<IConnectionChanelsStorage, ConnectionChanelsStorage>();
         services.AddScoped<IRedisBusService, RedisBusService>();
 
         #endregion
 
         services.AddKafkaServices(Configuration);
+        services.AddRedisServices(Configuration);
     }
 
     public void Configure(IApplicationBuilder app,

@@ -7,5 +7,6 @@
         public string ClientPublicKey { get; set; }
         public string ClientPrivateKey { get; set; }
         public string SignKey { get; set; }
+        public string Aes { get; set; }
     }
 }

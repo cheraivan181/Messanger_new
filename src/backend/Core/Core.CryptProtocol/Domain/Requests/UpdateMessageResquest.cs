@@ -3,7 +3,7 @@ using Core.CryptProtocol.Domain.Base.Responses;
 
 namespace Core.CryptProtocol.Domain;
 
-public class UpdateMessageResquest : BaseResponsePayload
+public class UpdateMessageResquest : BaseRequestPayload
 {
     public Guid SenderRequestId { get; set; }
     public Guid MessageId { get; set; }

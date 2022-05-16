@@ -14,9 +14,9 @@
         <EditForm Model="AuthModel" OnValidSubmit="SignInAsync" class="form-signin">
             <DataAnnotationsValidator />
             <span id="reauth-email" class="reauth-email"></span>
-            <InputText id="email" class="form-control" @bind-Value="AuthModel.UserName"/>
+            <InputText id="email" class="form-control" @bind-Value="AuthModel.UserName" placeholder="username"/>
             <ValidationMessage For="@(() => AuthModel.UserName)" />
-            <InputText type="password" id="password" class="form-control" @bind-Value="AuthModel.Password" />
+            <InputText type="password" id="password" class="form-control" @bind-Value="AuthModel.Password" placeholder="password"/>
             <ValidationMessage For="@(() => AuthModel.Password)" />
             <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Login</button>
         </EditForm>

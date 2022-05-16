@@ -10,7 +10,7 @@
 @implements IDisposable;
 
 @inject ILogger<Dialog> _logger;
-@inject StateContainer _stateContainer;
+@inject MessageDialogStateContainer _stateContainer;
 @inject IDialogManagerService _dialogManagerService;
 @inject NavigationManager _navigationManager;
 @inject SearchResultStateContainer _searchResultStateContainer;
@@ -349,11 +349,15 @@
         </div>
     </div>
 
-    <Front.Components.UserInformation DialogCreated="@CurrentDialog.DialogCreateDate.Value" 
+    @if (!IsRequestByUserName
+        || (_stateContainer.DialogRequests[DialogId]))
+    {
+        <Front.Components.UserInformation DialogCreated="@CurrentDialog.DialogCreateDate.Value" 
                                Email = "@CurrentDialog.Email" LastActivity = "@CurrentDialog.LastActivity.Value"  
                                PhoneNumber = "@CurrentDialog.PhoneNumber" IsDialogConfirmed ="CurrentDialog.IsConfirmDialog" 
                                UserName="@CurrentDialog.UserName">
-    </Front.Components.UserInformation>
+        </Front.Components.UserInformation>
+    }
 }
 
 
@@ -384,11 +388,24 @@
     {
         _stateContainer.OnChange += StateHasChanged;
 
-        var parsedDialogId = Guid.Parse(DialogId);
+        if (!IsRequestByUserName)
+        {
+            var parsedDialogId = Guid.Parse(DialogId);
 
-        CurrentDialog = _stateContainer.Dialogs.FirstOrDefault(x => x.DialogId == parsedDialogId);
+            CurrentDialog = _stateContainer.Dialogs.FirstOrDefault(x => x.DialogId == parsedDialogId);
+        }
+        else
+        {
+            _stateContainer.AddDialogRequest(DialogId);
+
+            CurrentDialog = new DialogDomainModel()
+            {
+                UserName = DialogId
+            };
+        }
+
+
         IsDialogInitialized = true;
-
         await base.OnInitializedAsync();
     }
 
@@ -402,6 +419,7 @@
             var userId = _searchResultStateContainer.SearchUserResponses.Where(x => x.UserName == DialogId)
                 .Select(x => x.UserId)
                 .First();
+
             var createdDialog = await _dialogManagerService.CreateAndGetDialogAsync(userId, DialogId);
             _stateContainer.AddDialog(createdDialog);
 
@@ -409,6 +427,16 @@
         }
 
         _logger.LogDebug($"Try to send message #({MessageText})");
+
+        var message = new Message()
+        {
+            DecryptedText = MessageText,
+            IsDelivery = true,
+            IsReaded = true,
+            IsImSender = IsSendForMe,
+            CreatedAt = DateTime.Now,
+            DialogId = CurrentDialog.DialogId
+        };
 
         _stateContainer.AddMessage(new Message()
         {

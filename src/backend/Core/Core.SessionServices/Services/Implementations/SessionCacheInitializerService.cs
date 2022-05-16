@@ -7,13 +7,16 @@ namespace Core.SessionServices.Services.Implementations;
 public class SessionCacheInitializerService : ISessionCacheInitializerService
 {
     private readonly ISessionRepository _sessionRepository;
+    private readonly IUserCypherKeyRepository _userCypherKeyRepository;
 
     private readonly ISessionCacheService _sessionCacheService;
     
     public SessionCacheInitializerService(ISessionRepository sessionRepository,
+        IUserCypherKeyRepository userCypherKeyRepository,
         ISessionCacheService sessionCacheService)
     {
         _sessionRepository = sessionRepository;
+        _userCypherKeyRepository = userCypherKeyRepository;
         _sessionCacheService = sessionCacheService;
     }
 
@@ -27,7 +30,9 @@ public class SessionCacheInitializerService : ISessionCacheInitializerService
             return;
         }
 
+        var cypher = await _userCypherKeyRepository.GetCypherKeyBySessionIdAsync(sessionId);
+        
         await _sessionCacheService.AddSessionInCacheAsync(userId, sessionId, session.ServerPublicKey,
-            session.ServerPrivateKey, session.ClientPublicKey, session.HmacKey); ;
+            session.ServerPrivateKey, session.ClientPublicKey, cypher.CryptedKey, session.HmacKey); ;
     }
 }

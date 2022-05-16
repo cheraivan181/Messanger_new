@@ -16,6 +16,7 @@ public class ApplicationContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<UserRoles> UserRoles { get; set; }
     public DbSet<Connection> Connections { get; set; }
+    public DbSet<UserCypherKey> UserCypherKeys { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -31,6 +32,7 @@ public class ApplicationContext : DbContext
         modelBuilder.Entity<User>();
         modelBuilder.Entity<UserRoles>();
         modelBuilder.Entity<Connection>();
+        modelBuilder.Entity<UserCypherKey>();
 
         modelBuilder.Entity<Dialog>().HasKey(x => x.Id);
         modelBuilder.Entity<DialogRequest>().HasKey(x => x.Id);
@@ -42,13 +44,16 @@ public class ApplicationContext : DbContext
         modelBuilder.Entity<User>().HasKey(x => x.Id);
         modelBuilder.Entity<UserRoles>().HasKey(x => x.Id);
         modelBuilder.Entity<Connection>().HasKey(x => x.Id);
+        modelBuilder.Entity<UserCypherKey>().HasKey(x => x.Id);
         
         modelBuilder.Entity<Dialog>().HasIndex(x => x.User1Id);
         modelBuilder.Entity<Dialog>().HasIndex(x => x.User2Id);
 
         modelBuilder.Entity<DialogRequest>().HasIndex(x => x.OwnerUserId);
         modelBuilder.Entity<DialogRequest>().HasIndex(x => new {x.OwnerUserId, x.RequestUserId});
-
+        modelBuilder.Entity<UserCypherKey>().HasIndex(x => x.SessionId)
+            .IncludeProperties(x => x.CryptedKey);
+        
         modelBuilder.Entity<Message>().HasIndex(x => x.AnswerMessageId);
         modelBuilder.Entity<Message>().HasIndex(x => x.DialogId);
 

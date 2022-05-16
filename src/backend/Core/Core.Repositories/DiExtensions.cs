@@ -18,6 +18,7 @@ namespace Core.Repositories
             serviceCollection.AddScoped<IDialogRequestRepository, DialogRequestRepository>();
             serviceCollection.AddScoped<IDialogSecretRepository, DialogSecretRepository>();
             serviceCollection.AddScoped<IMessageRepository, MessageRepository>();
+            serviceCollection.AddScoped<IUserCypherKeyRepository, UserCypherKeyRepository>();
         }
     }
 }

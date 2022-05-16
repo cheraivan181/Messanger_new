@@ -51,6 +51,7 @@
     <ProjectReference Include="..\Core.Kafka\Core.Kafka.csproj" />
     <ProjectReference Include="..\Core.MessageServices\Core.MessageServices.csproj" />
     <ProjectReference Include="..\Core.Repositories\Core.Repositories.csproj" />
+    <ProjectReference Include="..\Core.Router\Core.Router.csproj" />
     <ProjectReference Include="..\Core.SearchServices\Core.SearchServices.csproj" />
     <ProjectReference Include="..\Core.SenderServices\Core.SenderServices.csproj" />
     <ProjectReference Include="..\Core.SessionServices\Core.SessionServices.csproj" />

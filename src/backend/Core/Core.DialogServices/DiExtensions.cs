@@ -10,5 +10,7 @@ public static class DiExtensions
     {
         serviceCollection.AddScoped<IDialogRequestService, DialogRequestService>();
         serviceCollection.AddScoped<IDialogService, DialogService>();
+        serviceCollection.AddScoped<IDialogGetterService, DialogGetterService>();
+        serviceCollection.AddScoped<IDialogCacheService, DialogCacheService>();
     }
 }

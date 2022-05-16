@@ -12,10 +12,14 @@ service Connector{
 
 message UserConnectRequest{
   string connectionId = 1;
+  string sessionId = 2;
+  string userId = 3;
 }
 
 message UserDisconnectRequest{
   string connectionId = 1;
+  string sessionId = 2;
+  string userId = 3;
 }
 
 message ConnectorResponse{

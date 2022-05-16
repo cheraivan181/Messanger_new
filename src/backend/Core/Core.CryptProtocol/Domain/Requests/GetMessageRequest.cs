@@ -3,11 +3,10 @@ using Core.CryptProtocol.Domain.Interfaces;
 
 namespace Core.CryptProtocol.Domain;
 
-public class GetMessageRequest : BasePayload
+public class GetMessageRequest : BaseRequestPayload
 {
     public Guid DialogId { get; set; }
     public string UserName { get; set; }
-    
     public int Page { get; set; }
     
     public override void Serialize(BinaryMessangerSerializer serializer)
