@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Shared\Kafka.Contract\Kafka.Contract.csproj" />
+      <ProjectReference Include="..\Core.HandlerActions\Core.HandlerActions.csproj" />
+      <ProjectReference Include="..\Core.Kafka\Core.Kafka.csproj" />
+      <ProjectReference Include="..\Core.SenderServices\Core.SenderServices.csproj" />
+    </ItemGroup>
+
+</Project>
